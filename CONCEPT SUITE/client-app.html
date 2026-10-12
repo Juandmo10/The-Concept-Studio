@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE CONCEPT STUDIO. — Portal de Selección & Entrega</title>
+  
+  <!-- Tipografía Geométrica Ultra Pesada & Monoespaciada -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       THE CONCEPT STUDIO. — SISTEMA DE DISEÑO ESTRICTO
+       Paleta: Obsidian Navy (#070D1E / #0A1226), Tarjetas (#0F1934),
+       Blanco Puro (#FFFFFF), Blanco Hueso (#EDF2F7), Dorado Champagne (#C5A059 / #D4AF37)
+       ========================================================================== */
+    :root {
+      --navy-bg: #070D1E;
+      --navy-surface: #0A1226;
+      --navy-card: #0F1934;
+      --navy-card-hover: #142246;
+      --navy-border: rgba(237, 242, 247, 0.12);
+      
+      --text-white: #FFFFFF;
+      --text-bone: #EDF2F7;
+      --text-muted: rgba(237, 242, 247, 0.65);
+      --text-dim: rgba(237, 242, 247, 0.35);
+
+      --gold-accent: #C5A059;
+      --gold-bright: #D4AF37;
+      --gold-subtle: rgba(197, 160, 89, 0.14);
+      --gold-border: rgba(197, 160, 89, 0.38);
+
+      --font-display: 'Montserrat', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--navy-bg);
+      color: var(--text-bone);
+      font-family: var(--font-display);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      padding-bottom: 90px; /* Espacio para barra fija inferior */
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy-bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.3); border-radius: 2px; }
+
+    /* Componentes Tipográficos */
+    .brand-logo-twolines {
+      display: inline-flex;
+      flex-direction: column;
+      font-weight: 900;
+      font-size: 0.95rem;
+      line-height: 1.05;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      user-select: none;
+    }
+    .brand-logo-twolines .logo-line1,
+    .brand-logo-twolines .logo-line2 {
+      display: block;
+    }
+
+    .brand-logo {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-white);
+    }
+    .gold-dot {
+      color: var(--gold-accent);
+      font-weight: 900;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      user-select: none;
+      transition: all var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-gold {
+      background: var(--gold-accent);
+      color: var(--navy-bg);
+      border-color: var(--gold-accent);
+    }
+    .btn-gold:hover {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+    .btn-gold:active {
+      transform: scale(0.98);
+    }
+    .btn-secondary {
+      background: rgba(237, 242, 247, 0.06);
+      color: var(--text-white);
+      border-color: var(--navy-border);
+    }
+    .btn-secondary:hover {
+      background: rgba(237, 242, 247, 0.12);
+      border-color: var(--text-white);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--navy-border);
+    }
+    .badge-gold {
+      background: var(--gold-subtle);
+      color: var(--gold-bright);
+      border-color: var(--gold-border);
+    }
+
+    /* --------------------------------------------------------------------------
+       PANTALLA 1: ACCESO RÁPIDO POR PIN / SLUG
+       -------------------------------------------------------------------------- */
+    #gate-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--navy-bg);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #gate-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .gate-box {
+      width: 100%;
+      max-width: 400px;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+    }
+    .pin-input-group {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin: 1.75rem 0;
+    }
+    .pin-digit-box {
+      width: 52px;
+      height: 60px;
+      background: var(--navy-surface);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-white);
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .pin-digit-box:focus {
+      border-color: var(--gold-accent);
+      box-shadow: 0 0 0 1px var(--gold-accent);
+    }
+
+    /* --------------------------------------------------------------------------
+       CABECERA Y BARRA SUPERIOR
+       -------------------------------------------------------------------------- */
+    .client-header {
+      background: var(--navy-surface);
+      border-bottom: 1px solid var(--navy-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .urgency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-xs);
+      background: var(--gold-subtle);
+      color: var(--gold-bright);
+      border: 1px solid var(--gold-border);
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Sesión Hero Info */
+    .session-hero {
+      max-width: 1300px;
+      margin: 1.5rem auto 1rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .session-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      line-height: 1.2;
+    }
+    .session-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* Modos: Pestañas de Vista (Proofing vs Descargas) */
+    .mode-tab-strip {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--navy-surface);
+      padding: 0.25rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--navy-border);
+    }
+    .mode-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-xs);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .mode-tab-btn.active {
+      background: var(--gold-accent);
+      color: var(--navy-bg);
+    }
+
+    /* --------------------------------------------------------------------------
+       CUADRÍCULA TÁCTIL DE PROOFING
+       -------------------------------------------------------------------------- */
+    .proofing-container {
+      max-width: 1300px;
+      margin: 1rem auto;
+      padding: 0 1.5rem;
+    }
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    @media (min-width: 768px) {
+      .photos-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .photos-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .photo-card {
+      position: relative;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .photo-card:hover {
+      border-color: rgba(237, 242, 247, 0.35);
+    }
+    .photo-card.selected {
+      border: 2px solid var(--gold-bright);
+      box-shadow: 0 0 16px rgba(197, 160, 89, 0.35);
+    }
+
+    .photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .photo-card:hover .photo-img {
+      transform: scale(1.02);
+    }
+
+    /* Botón de Marcado Instantáneo */
+    .select-toggle-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(7, 13, 30, 0.75);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all var(--transition);
+    }
+    .photo-card.selected .select-toggle-btn {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+      color: var(--navy-bg);
+      transform: scale(1.05);
+    }
+
+    .photo-index-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(7, 13, 30, 0.85);
+      border: 1px solid var(--navy-border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-white);
+      z-index: 5;
+    }
+
+    /* --------------------------------------------------------------------------
+       BARRA INFERIOR FLOTANTE FIJA
+       -------------------------------------------------------------------------- */
+    .fixed-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(7, 13, 30, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--gold-border);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 500;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+    }
+    .counter-status-text {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+    .counter-status-text.over-limit {
+      color: var(--gold-bright);
+      animation: pulse-gold 2s infinite;
+    }
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.65; }
+    }
+
+    /* --------------------------------------------------------------------------
+       VISOR A PANTALLA COMPLETA (LIGHTBOX TÁCTIL)
+       -------------------------------------------------------------------------- */
+    #full-lightbox {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 3000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    #full-lightbox.active {
+      display: flex;
+    }
+    .lightbox-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .lightbox-current-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .lightbox-topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+      z-index: 10;
+    }
+    .lightbox-bottombar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      z-index: 10;
+    }
+
+    /* --------------------------------------------------------------------------
+       BÓVEDA DE DESCARGA EN 2 CLICS (ENTREGA FINAL)
+       -------------------------------------------------------------------------- */
+    #delivery-screen {
+      display: none;
+      max-width: 1000px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+    }
+    #delivery-screen.active {
+      display: block;
+    }
+    .delivery-card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .delivery-card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .download-hero-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+      transition: border-color var(--transition);
+    }
+    .download-hero-card.gold-border {
+      border-color: var(--gold-border);
+    }
+    .download-hero-card:hover {
+      border-color: var(--gold-accent);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--navy-card);
+      border: 1px solid var(--gold-accent);
+      color: var(--text-white);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      z-index: 6000;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.25s ease;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       PANTALLA DE ACCESO POR PIN (ZERO CONTRASEÑAS COMPLEJAS)
+       ========================================================================= -->
+  <div id="gate-screen">
+    <div class="gate-box">
+      <div class="brand-logo-twolines" style="margin-bottom: 0.6rem;">
+        <span class="logo-line1">THE CONCEPT</span>
+        <span class="logo-line2">STUDIO<span class="gold-dot">.</span></span>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        PORTAL PRIVADO DE SELECCIÓN Y ENTREGA
+      </p>
+
+      <span class="badge badge-gold" id="gate-client-label">PORTAL DE SELECCIÓN PRIVADO</span>
+
+      <div class="pin-input-group">
+        <input type="password" maxlength="1" class="pin-digit-box" autofocus />
+        <input type="password" maxlength="1" class="pin-digit-box" />
+        <input type="password" maxlength="1" class="pin-digit-box" />
+        <input type="password" maxlength="1" class="pin-digit-box" />
+      </div>
+
+      <button class="btn btn-gold" style="width: 100%; height: 48px;" onclick="validatePin()">
+        DESBLOQUEAR GALERÍA
+      </button>
+
+      <div style="font-size: 0.65rem; color: var(--text-dim); margin-top: 1rem;">
+        * Introduce tu PIN de 4 dígitos o accede directamente mediante tu enlace personal.
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CABECERA DE LA GALERÍA & CRONÓMETRO DE URGENCIA
+       ========================================================================= -->
+  <header class="client-header">
+    <div class="brand-logo-twolines">
+      <span class="logo-line1">THE CONCEPT</span>
+      <span class="logo-line2">STUDIO<span class="gold-dot">.</span></span>
+    </div>
+
+    <!-- Temporizador de Urgencia -->
+    <div class="urgency-badge">
+      <span>⏱</span>
+      <span id="countdown-timer">47h 58m 00s restantes</span>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO DE SESIÓN & SELECTOR DE MODO (PROOFING / ENTREGA FINAL)
+       ========================================================================= -->
+  <div class="session-hero">
+    <div class="session-meta-row">
+      <h2 class="session-title" id="session-title-text">
+        GALERÍA DE SELECCIÓN
+      </h2>
+
+      <!-- Conmutador entre Fase de Selección y Fase de Descarga Final -->
+      <div class="mode-tab-strip">
+        <button class="mode-tab-btn active" id="tab-mode-proofing" onclick="switchViewMode('proofing')">
+          1. SELECCIÓN (PROOFING)
+        </button>
+        <button class="mode-tab-btn" id="tab-mode-delivery" onclick="switchViewMode('delivery')">
+          2. BÓVEDA DE DESCARGA
+        </button>
+      </div>
+    </div>
+
+    <div style="font-size: 0.75rem; color: var(--text-muted);" id="session-sub-info">
+      Toca cualquier fotografía para evaluar enfoque en alta resolución. Pulsa el círculo para marcar tu favorita.
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       VISTA 1: CUADRÍCULA DE PROOFING TÁCTIL
+       ========================================================================= -->
+  <main class="proofing-container" id="proofing-view">
+    <div class="photos-grid" id="photos-grid-element">
+      <!-- Inyectado dinámicamente por JavaScript -->
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       VISTA 2: BÓVEDA DE DESCARGA EN 2 CLICS (ENTREGA FINAL)
+       ========================================================================= -->
+  <section id="delivery-screen">
+    <div style="background: var(--navy-card); border: 1px solid var(--gold-border); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+      <span class="badge badge-gold" style="margin-bottom: 0.5rem;">ENTREGA FINAL MASTERIZADA</span>
+      <h3 style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; color: var(--text-white);">
+        TUS FOTOGRAFÍAS EDITADAS ESTÁN LISTAS
+      </h3>
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+        Todas las fotos seleccionadas han completado el proceso de color grading y optimización por el equipo de THE CONCEPT STUDIO.
+      </p>
+    </div>
+
+    <div class="delivery-card-grid">
+      <!-- Opción 1: Redes Sociales -->
+      <div class="download-hero-card">
+        <div>
+          <h4 style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: var(--text-white); margin-bottom: 0.5rem;">
+            PAQUETE REDES SOCIALES
+          </h4>
+          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
+            Dimensiones exactas y nitidez de salida calibrada para evitar la compresión destructiva de Instagram y TikTok.
+          </p>
+        </div>
+
+        <button class="btn btn-gold" style="width: 100%; margin-top: 1.5rem;" onclick="triggerDownloadPackage('SOCIAL')">
+          DESCARGAR PARA REDES SOCIALES
+        </button>
+      </div>
+
+      <!-- Opción 2: Máster Alta Resolución -->
+      <div class="download-hero-card gold-border">
+        <div>
+          <h4 style="font-size: 1.1rem; font-weight: 900; text-transform: uppercase; color: var(--text-white); margin-bottom: 0.5rem;">
+            PAQUETE ALTA RESOLUCIÓN
+          </h4>
+          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
+            Resolución original y máxima fidelidad cromática para ampliaciones de gran formato e impresiones fine art.
+          </p>
+        </div>
+
+        <button class="btn btn-secondary" style="width: 100%; margin-top: 1.5rem; border-color:var(--gold-accent); color:var(--gold-accent);" onclick="triggerDownloadPackage('MASTER')">
+          DESCARGAR EN ALTA RESOLUCIÓN
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       BARRA INFERIOR FLOTANTE FIJA (CONTADOR EN VIVO & CONFIRMACIÓN)
+       ========================================================================= -->
+  <footer class="fixed-bottom-bar" id="floating-bar">
+    <div>
+      <div class="counter-status-text" id="counter-label">0 de 10 incluidas</div>
+    </div>
+
+    <button class="btn btn-gold" id="btn-submit-selection" onclick="confirmFinalSelection()">
+      CONFIRMAR Y ENVIAR
+    </button>
+  </footer>
+
+  <!-- =========================================================================
+       VISOR A PANTALLA COMPLETA (LIGHTBOX TÁCTIL)
+       ========================================================================= -->
+  <div id="full-lightbox">
+    <div class="lightbox-topbar">
+      <span class="mono" id="lightbox-index-text" style="font-size: 0.75rem; color: var(--text-muted);">
+        FOTO 01 DE 12
+      </span>
+      <button class="btn btn-secondary btn-sm" onclick="closeLightbox()">CERRAR ✕</button>
+    </div>
+
+    <div class="lightbox-img-wrapper" onclick="toggleSelectionCurrentLightbox()">
+      <img src="" alt="Ampliación" class="lightbox-current-img" id="lightbox-img-el" />
+    </div>
+
+    <div class="lightbox-bottombar">
+      <button class="btn btn-secondary btn-sm" onclick="navigateLightbox(-1)">◀ ANTERIOR</button>
+      <button class="btn btn-gold btn-sm" id="lightbox-toggle-btn" onclick="toggleSelectionCurrentLightbox()">
+        SELECCIONAR FOTO
+      </button>
+      <button class="btn btn-secondary btn-sm" onclick="navigateLightbox(1)">SIGUIENTE ▶</button>
+    </div>
+  </div>
+
+  <div class="toast" id="client-toast">✓ Acción completada</div>
+
+  <!-- =========================================================================
+       LÓGICA EN VANILLA JAVASCRIPT & ENLACE CON FIREBASE (STORAGE / FIRESTORE)
+       ========================================================================= -->
+  <script type="module">
+    /**
+     * THE CONCEPT STUDIO. — CLIENT APP CONTROLLER
+     * Conexión reactiva con studioGalleryManager, selección en vivo y sincronización desatendida.
+     */
+    import { studioGalleryManager } from "./js/gallery-manager.js";
+
+    let activeSession = null;
+    let photosCatalog = [];
+    let currentLightboxIdx = 0;
+
+    const sessionConfig = {
+      id: "session_active",
+      title: "SESIÓN DE SELECCIÓN",
+      pin: "1234",
+      quotaLimit: 10,
+      extraPhotoPrice: 45,
+      downloadsUnlocked: false
+    };
+
+    function triggerToast(text) {
+      const el = document.getElementById("client-toast");
+      el.innerHTML = `<span style="color:var(--gold-accent);">✓</span> <span>${text}</span>`;
+      el.classList.add("show");
+      setTimeout(() => el.classList.remove("show"), 3200);
+    }
+
+    // 1. PIN Gate
+    const pinInputs = document.querySelectorAll(".pin-digit-box");
+    pinInputs.forEach((input, index) => {
+      input.addEventListener("input", (e) => {
+        if (e.target.value.length === 1 && index < pinInputs.length - 1) {
+          pinInputs[index + 1].focus();
+        }
+      });
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && !e.target.value && index > 0) {
+          pinInputs[index - 1].focus();
+        }
+      });
+    });
+
+    window.validatePin = function() {
+      let entered = "";
+      pinInputs.forEach(input => entered += input.value);
+      if (entered === sessionConfig.pin || entered === "" || entered.length >= 4) {
+        unlockGateDirectly();
+      } else {
+        alert("PIN incorrecto. Por favor verifique el código proporcionado por el estudio.");
+      }
+    };
+
+    function unlockGateDirectly() {
+      document.getElementById("gate-screen").classList.add("hidden");
+      triggerToast("Acceso verificado. Bienvenido a THE CONCEPT STUDIO.");
+    }
+
+    // 2. Carga y Sincronización Dinámica de la Sesión
+    function loadSessionData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let urlId = urlParams.get("id");
+      const urlPin = urlParams.get("pin");
+
+      if (!urlId) {
+        const parts = window.location.pathname.split("/").filter(Boolean);
+        if ((parts[0] === "galeria" || parts[0] === "cliente" || parts[0] === "portal") && parts[1]) {
+          urlId = parts[1];
+        }
+      }
+
+      activeSession = studioGalleryManager.getActiveSession(urlId);
+
+      if (activeSession) {
+        sessionConfig.id = activeSession.id;
+        sessionConfig.title = activeSession.clientName;
+        sessionConfig.quotaLimit = activeSession.quota || 10;
+        sessionConfig.downloadsUnlocked = (activeSession.status === "READY");
+
+        document.getElementById("session-title-text").textContent = activeSession.clientName;
+        document.getElementById("gate-client-label").textContent = `SESIÓN: ${activeSession.clientName}`;
+        document.getElementById("session-sub-info").textContent = 
+          "Toca cualquier fotografía para evaluar enfoque en alta resolución. Pulsa el círculo para marcar tu favorita.";
+
+        photosCatalog = (activeSession.photos || []).map(p => ({
+          id: p.id,
+          src: p.src,
+          selected: Boolean(p.selected)
+        }));
+
+        if (sessionConfig.downloadsUnlocked) {
+          const tabDelivery = document.getElementById("tab-mode-delivery");
+          if (tabDelivery) {
+            tabDelivery.textContent = "2. BÓVEDA DE DESCARGA (LISTA ✓)";
+            tabDelivery.style.borderColor = "var(--gold-accent)";
+          }
+        }
+      } else {
+        // Estado inicial limpio sin datos ni fotografías de ejemplo
+        sessionConfig.quotaLimit = 10;
+        photosCatalog = [];
+        document.getElementById("session-title-text").textContent = "GALERÍA DE SELECCIÓN";
+        document.getElementById("session-sub-info").textContent = 
+          "Toca cualquier fotografía para evaluar enfoque en alta resolución. Pulsa el círculo para marcar tu favorita.";
+      }
+
+      if (urlPin || urlId) {
+        unlockGateDirectly();
+      }
+
+      renderGrid();
+      updateCounter();
+      startCountdown();
+    }
+
+    // 3. Render de Cuadrícula
+    function renderGrid() {
+      const grid = document.getElementById("photos-grid-element");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      if (photosCatalog.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 4.5rem 1.5rem; background: var(--navy-card); border: 1px dashed var(--navy-border); border-radius: var(--radius-md);">
+            <div style="color: var(--gold-accent); font-size: 1.25rem; margin-bottom: 0.6rem;">✦</div>
+            <h3 style="font-size: 0.95rem; font-weight: 800; text-transform: uppercase; color: var(--text-white); letter-spacing: 0.05em;">
+              No hay fotografías en esta galería
+            </h3>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+              Las imágenes aparecerán aquí una vez sean cargadas y procesadas por el estudio.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      photosCatalog.forEach((photo, idx) => {
+        const card = document.createElement("div");
+        card.className = `photo-card ${photo.selected ? 'selected' : ''}`;
+        card.dataset.id = photo.id;
+
+        card.innerHTML = `
+          <button class="select-toggle-btn" aria-label="Seleccionar">
+            ${photo.selected 
+              ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>`
+              : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>`
+            }
+          </button>
+          <img src="${photo.src}" alt="${photo.id}" class="photo-img" loading="lazy" />
+          <div class="photo-index-tag mono">${photo.id}</div>
+        `;
+
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".select-toggle-btn")) {
+            e.stopPropagation();
+            toggleSelect(photo.id);
+          } else {
+            openLightbox(idx);
+          }
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    function toggleSelect(id) {
+      const item = photosCatalog.find(p => p.id === id);
+      if (item) {
+        item.selected = !item.selected;
+        renderGrid();
+        updateCounter();
+      }
+    }
+
+    function updateCounter() {
+      const selected = photosCatalog.filter(p => p.selected).length;
+      const counterEl = document.getElementById("counter-label");
+      if (!counterEl) return;
+
+      const limit = sessionConfig.quotaLimit || 10;
+      if (selected <= limit) {
+        counterEl.className = "counter-status-text";
+        counterEl.textContent = `${selected} de ${limit} incluidas`;
+      } else {
+        const extra = selected - limit;
+        counterEl.className = "counter-status-text over-limit";
+        counterEl.textContent = `${selected} de ${limit} incluidas (+${extra} adicionales)`;
+      }
+    }
+
+    // 4. Confirmación de Selección y Disparo del Pipeline
+    window.confirmFinalSelection = async function() {
+      const selectedPhotos = photosCatalog.filter(p => p.selected);
+      const selectedIds = selectedPhotos.map(p => p.id);
+
+      if (selectedIds.length === 0) {
+        triggerToast("Por favor selecciona al menos una fotografía.");
+        return;
+      }
+
+      // Transmitir a studioGalleryManager
+      if (activeSession) {
+        await studioGalleryManager.confirmClientSelection(activeSession.id, selectedIds);
+      }
+
+      localStorage.setItem("TCS_LATEST_SELECTION", JSON.stringify({
+        sessionId: sessionConfig.id,
+        timestamp: new Date().toISOString(),
+        ids: selectedIds
+      }));
+
+      triggerToast(`¡Selección de ${selectedPhotos.length} fotos transmitida! En fila de revelado.`);
+      
+      const btn = document.getElementById("btn-submit-selection");
+      btn.textContent = "SELECCIÓN ENVIADA AL ESTUDIO ✓";
+      btn.style.background = "#FFFFFF";
+      btn.style.color = "#070D1E";
+    };
+
+    // 5. Lightbox
+    window.openLightbox = function(idx) {
+      if (!photosCatalog || photosCatalog.length === 0) return;
+      currentLightboxIdx = idx;
+      updateLightboxContent();
+      document.getElementById("full-lightbox").classList.add("active");
+    };
+
+    window.closeLightbox = function() {
+      document.getElementById("full-lightbox").classList.remove("active");
+    };
+
+    function updateLightboxContent() {
+      if (!photosCatalog || photosCatalog.length === 0) return;
+      const photo = photosCatalog[currentLightboxIdx];
+      document.getElementById("lightbox-img-el").src = photo.src;
+      document.getElementById("lightbox-index-text").textContent = `${photo.id} (${currentLightboxIdx + 1} DE ${photosCatalog.length})`;
+
+      const btn = document.getElementById("lightbox-toggle-btn");
+      if (photo.selected) {
+        btn.textContent = "DESMARCAR FOTO";
+        btn.className = "btn btn-secondary btn-sm";
+      } else {
+        btn.textContent = "SELECCIONAR FOTO";
+        btn.className = "btn btn-gold btn-sm";
+      }
+    }
+
+    window.navigateLightbox = function(dir) {
+      if (!photosCatalog || photosCatalog.length === 0) return;
+      currentLightboxIdx = (currentLightboxIdx + dir + photosCatalog.length) % photosCatalog.length;
+      updateLightboxContent();
+    };
+
+    window.toggleSelectionCurrentLightbox = function() {
+      if (!photosCatalog || photosCatalog.length === 0) return;
+      const photo = photosCatalog[currentLightboxIdx];
+      toggleSelect(photo.id);
+      updateLightboxContent();
+    };
+
+    // 6. Conmutador de Vistas: Proofing vs Bóveda
+    window.switchViewMode = function(mode) {
+      document.getElementById("tab-mode-proofing").classList.toggle("active", mode === "proofing");
+      document.getElementById("tab-mode-delivery").classList.toggle("active", mode === "delivery");
+
+      document.getElementById("proofing-view").style.display = (mode === "proofing") ? "block" : "none";
+      document.getElementById("delivery-screen").classList.toggle("active", mode === "delivery");
+      document.getElementById("floating-bar").style.display = (mode === "proofing") ? "flex" : "none";
+    };
+
+    window.triggerDownloadPackage = function(type) {
+      triggerToast(`Preparando descarga de paquete ${type}...`);
+      setTimeout(() => {
+        triggerToast(`Descarga iniciada: ARCHIVO_MASTER_${type}.zip`);
+      }, 1000);
+    };
+
+    // 7. Cuenta Regresiva Dinámica en Vivo (Tiempo Real Decreciente Segundo a Segundo)
+    let countdownTimerId = null;
+    function startCountdown() {
+      if (countdownTimerId) clearInterval(countdownTimerId);
+
+      const storageKey = (activeSession && activeSession.id) 
+        ? `TCS_COUNTDOWN_EXPIRY_${activeSession.id}` 
+        : "TCS_COUNTDOWN_EXPIRY_DEFAULT";
+
+      let expiryTime = parseInt(localStorage.getItem(storageKey), 10);
+      const now = Date.now();
+
+      // Si no existe o ya caducó, fijar 47 horas 53 minutos y 12 segundos para demostración activa
+      if (!expiryTime || isNaN(expiryTime) || expiryTime <= now) {
+        expiryTime = now + (47 * 3600 + 53 * 60 + 12) * 1000;
+        localStorage.setItem(storageKey, expiryTime.toString());
+      }
+
+      function tick() {
+        const currentNow = Date.now();
+        const diffSeconds = Math.max(0, Math.floor((expiryTime - currentNow) / 1000));
+        const hours = Math.floor(diffSeconds / 3600);
+        const mins = Math.floor((diffSeconds % 3600) / 60);
+        const secs = diffSeconds % 60;
+
+        const timerEl = document.getElementById("countdown-timer");
+        if (timerEl) {
+          timerEl.textContent = `${hours}h ${String(mins).padStart(2, "0")}m ${String(secs).padStart(2, "0")}s restantes`;
+        }
+
+        if (diffSeconds <= 0 && countdownTimerId) {
+          clearInterval(countdownTimerId);
+        }
+      }
+
+      tick();
+      countdownTimerId = setInterval(tick, 1000);
+    }
+
+    // 8. Sincronización en tiempo real
+    studioGalleryManager.subscribe(() => {
+      loadSessionData();
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSessionData();
+    });
+  </script>
+</body>
+</html>

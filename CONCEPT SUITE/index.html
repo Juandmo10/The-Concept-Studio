@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE CONCEPT STUDIO. — Luxury SaaS Suite</title>
+  
+  <!-- Modern Geometric Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Design System & Architecture CSS -->
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/client-portal.css">
+  <link rel="stylesheet" href="css/admin-panel.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       TOP DOMAIN SWITCHER (Simulador de Dominios Web Independientes)
+       ========================================================================= -->
+  <header class="domain-switcher-bar">
+    <div class="domain-tabs">
+      <span style="font-size:0.65rem; font-weight:800; color:var(--white-50); letter-spacing:var(--tracking-widest); text-transform:uppercase;">
+        DOMINIO SAAS:
+      </span>
+      <button class="domain-tab-btn active" data-domain="portal.theconceptstudio.com" id="tab-portal-client">
+        <span>🌐</span> portal.theconceptstudio.com
+      </button>
+      <button class="domain-tab-btn" data-domain="app.theconceptstudio.com" id="tab-app-admin">
+        <span>⚙️</span> app.theconceptstudio.com
+      </button>
+    </div>
+
+    <div class="domain-status-pill">
+      <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--white-70);" id="active-domain-display">
+        portal.theconceptstudio.com
+      </span>
+      <span class="badge badge-gold" style="font-size:0.55rem; padding:0.1rem 0.35rem;">SSL ENCRYPTED // TLS 1.3</span>
+    </div>
+  </header>
+
+  <div class="app-container">
+    
+    <!-- =======================================================================
+         SIDEBAR: MIDNIGHT NAVY & TIPOGRAFÍA BOLD CON ACENTO CHAMPAGNE
+         ======================================================================= -->
+    <aside class="sidebar">
+      
+      <!-- Brand Logo con Acento Dorado en el Punto Final -->
+      <div class="sidebar-brand">
+        <h1 class="brand-logo-text">THE CONCEPT STUDIO<span class="gold-dot">.</span></h1>
+        <span class="brand-tagline">SPORTS FILM & COMMERCIAL PHOTOGRAPHY</span>
+      </div>
+
+      <!-- Platform Active Context Banner -->
+      <div class="platform-banner">
+        <span class="platform-badge" id="platform-badge">PORTAL DEL CLIENTE // VIP ACCESS</span>
+        <span class="badge-dot"></span>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar-nav">
+        
+        <!-- ===================================================================
+             PLATAFORMA 1: PORTAL DEL CLIENTE (portal.theconceptstudio.com)
+             =================================================================== -->
+        <div id="nav-client-section">
+          <div class="nav-section-title">EXPERIENCIA VIP CLIENTE</div>
+
+          <a href="#" class="nav-item active" data-view="client-proofing">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span>PROOFING INTELIGENTE</span>
+            <span class="nav-badge" id="nav-proofing-badge">14 / 20</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="client-video">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="23 7 16 12 23 17 23 7"></polygon>
+              <rect x="1" y="5" width="15" height="14" rx="2"></rect>
+            </svg>
+            <span>REVISIÓN CON PINES</span>
+            <span class="nav-badge">00:08</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="client-vault">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>BÓVEDA MULTI-FORMATO</span>
+            <span class="nav-badge">4K & SOCIAL</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="client-contract">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>CONTRATOS Y PAGOS</span>
+            <span class="nav-badge">FIRMA OK</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="client-tracker">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>RASTREADOR DE PROYECTO</span>
+            <span class="nav-badge">75%</span>
+          </a>
+        </div>
+
+        <!-- ===================================================================
+             PLATAFORMA 2: PANEL DE ADMINISTRACIÓN (app.theconceptstudio.com)
+             =================================================================== -->
+        <div id="nav-admin-section" style="display: none;">
+          <div class="nav-section-title">CENTRO DE COMANDO OPERATIVO</div>
+
+          <a href="#" class="nav-item" data-view="admin-dashboard">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="9"></rect>
+              <rect x="14" y="3" width="7" height="5"></rect>
+              <rect x="14" y="12" width="7" height="9"></rect>
+              <rect x="3" y="16" width="7" height="5"></rect>
+            </svg>
+            <span>DASHBOARD EJECUTIVO</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="admin-links">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span>ENLACES EXPIRABLES</span>
+            <span class="nav-badge">48H VIP</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="admin-kanban">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="4" height="18"></rect>
+              <rect x="9" y="3" width="4" height="18"></rect>
+              <rect x="15" y="3" width="4" height="18"></rect>
+            </svg>
+            <span>PIPELINE DE 5 ETAPAS</span>
+            <span class="nav-badge">KANBAN</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="admin-callsheets">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>CALL SHEETS & RODAJE</span>
+            <span class="nav-badge">05:30 AM</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="admin-inventory">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            <span>INVENTARIO TÉCNICO</span>
+            <span class="nav-badge" style="color:var(--gold-primary);">ALERTAS</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="admin-crm">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            </svg>
+            <span>CRM & EXPEDIENTES</span>
+          </a>
+
+          <a href="#" class="nav-item" data-view="admin-uploads">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>SUBIDAS A BÓVEDA</span>
+          </a>
+        </div>
+
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="backend-indicator">
+          <span class="backend-status-dot"></span>
+          <span>FIRESTORE CLOUD READY</span>
+        </div>
+        <div class="user-snippet">
+          <div class="user-avatar">TC</div>
+          <div class="user-info">
+            <span class="user-name" id="user-name-badge">MARCUS VANCE</span>
+            <span class="user-role" id="user-role-badge">GLOBAL BRAND DIRECTOR</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- =======================================================================
+         MAIN WORKSPACE AREA
+         ======================================================================= -->
+    <main class="main-wrapper">
+      
+      <!-- Top Sticky Header Bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <button id="mobile-menu-toggle" class="btn btn-secondary btn-sm" style="display:none;" aria-label="Abrir Menú">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          
+          <div class="project-selector" id="global-project-selector" title="Alternar proyecto">
+            <span class="project-label">PROYECTO ACTIVO:</span>
+            <span class="project-name">NIKE TRAINING // ELITE SPEED 2026</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <!-- Central Watermark Quick Switcher for Admin View -->
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <label class="switch-wrapper" title="Interruptor de marca de agua central automática">
+              <input type="checkbox" id="watermark-toggle-switch" class="switch-input" checked />
+              <span class="switch-slider"></span>
+              <span style="font-size:0.65rem; font-weight:800; letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--white-70);">
+                MARCA DE AGUA
+              </span>
+            </label>
+          </div>
+
+          <button class="btn btn-gold btn-sm" onclick="window.showAppToast?.('Sincronización en tiempo real activa con Cloud Firestore.')">
+            SINCRONIZAR
+          </button>
+        </div>
+      </header>
+
+      <!-- Dynamic Page Container -->
+      <div class="page-container">
+
+        <!-- ===================================================================
+             PLATAFORMA 1 — VISTA 1: PROOFING INTELIGENTE (CLIENTE)
+             =================================================================== -->
+        <section id="client-proofing" class="page-view active">
+          
+          <!-- 1. VIP Magic Link Welcome Splash Banner -->
+          <div class="vip-welcome-banner">
+            <div>
+              <div class="vip-badge-cluster">
+                <span class="badge badge-gold">ACCESO VIP VERIFICADO</span>
+                <span class="mono-text" style="font-size:0.7rem; color:var(--white-50);">PIN: TCS-VIP-8842 // TOKEN ACTIVO</span>
+              </div>
+              <h2 class="vip-client-title">BIENVENIDO, MARCUS VANCE // NIKE GLOBAL ATHLETICS</h2>
+              <p class="vip-meta-details">
+                Sesión de rodaje y fotografía deportiva completada. Revisa los fotogramas y selecciona tus tomas para el máster final.
+              </p>
+            </div>
+            <div>
+              <span class="badge badge-outline" style="border-color:var(--gold-border); color:var(--gold-light);">
+                VALIDEZ RESTANTE: 48 HORAS
+              </span>
+            </div>
+          </div>
+
+          <!-- 2. Cinematic Hero Presentation Header -->
+          <div class="cinematic-hero-card">
+            <img src="assets/images/sprinter_hero.jpg" alt="Hero Footage" class="hero-backdrop-img" />
+            <div class="hero-overlay-gradient"></div>
+            <div class="hero-content">
+              <div>
+                <div class="hero-session-tag">CAMPAÑA VELOCIDAD 2026 // ESTADIO OLÍMPICO</div>
+                <h3 class="hero-main-title">ELITE SPEED HERO REEL & STILLS MÁSTER</h3>
+                <div style="font-size:0.75rem; color:var(--white-70); margin-top:0.5rem;" class="mono-text">
+                  RED V-RAPTOR 8K VV · PHANTOM FLEX 4K (1000 FPS) · CANON R5 II 45MP
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-gold" onclick="window.switchSubTab?.('client-video')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  REPRODUCIR REEL PRINCIPAL
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Proofing Controls Bar with Gold Dynamic Counter -->
+          <div class="gallery-controls-bar">
+            <div class="gallery-filters">
+              <button class="filter-btn proofing-filter-btn active" data-filter="ALL">TODAS (14)</button>
+              <button class="filter-btn proofing-filter-btn" data-filter="PISTA & VELOCIDAD">PISTA & VELOCIDAD</button>
+              <button class="filter-btn proofing-filter-btn" data-filter="STUDIO & LUZ">STUDIO & LUZ</button>
+              <button class="filter-btn proofing-filter-btn" data-filter="VERTICAL REELS">VERTICAL REELS</button>
+              <button class="filter-btn proofing-filter-btn" data-filter="FAVORITES">★ FAVORITAS</button>
+            </div>
+
+            <!-- Dynamic Package Quota & Extra Cost Notice -->
+            <div class="quota-indicator-box">
+              <span class="quota-counter-gold" id="quota-counter-gold">14 / 20 SELECCIONADAS</span>
+              <span class="extra-photo-warning" id="extra-photo-warning-pill">+$45 USD / FOTO EXTRA</span>
+            </div>
+          </div>
+
+          <!-- Masonry Grid with Watermark Support -->
+          <div class="masonry-grid" id="proofing-masonry-grid">
+            <!-- Dynamically populated by js/proofing.js -->
+          </div>
+
+          <!-- Bottom Floating Action Bar -->
+          <div class="proofing-bottom-bar" id="proofing-bottom-bar">
+            <div class="selection-summary">
+              <div>
+                <div class="selection-count-badge" id="proofing-selected-count">14 DE 14 FOTOS SELECCIONADAS</div>
+                <div class="selection-subtext">LÍMITE DE PAQUETE: 20 FOTOS INCLUIDAS EN CONTRATO BASE</div>
+              </div>
+            </div>
+            <div class="proofing-actions" style="display:flex; gap:0.75rem;">
+              <button class="btn btn-secondary" id="clear-selection-btn">LIMPIAR</button>
+              <button class="btn btn-gold btn-lg" id="confirm-selection-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                CONFIRMAR Y ENVIAR SELECCIÓN
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 1 — VISTA 2: REVISIÓN DE VIDEO CON PINES (CLIENTE)
+             =================================================================== -->
+        <section id="client-video" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">FEEDBACK VISUAL PUNTUAL // CÓDIGO DE TIEMPO</span>
+              <h2 class="section-title">REVISIÓN DE VIDEO CON MARCADOR EN PANTALLA</h2>
+              <p class="section-subtitle">Haz click en cualquier punto del video para colocar un marcador visual y anclar tu comentario exacto.</p>
+            </div>
+            <div class="view-header-actions">
+              <span class="badge badge-gold">CORTE: HERO 60S ROUGH CUT V3</span>
+              <span class="badge badge-outline">APPLE PRORES 422 HQ</span>
+            </div>
+          </div>
+
+          <div class="video-review-container">
+            <!-- Video Screen Card -->
+            <div class="video-player-card">
+              <div class="video-screen-wrapper" id="video-screen-wrapper">
+                <img src="assets/images/cinema_rig.jpg" alt="Video Frame" class="video-element" id="review-video-poster" />
+                <div class="pin-spot-hint">HAZ CLICK EN LA PANTALLA PARA SITUAR UN PIN EN COORDENADAS</div>
+                <div class="video-overlay-timecode" id="overlay-timecode">TC 01:00:00:08:12</div>
+                <!-- On-screen pins injected by js/video-review.js -->
+              </div>
+
+              <!-- Controls -->
+              <div class="video-controls">
+                <div class="scrubber-track" id="video-scrubber-track">
+                  <div class="scrubber-fill" id="video-scrubber-fill"></div>
+                  <!-- Markers injected dynamically -->
+                </div>
+
+                <div class="controls-row">
+                  <div class="controls-left" style="display:flex; align-items:center; gap:1rem;">
+                    <button class="control-btn" id="video-play-btn" aria-label="Reproducir o pausar video">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <span class="timecode-display mono-text" id="video-timecode-display">00:08 / 02:00</span>
+                  </div>
+
+                  <div>
+                    <button class="btn btn-secondary btn-sm" id="capture-current-frame-btn">
+                      + ANCLAR SEGUNDO ACTUAL
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spatial Comments Panel -->
+            <div class="video-comments-panel">
+              <div class="comments-panel-header">
+                <h4 style="font-size:var(--text-xs); font-weight:900; letter-spacing:var(--tracking-wider); text-transform:uppercase;">
+                  ANOTACIONES & PINES ESPACIALES
+                </h4>
+                <span class="badge badge-gold">3 NOTAS</span>
+              </div>
+
+              <div class="comments-list" id="video-comments-list">
+                <!-- Dynamically populated by js/video-review.js -->
+              </div>
+
+              <div class="comment-input-area">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.65rem; font-weight:800; text-transform:uppercase;">
+                  <span style="color:var(--white-50);">OBJETIVO:</span>
+                  <span class="mono-text" style="color:var(--gold-primary);" id="anchor-time-chip">FRAME [00:08] (X: 48%, Y: 42%)</span>
+                </div>
+
+                <div class="comment-tag-selector" style="display:flex; gap:0.25rem; margin-bottom:0.75rem;">
+                  <button class="tag-pill active" data-tag="CORTE / EDICIÓN">EDICIÓN</button>
+                  <button class="tag-pill" data-tag="COLOR GRADING">COLOR</button>
+                  <button class="tag-pill" data-tag="SONIDO / MIX">SONIDO</button>
+                  <button class="tag-pill" data-tag="VFX / GRÁFICA">VFX</button>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0.75rem;">
+                  <textarea id="video-comment-text" class="form-textarea" rows="2" placeholder="Escribe el ajuste exacto o haz click en la pantalla para señalar..."></textarea>
+                </div>
+
+                <button class="btn btn-gold" style="width: 100%;" id="submit-video-comment">
+                  PUBLICAR NOTA CON PIN VISUAL
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 1 — VISTA 3: BÓVEDA MULTI-FORMATO (CLIENTE)
+             =================================================================== -->
+        <section id="client-vault" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">DESCARGAS SEGMENTADAS // ALTA VELOCIDAD</span>
+              <h2 class="section-title">BÓVEDA DE ENTREGABLES MULTI-FORMATO</h2>
+              <p class="section-subtitle">Archivos optimizados para redes sociales y versiones máster originales sin compresión.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-gold btn-sm" id="download-entire-vault-btn">
+                DESCARGAR PAQUETE COMPLETO (24.8 GB)
+              </button>
+            </div>
+          </div>
+
+          <!-- Segment Tabs -->
+          <div class="vault-segments-tab-bar">
+            <button class="vault-tab-btn active" data-segment="ALL">TODOS LOS ENTREGABLES</button>
+            <button class="vault-tab-btn" data-segment="social_web">📱 VERSIÓN WEB / REDES SOCIALES</button>
+            <button class="vault-tab-btn" data-segment="master_print">💎 VERSIÓN MÁSTER / IMPRESIÓN (ORIGINAL)</button>
+          </div>
+
+          <!-- File Cards Grid -->
+          <div class="vault-grid-cards" id="vault-files-grid">
+            <!-- Dynamically populated by js/vault.js -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 1 — VISTA 4: CONTRATOS, ESTADO DE CUENTA Y PAGOS (CLIENTE)
+             =================================================================== -->
+        <section id="client-contract" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">LIQUIDACIÓN FORMAL & SEGURIDAD</span>
+              <h2 class="section-title">VISOR DE CONTRATOS, PAGOS & ESTADO DE CUENTA</h2>
+              <p class="section-subtitle">Revisa el desglose de honorarios, firma digitalmente y adjunta comprobantes de transferencia.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-secondary btn-sm" onclick="window.print()">IMPRIMIR COPIA PDF</button>
+            </div>
+          </div>
+
+          <!-- Account Statement Balance Cards -->
+          <div class="account-statement-grid">
+            <div class="statement-card">
+              <span class="section-label">TOTAL PRESUPUESTADO</span>
+              <div class="metric-value">$18,500.00</div>
+              <div class="metric-footer">USD // CONTRATO APROBADO</div>
+            </div>
+
+            <div class="statement-card gold-highlight">
+              <span class="section-label" style="color:var(--gold-primary);">ANTICIPO PAGADO (50%)</span>
+              <div class="metric-value" style="color:var(--gold-primary);">$9,250.00</div>
+              <div class="metric-footer" style="color:var(--gold-light);">CONCILIADO EN BANCO ✓</div>
+            </div>
+
+            <div class="statement-card">
+              <span class="section-label">SALDO PENDIENTE LIQUIDACIÓN</span>
+              <div class="metric-value">$9,250.00</div>
+              <div class="metric-footer">CONTRA ENTREGA DE BÓVEDA FINAL</div>
+            </div>
+          </div>
+
+          <!-- Contract Document -->
+          <div class="contract-document-wrapper">
+            <div class="contract-header" style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--white-15); padding-bottom:1.5rem; margin-bottom:1.5rem;">
+              <div>
+                <h3 class="brand-logo-text" style="font-size:1.4rem;">THE CONCEPT STUDIO<span class="gold-dot">.</span></h3>
+                <div style="font-size:0.7rem; color:var(--white-50); text-transform:uppercase; margin-top:2px;">
+                  COMMERCIAL SPORTS CINEMATOGRAPHY & STILLS
+                </div>
+              </div>
+              <div class="mono-text" style="font-size:0.75rem; color:var(--gold-primary); text-align:right;">
+                CONTRATO: #TCS-CTR-2026-088<br>
+                ESTADO: EN EJECUCIÓN
+              </div>
+            </div>
+
+            <table class="contract-items-table" style="width:100%; border-collapse:collapse; margin-bottom:2rem; font-size:var(--text-xs);">
+              <thead>
+                <tr style="border-bottom:1px solid var(--gold-border); text-align:left;">
+                  <th style="padding:0.75rem 0;">CONCEPTO</th>
+                  <th>JORNADA</th>
+                  <th style="text-align:right;">VALOR</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--white-08);">
+                  <td style="padding:0.75rem 0;">Dirección de Fotografía & Cine Comercial (RED V-Raptor 8K On-Set)</td>
+                  <td>3 Días</td>
+                  <td class="mono-text" style="text-align:right;">$7,500.00 USD</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--white-08);">
+                  <td style="padding:0.75rem 0;">Fotografía Deportiva High-Speed Stills (Canon R5 II + Profoto 2400W)</td>
+                  <td>3 Días</td>
+                  <td class="mono-text" style="text-align:right;">$5,400.00 USD</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--white-08);">
+                  <td style="padding:0.75rem 0;">Post-Producción, Color Grading DaVinci Resolve & Sound Master</td>
+                  <td>Global</td>
+                  <td class="mono-text" style="text-align:right;">$3,600.00 USD</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--white-08);">
+                  <td style="padding:0.75rem 0;">Cesión de Derechos Comerciales Globales (Buyout 2 Años)</td>
+                  <td>Licencia</td>
+                  <td class="mono-text" style="text-align:right;">$2,000.00 USD</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Upload Payment Proof Zone -->
+            <div class="payment-proof-zone" id="payment-proof-dropzone">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-primary); margin-bottom:0.5rem;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <h4 style="font-size:var(--text-xs); font-weight:900; text-transform:uppercase; color:var(--white);">
+                ADJUNTAR COMPROBANTE DE TRANSFERENCIA O PAGO
+              </h4>
+              <p style="font-size:0.7rem; color:var(--white-50); margin-top:2px;" id="payment-proof-status-text">
+                Haz click para cargar PDF o captura de transferencia bancaria (SWIFT / ACH / Wire Transfer).
+              </p>
+              <input type="file" id="payment-proof-file-input" style="display:none;" accept=".pdf,.png,.jpg,.jpeg" />
+            </div>
+
+            <!-- Digital Signature Block -->
+            <div style="margin-top:2rem; border-top:1px solid var(--white-15); padding-top:2rem;">
+              <div id="signature-active-form">
+                <span class="section-label">FIRMA ELECTRÓNICA PROTOCOLIZADA</span>
+                
+                <div class="form-group" style="margin-bottom:1rem;">
+                  <label class="form-label" for="signer-name-input">NOMBRE COMPLETO Y CARGO DEL REPRESENTANTE AUTORIZADO:</label>
+                  <input type="text" id="signer-name-input" class="form-input" value="Marcus Vance — Global Brand Director" />
+                </div>
+
+                <div class="signature-canvas-container">
+                  <canvas id="signature-canvas" class="signature-canvas"></canvas>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                  <button class="btn btn-secondary btn-sm" id="clear-signature-btn">LIMPIAR FIRMA</button>
+                  <label style="display:flex; align-items:center; gap:0.5rem; font-size:var(--text-xs); color:var(--white-70); cursor:pointer;">
+                    <input type="checkbox" id="legal-consent-check" checked style="accent-color:var(--gold-primary);" />
+                    <span>Certifico facultades legales para vincular a la compañía.</span>
+                  </label>
+                  <button class="btn btn-gold btn-lg" id="sign-contract-btn">
+                    APROBAR Y FIRMAR DIGITALMENTE
+                  </button>
+                </div>
+              </div>
+
+              <div class="signed-stamp" id="signed-verification-stamp">
+                <!-- Injected dynamically upon sign -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 1 — VISTA 5: RASTREADOR DE PROYECTOS (CLIENTE)
+             =================================================================== -->
+        <section id="client-tracker" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">MONITOREO DE HITOS // PIPELINE</span>
+              <h2 class="section-title">RASTREADOR DE FASES DE PRODUCCIÓN</h2>
+              <p class="section-subtitle">Estado en tiempo real del cronograma, jornadas de rodaje y entregables.</p>
+            </div>
+            <div class="view-header-actions">
+              <span class="badge badge-gold">FASE 3: POST-PRODUCCIÓN ACTIVA</span>
+            </div>
+          </div>
+
+          <div class="tracker-pipeline-container">
+            <div class="pipeline-phases-grid">
+              <div class="phase-card completed">
+                <span class="phase-number">01</span>
+                <h3 class="phase-title">PLANIFICACIÓN</h3>
+                <span class="phase-status-badge">COMPLETADO ✓</span>
+                <span class="phase-date">15 ENE 2026</span>
+              </div>
+              <div class="phase-card completed">
+                <span class="phase-number">02</span>
+                <h3 class="phase-title">RODAJE EN SET</h3>
+                <span class="phase-status-badge">COMPLETADO ✓</span>
+                <span class="phase-date">28 ENE 2026</span>
+              </div>
+              <div class="phase-card active">
+                <span class="phase-number">03</span>
+                <h3 class="phase-title">POST & COLOR</h3>
+                <span class="phase-status-badge" style="background:var(--gold-primary); color:var(--navy-black);">ACTUAL ●</span>
+                <span class="phase-date">FEB 2026</span>
+              </div>
+              <div class="phase-card">
+                <span class="phase-number">04</span>
+                <h3 class="phase-title">ENTREGA FINAL</h3>
+                <span class="phase-status-badge">PRÓXIMO ○</span>
+                <span class="phase-date">28 FEB 2026</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 2 — VISTA 1: DASHBOARD EJECUTIVO (ADMIN)
+             =================================================================== -->
+        <section id="admin-dashboard" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">CENTRO DE COMANDO OPERATIVO // DIRECCIÓN</span>
+              <h2 class="section-title">DASHBOARD EJECUTIVO & BALANCE FINANCIERO</h2>
+              <p class="section-subtitle">Métricas financieras consolidadas y rendimiento por categoría de proyecto.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-gold btn-sm" onclick="window.switchSubTab?.('admin-links')">+ GENERAR ENLACE CLIENTE</button>
+            </div>
+          </div>
+
+          <!-- 4 Financial Balance Cards with Average Project Values -->
+          <div class="dashboard-metrics-grid">
+            <div class="metric-card gold-card">
+              <div class="metric-header">
+                <span class="metric-label">INGRESOS DEL MES</span>
+                <span class="metric-trend">+24.5%</span>
+              </div>
+              <div class="metric-value">$148,500</div>
+              <div class="metric-footer">USD FACTURADOS // FEBRERO 2026</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">COBROS PENDIENTES</span>
+                <span class="metric-trend">3 CUENTAS</span>
+              </div>
+              <div class="metric-value">$34,200</div>
+              <div class="metric-footer">POR CONCILIAR CONTRA BÓVEDA</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">TICKET PROMEDIO DEPORTIVO</span>
+                <span class="metric-trend">STILLS & HIGH-SPEED</span>
+              </div>
+              <div class="metric-value">$22,400</div>
+              <div class="metric-footer">VALOR MEDIO POR CAMPAÑA ATLÉTICA</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">TICKET PROMEDIO COMERCIAL</span>
+                <span class="metric-trend">FILM & BUYOUT</span>
+              </div>
+              <div class="metric-value">$38,500</div>
+              <div class="metric-footer">VALOR MEDIO POR SPOT AUDIOVISUAL</div>
+            </div>
+          </div>
+
+          <!-- Quick Access Cards -->
+          <div class="dashboard-sections-grid">
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h4 style="color:var(--white);">DISPATCH RÁPIDO DE PRODUCCIÓN</h4>
+                <span class="badge badge-gold">TIEMPO REAL</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:1rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:1rem; background:var(--navy-900); border:1px solid var(--white-15); border-radius:var(--radius-sm);">
+                  <div>
+                    <div style="font-weight:900; font-size:var(--text-xs); color:var(--white);">NIKE TRAINING // ELITE SPEED 2026</div>
+                    <div style="font-size:0.7rem; color:var(--white-50);">Cliente con 14 fotos seleccionadas de 20. En espera de aprobación final.</div>
+                  </div>
+                  <button class="btn btn-gold btn-sm" onclick="window.switchSubTab?.('admin-kanban')">VER KANBAN</button>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:1rem; background:var(--navy-900); border:1px solid var(--white-15); border-radius:var(--radius-sm);">
+                  <div>
+                    <div style="font-weight:900; font-size:var(--text-xs); color:var(--white);">RED BULL MOTORSPORT // DAKAR PROMO</div>
+                    <div style="font-size:0.7rem; color:var(--white-50);">Material 8K verificado con MD5. En etapa de color en DaVinci Resolve.</div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="window.switchSubTab?.('admin-callsheets')">CALL SHEET</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h4 style="color:var(--white);">PROTECCIÓN DE CONTENIDO</h4>
+                <span class="badge badge-outline">SEGURIDAD</span>
+              </div>
+              <p style="font-size:var(--text-xs); color:var(--white-70); line-height:1.5; margin-bottom:1rem;">
+                El sistema de marca de agua centralizada aplica dinámicamente el sello tipográfico oficial <strong>THE CONCEPT STUDIO.</strong> a todas las imágenes mostradas en el portal del cliente antes de su compra o entrega final.
+              </p>
+              <span class="badge badge-gold">ESTADO: PROTECCIÓN ACTIVA</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 2 — VISTA 2: GENERADOR DE ENLACES CON EXPIRACIÓN (ADMIN)
+             =================================================================== -->
+        <section id="admin-links" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">ACCESOS VIP DE CLIENTE // SEGURIDAD</span>
+              <h2 class="section-title">GENERADOR DE ENLACES CON EXPIRACIÓN</h2>
+              <p class="section-subtitle">Crea accesos directos únicos por token para clientes con vigencia temporal limitada.</p>
+            </div>
+          </div>
+
+          <div class="link-generator-card">
+            <h4 style="font-size:var(--text-sm); font-weight:900; text-transform:uppercase; color:var(--gold-primary); margin-bottom:1rem;">
+              NUEVO ENLACE SEGURO CON CUENTA REGRESIVA
+            </h4>
+
+            <div class="link-generator-grid">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="link-client-select">CLIENTE / INSTITUCIÓN:</label>
+                <select id="link-client-select" class="form-select">
+                  <option value="Marcus Vance — Nike Global Athletics">Marcus Vance — Nike Global Athletics</option>
+                  <option value="Elena Rostova — Red Bull Motorsport">Elena Rostova — Red Bull Motorsport</option>
+                  <option value="David Holtz — Alpine Formula Team">David Holtz — Alpine Formula Team</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="link-expiry-select">DURACIÓN DEL ENLACE:</label>
+                <select id="link-expiry-select" class="form-select">
+                  <option value="48">48 HORAS (ESTÁNDAR)</option>
+                  <option value="120">5 DÍAS (EXTENDIDO)</option>
+                  <option value="336">14 DÍAS (CAMPAÑA GLOBAL)</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">PIN DE ACCESO:</label>
+                <input type="text" class="form-input" value="AUTO-GENERADO" readonly style="color:var(--gold-primary);" />
+              </div>
+
+              <button class="btn btn-gold" id="generate-link-btn" style="height:42px;">
+                GENERAR ENLACE VIP
+              </button>
+            </div>
+          </div>
+
+          <h4 style="font-size:var(--text-sm); font-weight:900; text-transform:uppercase; color:var(--white); margin-bottom:1rem;">
+            ENLACES ACTIVOS EN EL SISTEMA
+          </h4>
+          <div id="active-links-list">
+            <!-- Dynamically populated by js/admin-tools.js -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 2 — VISTA 3: PIPELINE DE 5 ETAPAS (ADMIN KANBAN)
+             =================================================================== -->
+        <section id="admin-kanban" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">FLUJO DE TRABAJO AUDIOVISUAL // 5 ETAPAS</span>
+              <h2 class="section-title">PIPELINE DE PRODUCCIÓN KANBAN</h2>
+              <p class="section-subtitle">Arrastra y suelta tareas entre fases operativas del estudio.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-gold btn-sm" id="add-task-btn">+ NUEVA TAREA</button>
+            </div>
+          </div>
+
+          <!-- 5-Stage Kanban Columns -->
+          <div class="kanban-board-wrapper-5">
+            <!-- Columna 1: Pre-producción / Por Rodar -->
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <div class="kanban-column-title">
+                  <span>PRE-PROD / POR RODAR</span>
+                </div>
+                <span class="kanban-counter" id="kanban-count-pre_production">0</span>
+              </div>
+              <div class="kanban-cards-container" data-stage="pre_production"></div>
+            </div>
+
+            <!-- Columna 2: En Selección (Esperando cliente) -->
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <div class="kanban-column-title">
+                  <span>EN SELECCIÓN</span>
+                </div>
+                <span class="kanban-counter" id="kanban-count-in_selection">0</span>
+              </div>
+              <div class="kanban-cards-container" data-stage="in_selection"></div>
+            </div>
+
+            <!-- Columna 3: Post-producción / Color -->
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <div class="kanban-column-title">
+                  <span>POST / COLOR</span>
+                </div>
+                <span class="kanban-counter" id="kanban-count-post_production">0</span>
+              </div>
+              <div class="kanban-cards-container" data-stage="post_production"></div>
+            </div>
+
+            <!-- Columna 4: Revisión -->
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <div class="kanban-column-title">
+                  <span>REVISIÓN</span>
+                </div>
+                <span class="kanban-counter" id="kanban-count-review">0</span>
+              </div>
+              <div class="kanban-cards-container" data-stage="review"></div>
+            </div>
+
+            <!-- Columna 5: Entregado / Cerrado -->
+            <div class="kanban-column">
+              <div class="kanban-column-header">
+                <div class="kanban-column-title">
+                  <span>ENTREGADO / CERRADO</span>
+                </div>
+                <span class="kanban-counter" id="kanban-count-delivered">0</span>
+              </div>
+              <div class="kanban-cards-container" data-stage="delivered"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 2 — VISTA 4: CALL SHEET & LOGÍSTICA DE RODAJE (ADMIN)
+             =================================================================== -->
+        <section id="admin-callsheets" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">LOGÍSTICA DE SET // CALL SHEETS</span>
+              <h2 class="section-title">CALL SHEET & LOGÍSTICA DE RODAJE</h2>
+              <p class="section-subtitle">Ficha técnica operativa para crew y talento en set con checklist de equipos.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-gold btn-sm" onclick="window.showAppToast?.('Call Sheet despachada al equipo por SMS & Email.')">
+                DESPACHAR ORDEN AL CREW
+              </button>
+            </div>
+          </div>
+
+          <div class="callsheet-grid">
+            <div class="callsheet-card">
+              <span class="section-label">ORDEN DE CITACIÓN PRINCIPAL</span>
+              <h3 style="font-size:1.25rem; font-weight:900; text-transform:uppercase; color:var(--white); margin-bottom:1rem;">
+                RODAJE DÍA 1: ATLETISMO NIKE SPEED 2026
+              </h3>
+
+              <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:var(--text-xs);">
+                <div>
+                  <span style="color:var(--white-50); font-weight:800; text-transform:uppercase;">HORA DE CITACIÓN (CREW CALL):</span>
+                  <div class="mono-text" style="font-size:1.25rem; font-weight:900; color:var(--gold-primary); margin-top:2px;">
+                    05:30 AM (CALL GENERAL) // 06:15 AM (PRIMER PLANO)
+                  </div>
+                </div>
+
+                <div>
+                  <span style="color:var(--white-50); font-weight:800; text-transform:uppercase;">LOCACIÓN & COORDENADAS GPS:</span>
+                  <div style="color:var(--white); font-weight:700;">Estadio Olímpico de Atletismo — Pista Central</div>
+                  <div class="mono-text" style="font-size:0.7rem; color:var(--gold-light);">GPS: 45.5152° N, 122.6784° W (Acceso Túnel Sur)</div>
+                </div>
+
+                <div>
+                  <span style="color:var(--white-50); font-weight:800; text-transform:uppercase;">CONTACTOS CLAVE:</span>
+                  <div style="color:var(--white);">Director: Juan D. (+1 555-0192) · DP: Alex Thorne (+1 555-0144)</div>
+                  <div style="color:var(--white-70);">Contacto Cliente: Marcus Vance (+1 555-0188)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callsheet-card">
+              <span class="section-label">CHECKLIST DE EQUIPOS TÉCNICOS EN SET</span>
+              <div class="checklist-group">
+                <label class="checklist-item">
+                  <input type="checkbox" checked style="accent-color:var(--gold-primary);" />
+                  <span>RED V-Raptor 8K VV Cinema Rig + Jaula Arri + Baterías V-Mount</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" checked style="accent-color:var(--gold-primary);" />
+                  <span>Phantom Flex 4K High-Speed (1000 FPS) + Monitor Director SmallHD</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" checked style="accent-color:var(--gold-primary);" />
+                  <span>Juego Ópticas Anamórficas Cooke 35/50/85mm + Mattebox Vocas</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" checked style="accent-color:var(--gold-primary);" />
+                  <span>Pack Iluminación Profoto Pro-11 2400W Air + Reflectores Giant</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" checked style="accent-color:var(--gold-primary);" />
+                  <span>Gimbal DJI Ronin 2 con chaleco Ready Rig</span>
+                </label>
+                <label class="checklist-item">
+                  <input type="checkbox" checked style="accent-color:var(--gold-primary);" />
+                  <span>4x Tarjetas CFexpress 2TB con formateo seguro verificado</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 2 — VISTA 5: INVENTARIO TÉCNICO Y MANTENIMIENTO (ADMIN)
+             =================================================================== -->
+        <section id="admin-inventory" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">GESTIÓN DE ACTIVOS // CÁMARAS, ÓPTICAS Y MEMORIAS</span>
+              <h2 class="section-title">INVENTARIO TÉCNICO & ALERTAS DE MANTENIMIENTO</h2>
+              <p class="section-subtitle">Registro de equipos, alertas de formateo de tarjetas y estado de sensores de cámara.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-gold btn-sm" onclick="window.showAppToast?.('Nuevo activo registrado en Firestore.')">+ REGISTRAR EQUIPO</button>
+            </div>
+          </div>
+
+          <div class="inventory-grid-table">
+            <table class="inventory-table">
+              <thead>
+                <tr>
+                  <th>EQUIPO // MODELO</th>
+                  <th>CATEGORÍA</th>
+                  <th>ESTADO OPERATIVO</th>
+                  <th>ALERTA DE MANTENIMIENTO / FORMATEO</th>
+                  <th>ÚLTIMO CHECK</th>
+                  <th>ACCIÓN</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table-tbody">
+                <!-- Dynamically populated by js/admin-tools.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 2 — VISTA 6: CRM DE CLIENTES (ADMIN)
+             =================================================================== -->
+        <section id="admin-crm" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">EXPEDIENTES INSTITUCIONALES</span>
+              <h2 class="section-title">CRM DE CLIENTES & EXPEDIENTES</h2>
+              <p class="section-subtitle">Base de datos institucional con notas privadas de producción.</p>
+            </div>
+          </div>
+
+          <div class="crm-controls-bar">
+            <div class="crm-search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="crm-search-input" class="crm-search-input" placeholder="Buscar cliente o club..." />
+            </div>
+            <span class="badge badge-gold">4 CLIENTES ACTIVOS</span>
+          </div>
+
+          <div class="crm-table-container">
+            <table class="crm-table">
+              <thead>
+                <tr>
+                  <th>CLIENTE // EMPRESA O CLUB</th>
+                  <th>CONTACTO DIRECTO</th>
+                  <th>PROYECTOS</th>
+                  <th>TOTAL FACTURADO</th>
+                  <th>ESTADO</th>
+                  <th>EXPEDIENTE</th>
+                </tr>
+              </thead>
+              <tbody id="crm-clients-tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- CRM Drawer -->
+          <div class="crm-drawer-overlay" id="crm-drawer-overlay">
+            <div class="crm-drawer">
+              <div class="drawer-header">
+                <div>
+                  <span class="section-label">EXPEDIENTE PRIVADO</span>
+                  <h3 id="drawer-client-name" style="font-size:var(--text-lg); font-weight:900; text-transform:uppercase;">MARCUS VANCE</h3>
+                  <div id="drawer-client-company" style="font-size:0.75rem; color:var(--gold-primary);">NIKE GLOBAL ATHLETICS</div>
+                </div>
+                <button class="modal-close-btn" id="close-crm-drawer">✕</button>
+              </div>
+
+              <div class="drawer-body">
+                <div>
+                  <span class="section-label">CONTACTO</span>
+                  <div style="font-size:var(--text-xs); color:var(--white);" id="drawer-client-email">marcus.vance@nike.com</div>
+                  <div class="mono-text" style="font-size:0.75rem; color:var(--white-50);" id="drawer-client-phone">+1 (503) 671-6453</div>
+                </div>
+
+                <div>
+                  <span class="section-label">NOTAS DE PRODUCCIÓN</span>
+                  <div class="notes-timeline" id="drawer-notes-list"></div>
+                </div>
+
+                <div style="border-top:1px solid var(--white-15); padding-top:1.5rem;">
+                  <span class="section-label">AGREGAR NOTA</span>
+                  <textarea id="new-client-note-input" class="form-textarea" rows="3" placeholder="Requerimientos de set, preferencias de ópticas..."></textarea>
+                  <button class="btn btn-gold btn-sm" id="submit-client-note-btn" style="width:100%; margin-top:0.75rem;">
+                    GUARDAR NOTA EN FIRESTORE
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             PLATAFORMA 2 — VISTA 7: SUBIDAS A BÓVEDA (ADMIN)
+             =================================================================== -->
+        <section id="admin-uploads" class="page-view">
+          <div class="view-header">
+            <div>
+              <span class="section-label">STORAGE PIPELINE // FIREBASE STORAGE</span>
+              <h2 class="section-title">GESTOR DE ARCHIVOS (SUBIDAS A BÓVEDA)</h2>
+              <p class="section-subtitle">Sube archivos que se reflejarán instantáneamente en la Bóveda del Cliente.</p>
+            </div>
+          </div>
+
+          <div class="uploads-layout">
+            <div>
+              <div class="form-group" style="margin-bottom:1.5rem;">
+                <label class="form-label" for="upload-target-folder">CARPETA DE DESTINO:</label>
+                <select id="upload-target-folder" class="form-select">
+                  <option value="MASTERS_4K_PRORES">📁 MASTERS_4K_PRORES</option>
+                  <option value="RAW_STILLS_SELECTS">📁 RAW_STILLS_SELECTS</option>
+                  <option value="REELS_TIKTOK_9x16">📁 REELS_TIKTOK_9x16</option>
+                  <option value="INSTAGRAM_POSTS_4x5">📁 INSTAGRAM_POSTS_4x5</option>
+                </select>
+              </div>
+
+              <div class="upload-dropzone" id="file-upload-dropzone">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-primary);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <h3 class="upload-title">ARRASTRA ARCHIVOS MÁSTER AQUÍ</h3>
+                <p class="upload-desc">Compatible con Apple ProRes 422 HQ/4444, Canon CR3 RAW, Cinema DNG, WAV 24-bit y archivos ZIP.</p>
+                <input type="file" id="native-file-input" multiple style="display:none;" />
+                <button class="btn btn-gold" id="browse-files-btn">SELECCIONAR DESDE EL ORDENADOR</button>
+              </div>
+            </div>
+
+            <div class="upload-queue-panel">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:1px solid var(--white-15);">
+                <h4 class="brand-title" style="font-size:var(--text-sm);">COLA DE TRANSFERENCIA</h4>
+                <span class="badge badge-gold">100 MB/S</span>
+              </div>
+              <div id="upload-queue-list"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       MODALS GLOBALES (CONFIRMAR SELECCIÓN, LIGHTBOX, NUEVA TAREA KANBAN)
+       ========================================================================= -->
+
+  <!-- Modal: Confirmar Selección Proofing con Costo Adicional -->
+  <div class="modal-overlay" id="proofing-confirm-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="color:var(--white);">CONFIRMAR SELECCIÓN DE FOTOGRAFÍAS</h3>
+        <button class="modal-close-btn" id="close-proofing-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:var(--text-xs); color:var(--white-70); margin-bottom:1.5rem; line-height:1.5;">
+          Al confirmar esta selección, las fotografías marcadas quedarán registradas en Cloud Firestore y pasarán al flujo de retoque del equipo.
+        </p>
+
+        <!-- Extra Cost Notice (Dynamic) -->
+        <div id="modal-extra-cost-notice" style="display:none;"></div>
+
+        <span class="section-label">FOTOGRAFÍAS SELECCIONADAS:</span>
+        <div id="proofing-modal-manifest" style="max-height:220px; overflow-y:auto; margin-bottom:1.5rem;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="document.getElementById('proofing-confirm-modal').classList.remove('active')">CANCELAR</button>
+        <button class="btn btn-gold" id="submit-proofing-final">CONFIRMAR Y ENVIAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Lightbox Image Viewer -->
+  <div class="modal-overlay" id="lightbox-modal">
+    <div class="modal-dialog" style="max-width:960px; background:var(--navy-black); border-color:var(--gold-border);">
+      <div class="modal-header">
+        <div>
+          <h3 id="lightbox-title" style="color:var(--white);">VISTA PREVIA HIGH-RES</h3>
+          <span id="lightbox-meta" class="mono-text" style="font-size:0.7rem; color:var(--gold-primary);"></span>
+        </div>
+        <button class="modal-close-btn" id="close-lightbox-modal">✕</button>
+      </div>
+      <div class="modal-body" style="padding:0; display:flex; align-items:center; justify-content:center; background:#000;">
+        <img id="lightbox-image" src="" alt="Vista previa" style="max-width:100%; max-height:75vh; object-fit:contain; display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Nueva Tarea Kanban -->
+  <div class="modal-overlay" id="new-task-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="color:var(--white);">CREAR TAREA EN PIPELINE</h3>
+        <button class="modal-close-btn" id="close-task-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="task-title-input">DESCRIPCIÓN DE LA TAREA:</label>
+          <input type="text" id="task-title-input" class="form-input" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-project-select">PROYECTO ASOCIADO:</label>
+          <select id="task-project-select" class="form-select">
+            <option value="NIKE // SPEED">NIKE // SPEED</option>
+            <option value="RED BULL // DAKAR">RED BULL // DAKAR</option>
+            <option value="ALPINE F1 // SPEED">ALPINE F1 // SPEED</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-stage-select">ETAPA DEL PIPELINE:</label>
+          <select id="task-stage-select" class="form-select">
+            <option value="pre_production">PRE-PRODUCCIÓN / POR RODAR</option>
+            <option value="in_selection">EN SELECCIÓN</option>
+            <option value="post_production">POST-PRODUCCIÓN / COLOR</option>
+            <option value="review">REVISIÓN</option>
+            <option value="delivered">ENTREGADO / CERRADO</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-priority-select">PRIORIDAD:</label>
+          <select id="task-priority-select" class="form-select">
+            <option value="CRÍTICA">CRÍTICA</option>
+            <option value="ALTA">ALTA</option>
+            <option value="MEDIA">MEDIA</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-assignee-input">RESPONSABLE ASIGNADO:</label>
+          <input type="text" id="task-assignee-input" class="form-input" value="TCS Crew" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="document.getElementById('new-task-modal').classList.remove('active')">CANCELAR</button>
+        <button class="btn btn-gold" id="submit-new-task-btn">CREAR TAREA</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Hub -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Entry Point (Modular ES6) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

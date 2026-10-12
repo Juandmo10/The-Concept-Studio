@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE CONCEPT STUDIO. — Centro de Comando Ejecutivo (Admin)</title>
+  
+  <!-- Tipografía Geométrica Ultra Pesada & Monoespaciada -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/admin-panel.css">
+
+  <style>
+    /* Estilos estructurales exclusivos del Panel de Administración */
+    body {
+      background-color: var(--navy-obsidian);
+      color: var(--white-off);
+      font-family: var(--font-display);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .admin-sidebar {
+      width: 290px;
+      background: var(--navy-obsidian);
+      border-right: 1px solid var(--navy-border-line);
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    .admin-main-wrapper {
+      margin-left: 290px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--navy-obsidian);
+    }
+
+    .admin-topbar {
+      height: 72px;
+      background: var(--navy-surface);
+      border-bottom: 1px solid var(--navy-border-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-8);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .admin-content-area {
+      flex: 1;
+      padding: var(--space-8);
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .admin-view-panel {
+      display: none;
+      animation: fadeIn 0.22s ease forwards;
+    }
+    .admin-view-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. BARRA LATERAL (SIDEBAR) ESTRUCTURAL DE LA AGENCIA
+       ========================================================================= -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand" style="padding:var(--space-6);">
+      <h1 class="brand-logo-text" style="font-size:1.15rem; color:var(--white-pure);">
+        THE CONCEPT STUDIO<span class="gold-dot">.</span>
+      </h1>
+      <span class="brand-tagline" style="font-size:0.625rem; color:var(--white-muted); margin-top:4px;">
+        COMMERCIAL FILM & SPORTS STILLS
+      </span>
+    </div>
+
+    <!-- Navegación entre Módulos de Administración -->
+    <nav class="sidebar-nav" style="padding:var(--space-4) 0;">
+      <div class="nav-section-title">CENTRO DE OPERACIONES</div>
+
+      <a href="#" class="nav-item active" data-view="view-dashboard">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="9"></rect>
+          <rect x="14" y="3" width="7" height="5"></rect>
+          <rect x="14" y="12" width="7" height="9"></rect>
+          <rect x="3" y="16" width="7" height="5"></rect>
+        </svg>
+        <span>DASHBOARD EJECUTIVO</span>
+      </a>
+
+      <a href="#" class="nav-item" data-view="view-kanban">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="4" height="18"></rect>
+          <rect x="9" y="3" width="4" height="18"></rect>
+          <rect x="15" y="3" width="4" height="18"></rect>
+        </svg>
+        <span>PIPELINE (5 FASES)</span>
+        <span class="nav-badge" id="kanban-total-badge">6 TAREAS</span>
+      </a>
+
+      <a href="#" class="nav-item" data-view="view-links">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+        <span>GALERÍAS & ENLACES VIP</span>
+        <span class="nav-badge">EXPIRABLES</span>
+      </a>
+
+      <a href="#" class="nav-item" data-view="view-callsheets">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+        </svg>
+        <span>FICHA DE RODAJE (CALL SHEET)</span>
+      </a>
+
+      <a href="#" class="nav-item" data-view="view-inventory">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        <span>INVENTARIO & EQUIPOS</span>
+        <span class="nav-badge" style="color:var(--gold-champagne);">ALERTAS</span>
+      </a>
+
+      <a href="#" class="nav-item" data-view="view-crm">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+        </svg>
+        <span>CRM DE CLIENTES</span>
+      </a>
+    </nav>
+
+    <!-- Estado Técnico y Usuario Director -->
+    <div class="sidebar-footer" style="padding:var(--space-5) var(--space-6); border-top:1px solid var(--navy-border-line);">
+      <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.65rem; font-weight:800; color:var(--white-muted); text-transform:uppercase; margin-bottom:0.75rem;">
+        <span style="width:7px; height:7px; background:var(--gold-champagne); border-radius:50%; box-shadow:0 0 8px var(--gold-champagne);"></span>
+        <span>FIRESTORE CLOUD OPERATIONAL</span>
+      </div>
+      <div class="user-snippet">
+        <div class="user-avatar" style="border:1px solid var(--gold-champagne); color:var(--gold-champagne);">JD</div>
+        <div class="user-info">
+          <span class="user-name">JUAN D.</span>
+          <span class="user-role">FOUNDER & LEAD CINEMATOGRAPHER</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       2. CONTENEDOR PRINCIPAL Y BARRA SUPERIOR
+       ========================================================================= -->
+  <div class="admin-main-wrapper">
+    <header class="admin-topbar">
+      <div style="display:flex; align-items:center; gap:1.5rem;">
+        <span class="section-label" style="margin:0;">ESTUDIO CENTRAL // MEDELLÍN & GLOBAL SETS</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:1.5rem;">
+        <!-- Switch de Marca de Agua Central Automática -->
+        <label class="switch-wrapper" title="Interruptor de marca de agua central automática">
+          <input type="checkbox" id="admin-watermark-switch" class="switch-input" checked onchange="toggleWatermarkState(this.checked)" />
+          <span class="switch-slider"></span>
+          <span style="font-size:0.65rem; font-weight:800; letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--white-muted);">
+            MARCA DE AGUA AUTOMÁTICA
+          </span>
+        </label>
+
+        <a href="client-portal.html" target="_blank" class="btn btn-secondary btn-sm">
+          VER PORTAL CLIENTE ↗
+        </a>
+      </div>
+    </header>
+
+    <main class="admin-content-area">
+
+      <!-- =====================================================================
+           MÓDULO 1: DASHBOARD EJECUTIVO & BALANCE FINANCIERO
+           ===================================================================== -->
+      <section id="view-dashboard" class="admin-view-panel active">
+        <div class="view-header">
+          <div>
+            <span class="section-label">CENTRO DE COMANDO OPERATIVO</span>
+            <h2 class="section-title">PANEL DE MÉTRICAS EJECUTIVAS</h2>
+            <p class="section-subtitle">Balance de ingresos consolidados, proyectos activos y liquidaciones pendientes.</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="switchAdminSubView('view-links')">
+            + CREAR ENLACE VIP
+          </button>
+        </div>
+
+        <!-- 4 Tarjetas de Balance con Números Grandes y Sólidos -->
+        <div class="dashboard-metrics-grid">
+          <div class="metric-card gold-card">
+            <div class="metric-header">
+              <span class="metric-label">FACTURACIÓN MENSUAL</span>
+              <span class="metric-trend">+24.5%</span>
+            </div>
+            <div class="metric-value">$148,500</div>
+            <div class="metric-footer">USD FACTURADOS // FEBRERO 2026</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">PROYECTOS ACTIVOS</span>
+              <span class="metric-trend">EN EJECUCIÓN</span>
+            </div>
+            <div class="metric-value">08</div>
+            <div class="metric-footer">3 EN RODAJE · 5 EN POST-PRODUCCIÓN</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">PAGOS PENDIENTES</span>
+              <span class="metric-trend">POR COBRAR</span>
+            </div>
+            <div class="metric-value">$34,200</div>
+            <div class="metric-footer">USD CONTRA ENTREGA FINAL EN BÓVEDA</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-label">ENTREGAS DE LA SEMANA</span>
+              <span class="metric-trend">CALENDARIO</span>
+            </div>
+            <div class="metric-value">04</div>
+            <div class="metric-footer">MASTERS 4K PRORES AGENDADOS</div>
+          </div>
+        </div>
+
+        <!-- Dispatch y Estructura de Ingresos -->
+        <div class="dashboard-sections-grid">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h4>PRODUCCIONES EN CURSO</h4>
+              <span class="badge badge-gold">TIEMPO REAL</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div style="padding:1rem; background:var(--navy-obsidian); border:1px solid var(--navy-border-line); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-weight:900; font-size:var(--text-xs); color:var(--white-pure);">NIKE TRAINING // ELITE SPEED 2026</div>
+                  <div style="font-size:0.7rem; color:var(--white-muted);">Cliente revisando 15 tomas seleccionadas. Etapa: Color grading DCI-P3.</div>
+                </div>
+                <button class="btn btn-gold btn-sm" onclick="switchAdminSubView('view-kanban')">VER KANBAN</button>
+              </div>
+
+              <div style="padding:1rem; background:var(--navy-obsidian); border:1px solid var(--navy-border-line); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-weight:900; font-size:var(--text-xs); color:var(--white-pure);">RED BULL MOTORSPORT // DAKAR PROMO</div>
+                  <div style="font-size:0.7rem; color:var(--white-muted);">Material Phantom 4K verificado. Rodaje concluido satisfactoriamente.</div>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="switchAdminSubView('view-callsheets')">CALL SHEET</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h4>PROTECCIÓN & SEGURIDAD DIGITAL</h4>
+              <span class="badge badge-outline">SISTEMA ACTIVO</span>
+            </div>
+            <p style="font-size:var(--text-xs); color:var(--white-muted); line-height:1.5; margin-bottom:1rem;">
+              Las muestras visuales del cliente cuentan con sellado automático por marca de agua centralizada de <strong>THE CONCEPT STUDIO.</strong> y encriptación de enlaces de 48 horas para prevenir descargas no autorizadas previas al pago final.
+            </p>
+            <span class="badge badge-gold" id="watermark-status-label">MARCA DE AGUA: ACTIVADA ✓</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           MÓDULO 2: PIPELINE DE PRODUCCIÓN (KANBAN DE 5 FASES)
+           ===================================================================== -->
+      <section id="view-kanban" class="admin-view-panel">
+        <div class="view-header">
+          <div>
+            <span class="section-label">FLUJO DE TRABAJO AUDIOVISUAL // 5 ETAPAS</span>
+            <h2 class="section-title">PIPELINE DE PRODUCCIÓN KANBAN</h2>
+            <p class="section-subtitle">Arrastra y suelta tareas entre fases operativas del estudio.</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="openNewTaskModal()">+ NUEVA TAREA</button>
+        </div>
+
+        <div class="kanban-board-wrapper-5">
+          <!-- Columna 1: PRE-PRODUCCIÓN -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">PRE-PRODUCCIÓN</span>
+              <span class="kanban-counter" id="count-pre_production">0</span>
+            </div>
+            <div class="kanban-cards-container" data-stage="pre_production" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'pre_production')"></div>
+          </div>
+
+          <!-- Columna 2: EN SELECCIÓN -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">EN SELECCIÓN</span>
+              <span class="kanban-counter" id="count-in_selection">0</span>
+            </div>
+            <div class="kanban-cards-container" data-stage="in_selection" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'in_selection')"></div>
+          </div>
+
+          <!-- Columna 3: COLOR & EDICIÓN -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">COLOR & EDICIÓN</span>
+              <span class="kanban-counter" id="count-post_production">0</span>
+            </div>
+            <div class="kanban-cards-container" data-stage="post_production" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'post_production')"></div>
+          </div>
+
+          <!-- Columna 4: REVISIÓN -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">REVISIÓN</span>
+              <span class="kanban-counter" id="count-review">0</span>
+            </div>
+            <div class="kanban-cards-container" data-stage="review" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'review')"></div>
+          </div>
+
+          <!-- Columna 5: FINALIZADO -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">FINALIZADO</span>
+              <span class="kanban-counter" id="count-delivered">0</span>
+            </div>
+            <div class="kanban-cards-container" data-stage="delivered" ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'delivered')"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           MÓDULO 3: GESTOR DE GALERÍAS Y ENLACES EXPIRABLES
+           ===================================================================== -->
+      <section id="view-links" class="admin-view-panel">
+        <div class="view-header">
+          <div>
+            <span class="section-label">PROTECCIÓN & ACCESO A PRUEBAS</span>
+            <h2 class="section-title">GESTOR DE GALERÍAS Y ENLACES EXPIRABLES</h2>
+            <p class="section-subtitle">Genera tokens de acceso temporal para clientes con fecha límite de selección programada.</p>
+          </div>
+        </div>
+
+        <div class="link-generator-card">
+          <h4 style="font-size:var(--text-sm); font-weight:900; text-transform:uppercase; color:var(--gold-champagne); margin-bottom:1rem;">
+            GENERAR NUEVO ACCESO TEMPORAL CON EXPIRACIÓN
+          </h4>
+
+          <div class="link-generator-grid">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="client-select-input">CLIENTE ASIGNADO:</label>
+              <select id="client-select-input" class="form-select">
+                <option value="Marcus Vance — Nike Global Athletics">Marcus Vance — Nike Global Athletics</option>
+                <option value="Elena Rostova — Red Bull Motorsport">Elena Rostova — Red Bull Motorsport</option>
+                <option value="David Holtz — Alpine Formula Team">David Holtz — Alpine Formula Team</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label" for="expiry-time-select">VIGENCIA DEL ENLACE:</label>
+              <select id="expiry-time-select" class="form-select">
+                <option value="48">48 HORAS (ESTÁNDAR)</option>
+                <option value="120">5 DÍAS (EXTENDIDO)</option>
+                <option value="336">14 DÍAS (CAMPAÑA GLOBAL)</option>
+              </select>
+            </div>
+
+            <button class="btn btn-gold" style="height:42px;" onclick="createNewClientLink()">
+              GENERAR ENLACE VIP
+            </button>
+          </div>
+        </div>
+
+        <h4 style="font-size:var(--text-sm); font-weight:900; text-transform:uppercase; color:var(--white-pure); margin-bottom:1rem;">
+          ENLACES DE CLIENTES ACTIVOS CON CUENTA REGRESIVA
+        </h4>
+        <div id="admin-links-list">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           MÓDULO 4: GENERADOR DE FICHA DE RODAJE (CALL SHEET)
+           ===================================================================== -->
+      <section id="view-callsheets" class="admin-view-panel">
+        <div class="view-header">
+          <div>
+            <span class="section-label">LOGÍSTICA TÉCNICA DE SET</span>
+            <h2 class="section-title">FICHA DE RODAJE (CALL SHEET)</h2>
+            <p class="section-subtitle">Horario de citación, coordenadas GPS y checklist de empaque de equipos para el crew.</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="showAdminToast('Orden de llamado despachada a todo el crew vía SMS y correo.')">
+            DESPACHAR ORDEN AL CREW
+          </button>
+        </div>
+
+        <div class="callsheet-grid">
+          <div class="callsheet-card">
+            <span class="section-label">ORDEN DE CITACIÓN PRINCIPAL</span>
+            <h3 style="font-size:1.25rem; font-weight:900; text-transform:uppercase; color:var(--white-pure); margin-bottom:1rem;">
+              CALL SHEET DÍA 1: VELOCISTAS EN PISTA
+            </h3>
+
+            <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:var(--text-xs);">
+              <div>
+                <span style="color:var(--white-muted); font-weight:800; text-transform:uppercase;">HORA DE CITACIÓN (CREW CALL):</span>
+                <div class="mono-text" style="font-size:1.25rem; font-weight:900; color:var(--gold-champagne); margin-top:2px;">
+                  05:30 AM (CALL GENERAL) // 06:15 AM (PRIMER PLANO)
+                </div>
+              </div>
+
+              <div>
+                <span style="color:var(--white-muted); font-weight:800; text-transform:uppercase;">LOCACIÓN & COORDENADAS:</span>
+                <div style="color:var(--white-pure); font-weight:700;">Estadio Olímpico de Atletismo — Pista Central</div>
+                <div class="mono-text" style="font-size:0.7rem; color:var(--gold-champagne);">GPS: 45.5152° N, 122.6784° W (Acceso Túnel Sur)</div>
+              </div>
+
+              <div>
+                <span style="color:var(--white-muted); font-weight:800; text-transform:uppercase;">CONTACTOS CLAVE:</span>
+                <div>Director: Juan D. (+1 555-0192) · DP: Alex Thorne (+1 555-0144)</div>
+                <div style="color:var(--white-muted);">Contacto Cliente: Marcus Vance (+1 555-0188)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callsheet-card">
+            <span class="section-label">CHECKLIST DE EQUIPO A EMPACAR</span>
+            <div class="checklist-group">
+              <label class="checklist-item">
+                <input type="checkbox" checked style="accent-color:var(--gold-champagne);" onchange="showAdminToast('Checklist de cámara verificado.')" />
+                <span>RED V-Raptor 8K VV Cinema Rig + Jaula Arri + Baterías V-Mount</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" checked style="accent-color:var(--gold-champagne);" onchange="showAdminToast('Checklist de slow-motion verificado.')" />
+                <span>Phantom Flex 4K High-Speed (1000 FPS) + Monitor SmallHD</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" checked style="accent-color:var(--gold-champagne);" onchange="showAdminToast('Checklist de lentes verificado.')" />
+                <span>Juego Ópticas Anamórficas Cooke 35/50/85mm + Mattebox</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" checked style="accent-color:var(--gold-champagne);" onchange="showAdminToast('Checklist de flashes verificado.')" />
+                <span>Pack Flashes Profoto Pro-11 2400W Air + Antorchas Giant</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" checked style="accent-color:var(--gold-champagne);" onchange="showAdminToast('Checklist de gimbal verificado.')" />
+                <span>Gimbal DJI Ronin 2 con chaleco de soporte Ready Rig</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" checked style="accent-color:var(--gold-champagne);" onchange="showAdminToast('Checklist de memorias verificado.')" />
+                <span>4x Tarjetas CFexpress 2TB Formateadas en exFAT</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           MÓDULO 5: INVENTARIO DE EQUIPO Y MANTENIMIENTO
+           ===================================================================== -->
+      <section id="view-inventory" class="admin-view-panel">
+        <div class="view-header">
+          <div>
+            <span class="section-label">CONTROL DE ACTIVOS TÉCNICOS</span>
+            <h2 class="section-title">INVENTARIO DE EQUIPO & MANTENIMIENTO</h2>
+            <p class="section-subtitle">Supervisión técnica de cámaras, lentes, memorias y alertas de mantenimiento.</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="showAdminToast('Formulario para registrar nuevo activo técnico.')">+ REGISTRAR EQUIPO</button>
+        </div>
+
+        <div class="inventory-grid-table">
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th>EQUIPO // MODELO</th>
+                <th>CATEGORÍA</th>
+                <th>ESTADO OPERATIVO</th>
+                <th>ALERTA / RECORDATORIO TÉCNICO</th>
+                <th>ÚLTIMO CHECK</th>
+                <th>ACCIÓN</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-tbody">
+              <!-- Inyectado dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           MÓDULO 6: CRM DE CLIENTES Y EXPEDIENTES
+           ===================================================================== -->
+      <section id="view-crm" class="admin-view-panel">
+        <div class="view-header">
+          <div>
+            <span class="section-label">BASE DE DATOS INSTITUCIONAL</span>
+            <h2 class="section-title">CRM DE CLIENTES & EXPEDIENTES</h2>
+            <p class="section-subtitle">Historial de campañas y registro privado de notas de rodaje.</p>
+          </div>
+        </div>
+
+        <div class="crm-controls-bar">
+          <div class="crm-search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="crm-filter-input" class="crm-search-input" placeholder="Buscar por cliente o empresa..." oninput="filterCRMClients(this.value)" />
+          </div>
+          <span class="badge badge-gold">4 CLIENTES ACTIVOS</span>
+        </div>
+
+        <div class="crm-table-container">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th>CLIENTE // INSTITUCIÓN</th>
+                <th>CONTACTO DIRECTO</th>
+                <th>PROYECTOS</th>
+                <th>TOTAL FACTURADO</th>
+                <th>ESTADO</th>
+                <th>EXPEDIENTE</th>
+              </tr>
+            </thead>
+            <tbody id="crm-table-body">
+              <!-- Inyectado dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Cajón de Notas de Cliente (Slide Drawer) -->
+        <div class="crm-drawer-overlay" id="admin-crm-drawer">
+          <div class="crm-drawer">
+            <div class="drawer-header">
+              <div>
+                <span class="section-label">EXPEDIENTE PRIVADO</span>
+                <h3 id="drawer-name" style="font-size:var(--text-lg); font-weight:900; text-transform:uppercase; color:var(--white-pure);">MARCUS VANCE</h3>
+                <div id="drawer-company" style="font-size:0.75rem; color:var(--gold-champagne);">NIKE GLOBAL ATHLETICS</div>
+              </div>
+              <button class="modal-close-btn" onclick="closeCRMDrawer()">✕</button>
+            </div>
+
+            <div class="drawer-body">
+              <div>
+                <span class="section-label">NOTAS DE RODAJE & PREFERENCIAS</span>
+                <div class="notes-timeline" id="drawer-notes-feed"></div>
+              </div>
+
+              <div style="border-top:1px solid var(--navy-border-line); padding-top:1.5rem;">
+                <span class="section-label">REGISTRAR NUEVA NOTA</span>
+                <textarea id="drawer-note-text" class="form-textarea" rows="3" placeholder="Requerimientos de ópticas, catering de atletas..."></textarea>
+                <button class="btn btn-gold btn-sm" style="width:100%; margin-top:0.75rem;" onclick="addClientNote()">
+                  GUARDAR NOTA EN FIRESTORE
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal: Crear Nueva Tarea en Pipeline -->
+  <div class="modal-overlay" id="admin-new-task-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="color:var(--white-pure);">AGREGAR TAREA AL PIPELINE</h3>
+        <button class="modal-close-btn" onclick="closeTaskModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="task-desc">DESCRIPCIÓN DE LA TAREA:</label>
+          <input type="text" id="task-desc" class="form-input" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="task-proj">PROYECTO:</label>
+          <select id="task-proj" class="form-select">
+            <option value="NIKE // SPEED">NIKE // SPEED</option>
+            <option value="RED BULL // DAKAR">RED BULL // DAKAR</option>
+            <option value="ALPINE F1 // SPEED">ALPINE F1 // SPEED</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="task-stage-input">FASE OPERATIVA:</label>
+          <select id="task-stage-input" class="form-select">
+            <option value="pre_production">PRE-PRODUCCIÓN</option>
+            <option value="in_selection">EN SELECCIÓN</option>
+            <option value="post_production">COLOR & EDICIÓN</option>
+            <option value="review">REVISIÓN</option>
+            <option value="delivered">FINALIZADO</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeTaskModal()">CANCELAR</button>
+        <button class="btn btn-gold" onclick="saveNewTask()">GUARDAR TAREA</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Hub -->
+  <div class="toast-container" id="admin-toast-hub"></div>
+
+  <!-- =========================================================================
+       3. JAVASCRIPT MODULAR Y ESTRUCTURA FIRESTORE
+       ========================================================================= -->
+  <script>
+    /**
+     * THE CONCEPT STUDIO. — ADMIN COMMAND CENTER JAVASCRIPT
+     * Manejo del pipeline Kanban de 5 fases, enlaces de clientes e inventario.
+     */
+
+    // Datos emulando colección Firestore: /tasks
+    const adminPipelineTasks = [
+      { id: "t1", stage: "pre_production", projectTag: "ALPINE F1 // SPEED", title: "Permisos de pista y scouting túnel de viento", priority: "ALTA", assignee: "Juan D. (Dir)", dueDate: "18 Feb" },
+      { id: "t2", stage: "in_selection", projectTag: "NIKE // SPEED", title: "Cliente revisando galería de 15 fotos de 20", priority: "CRÍTICA", assignee: "Marcus V. (Cliente)", dueDate: "Hoy" },
+      { id: "t3", stage: "post_production", projectTag: "NIKE // SPEED", title: "Etalonaje DaVinci Resolve DCI-P3 corte hero 60s", priority: "ALTA", assignee: "Sofia R. (Color)", dueDate: "14 Feb" },
+      { id: "t4", stage: "post_production", projectTag: "RED BULL // DAKAR", title: "Diseño sonoro y mezcla sub-bass Phantom 4K", priority: "MEDIA", assignee: "Lucas V. (Audio)", dueDate: "15 Feb" },
+      { id: "t5", stage: "review", projectTag: "NIKE // SPEED", title: "Validación de notas de timecode y pines visuales", priority: "CRÍTICA", assignee: "Marcus V. (Dir)", dueDate: "14 Feb" },
+      { id: "t6", stage: "delivered", projectTag: "ST. JUDE // ATHLETICS", title: "Entrega final en Bóveda y firmas archivadas", priority: "BAJA", assignee: "TCS Crew", dueDate: "Cerrado" }
+    ];
+
+    // Datos emulando colección Firestore: /inventory
+    const adminInventoryData = [
+      { id: "inv_1", name: "RED V-Raptor 8K VV Cinema Body", category: "CÁMARAS", status: "ALERTA", alertText: "Limpieza ultrasónica pendiente de sensor tras rodaje en arena", lastCheck: "10 Ene 2026" },
+      { id: "inv_2", name: "Phantom Flex 4K High-Speed (1000 FPS)", category: "CÁMARAS", status: "OK", alertText: "Calibración y foco colimado OK", lastCheck: "01 Feb 2026" },
+      { id: "inv_3", name: "Canon EOS R5 Mark II 45MP Body", category: "CÁMARAS", status: "OK", alertText: "Firmware v1.2 instalado", lastCheck: "05 Feb 2026" },
+      { id: "inv_4", name: "CFexpress Type B 2TB Pro #03", category: "MEMORIAS", status: "FORMATEO", alertText: "Requiere formateo seguro exFAT antes del llamado", lastCheck: "Hoy" },
+      { id: "inv_5", name: "Cooke Anamorphic /i Full Frame Plus 50mm", category: "LENTES", status: "OK", alertText: "Inspección de elementos ópticos OK", lastCheck: "28 Ene 2026" },
+      { id: "inv_6", name: "Profoto Pro-11 2400W Air Generator Pack", category: "ILUMINACIÓN", status: "OK", alertText: "Tubos de destello al 100%", lastCheck: "02 Feb 2026" }
+    ];
+
+    // Datos emulando colección Firestore: /client_links
+    const adminClientLinks = [
+      { id: "l1", clientName: "Marcus Vance — Nike Global Athletics", url: "https://portal.theconceptstudio.com/access?token=tcs-vip-78e2b9c", expiresIn: "48 HORAS", expiryDate: "13 Feb 2026, 23:59" },
+      { id: "l2", clientName: "Elena Rostova — Red Bull Motorsport", url: "https://portal.theconceptstudio.com/access?token=tcs-vip-99a410f", expiresIn: "5 DÍAS", expiryDate: "16 Feb 2026, 18:00" }
+    ];
+
+    // Datos emulando colección Firestore: /clients
+    const adminClientsCRM = [
+      { id: "c1", name: "Marcus Vance", company: "Nike Global Athletics", email: "marcus.vance@nike.com", phone: "+1 (503) 671-6453", projects: "2 / 5", billed: "$48,000", status: "ACTIVO", notes: ["Exigen entrega en Apple ProRes 422 HQ 24.00fps DCI 4K.", "Confirmado rodaje de 3 días con Phantom Flex 4K."] },
+      { id: "c2", name: "Elena Rostova", company: "Red Bull Motorsport", email: "e.rostova@redbull.com", phone: "+43 662 6582-0", projects: "1 / 3", billed: "$65,000", status: "ACTIVO", notes: ["Cámaras deportivas con soporte de alta vibración para coche."] },
+      { id: "c3", name: "David Holtz", company: "Alpine Formula Team", email: "d.holtz@alpine.com", phone: "+33 1 76 84 00 00", projects: "1 / 2", billed: "$32,000", status: "ACTIVO", notes: ["Rodaje comercial en túnel de viento y pista."] },
+      { id: "c4", name: "Sarah Jenkins", company: "St. Jude Athletics", email: "sjenkins@stjude.org", phone: "+1 (901) 595-3300", projects: "0 / 1", billed: "$12,500", status: "FINALIZADO", notes: ["Campaña benéfica concluida con 25 stills impresos."] }
+    ];
+
+    let draggedTaskId = null;
+    let selectedCRMClientId = null;
+
+    // Toast helper
+    function showAdminToast(msg) {
+      const hub = document.getElementById("admin-toast-hub");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = `<span style="color:var(--gold-champagne);">✓</span> <span>${msg}</span>`;
+      hub.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add("show"));
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // 1. Switch de Marca de Agua Central
+    function toggleWatermarkState(checked) {
+      const label = document.getElementById("watermark-status-label");
+      if (checked) {
+        label.textContent = "MARCA DE AGUA: ACTIVADA ✓";
+        showAdminToast("Marca de agua central [THE CONCEPT STUDIO.] activada.");
+      } else {
+        label.textContent = "MARCA DE AGUA: DESACTIVADA";
+        showAdminToast("Marca de agua desactivada en visualizaciones.");
+      }
+    }
+
+    // 2. Render Kanban Pipeline de 5 Fases
+    function renderPipelineKanban() {
+      const counts = { pre_production: 0, in_selection: 0, post_production: 0, review: 0, delivered: 0 };
+      document.querySelectorAll(".kanban-cards-container").forEach(c => c.innerHTML = "");
+
+      adminPipelineTasks.forEach(task => {
+        counts[task.stage] = (counts[task.stage] || 0) + 1;
+        const col = document.querySelector(`.kanban-cards-container[data-stage="${task.stage}"]`);
+        if (!col) return;
+
+        const card = document.createElement("div");
+        card.className = "kanban-card";
+        card.draggable = true;
+        card.dataset.id = task.id;
+        card.innerHTML = `
+          <div class="kanban-card-project">${task.projectTag}</div>
+          <div class="kanban-card-title">${task.title}</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--navy-border-subtle); padding-top:0.4rem; margin-top:0.4rem;">
+            <span class="badge ${task.priority === 'CRÍTICA' ? 'badge-solid' : 'badge-gold'}" style="font-size:0.55rem; padding:0.1rem 0.35rem;">${task.priority}</span>
+            <span class="mono-text" style="font-size:0.65rem; color:var(--white-dim);">${task.assignee} · ${task.dueDate}</span>
+          </div>
+        `;
+
+        card.addEventListener("dragstart", (e) => {
+          draggedTaskId = task.id;
+          card.classList.add("dragging");
+          e.dataTransfer.setData("text/plain", task.id);
+        });
+        card.addEventListener("dragend", () => {
+          card.classList.remove("dragging");
+          document.querySelectorAll(".kanban-cards-container").forEach(c => c.classList.remove("drag-over"));
+        });
+
+        col.appendChild(card);
+      });
+
+      for (const [stg, cnt] of Object.entries(counts)) {
+        const el = document.getElementById(`count-${stg}`);
+        if (el) el.textContent = cnt;
+      }
+      document.getElementById("kanban-total-badge").textContent = `${adminPipelineTasks.length} TAREAS`;
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add("drag-over");
+    }
+
+    function handleDrop(e, newStage) {
+      e.preventDefault();
+      e.currentTarget.classList.remove("drag-over");
+      if (!draggedTaskId) return;
+
+      const task = adminPipelineTasks.find(t => t.id === draggedTaskId);
+      if (task) {
+        task.stage = newStage;
+        renderPipelineKanban();
+        showAdminToast(`Tarea movida a fase: ${newStage.replace('_', ' ').toUpperCase()}`);
+      }
+    }
+
+    // Modal de Tarea
+    function openNewTaskModal() { document.getElementById("admin-new-task-modal").classList.add("active"); }
+    function closeTaskModal() { document.getElementById("admin-new-task-modal").classList.remove("active"); }
+    function saveNewTask() {
+      const desc = document.getElementById("task-desc").value.trim();
+      const proj = document.getElementById("task-proj").value;
+      const stage = document.getElementById("task-stage-input").value;
+      if (!desc) return;
+
+      adminPipelineTasks.push({
+        id: "t_" + Date.now(),
+        stage: stage,
+        projectTag: proj,
+        title: desc,
+        priority: "ALTA",
+        assignee: "TCS Crew",
+        dueDate: "18 Feb"
+      });
+
+      document.getElementById("task-desc").value = "";
+      closeTaskModal();
+      renderPipelineKanban();
+      showAdminToast("Nueva tarea asignada al pipeline de producción.");
+    }
+
+    // 3. Generador de Enlaces con Expiración
+    function renderClientLinks() {
+      const list = document.getElementById("admin-links-list");
+      list.innerHTML = adminClientLinks.map(l => `
+        <div class="generated-link-display">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+              <span class="badge badge-gold" style="font-size:0.6rem;">VIP ACTIVO</span>
+              <span style="font-weight:900; font-size:var(--text-xs); color:var(--white-pure);">${l.clientName}</span>
+            </div>
+            <div class="mono-text" style="font-size:0.7rem; color:var(--gold-champagne);">${l.url}</div>
+            <div style="font-size:0.65rem; color:var(--white-muted); margin-top:2px;">
+              VIGENCIA: ${l.expiresIn} (CIERRE: ${l.expiryDate})
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="navigator.clipboard?.writeText('${l.url}'); showAdminToast('Enlace de cliente copiado al portapapeles.');">
+            COPIAR ACCESO
+          </button>
+        </div>
+      `).join("");
+    }
+
+    function createNewClientLink() {
+      const client = document.getElementById("client-select-input").value;
+      const hours = document.getElementById("expiry-time-select").value;
+      const token = "tcs-vip-" + Math.random().toString(36).substring(2, 9);
+
+      adminClientLinks.unshift({
+        id: "l_" + Date.now(),
+        clientName: client,
+        url: `https://portal.theconceptstudio.com/access?token=${token}`,
+        expiresIn: `${hours} HORAS`,
+        expiryDate: new Date(Date.now() + hours * 3600 * 1000).toLocaleString('es-ES')
+      });
+
+      renderClientLinks();
+      showAdminToast(`Enlace VIP generado con vigencia de ${hours} horas.`);
+    }
+
+    // 4. Inventario Técnico & Mantenimiento
+    function renderInventoryTable() {
+      const tbody = document.getElementById("inventory-tbody");
+      tbody.innerHTML = adminInventoryData.map(item => `
+        <tr>
+          <td>
+            <div style="font-weight:900; color:var(--white-pure); text-transform:uppercase;">${item.name}</div>
+            <div class="mono-text" style="font-size:0.65rem; color:var(--white-dim);">ID: ${item.id}</div>
+          </td>
+          <td><span class="badge badge-outline" style="font-size:0.6rem;">${item.category}</span></td>
+          <td>
+            ${item.status === 'FORMATEO' 
+              ? `<span class="gear-alert-pill">⚠️ REQUIERE FORMATEO EXFAT</span>`
+              : item.status === 'ALERTA'
+              ? `<span class="gear-alert-pill gold">🔧 MANTENIMIENTO PENDIENTE</span>`
+              : `<span class="badge badge-gold">✓ OPERATIVO</span>`
+            }
+          </td>
+          <td style="font-size:0.75rem; color:${item.status !== 'OK' ? 'var(--gold-champagne)' : 'var(--white-muted)'};">
+            ${item.alertText}
+          </td>
+          <td class="mono-text" style="font-size:0.7rem; color:var(--white-dim);">${item.lastCheck}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="showAdminToast('Inspección técnica registrada para ${item.name}.')">
+              VERIFICAR
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    // 5. CRM de Clientes
+    function renderCRMTable(filter = "") {
+      const tbody = document.getElementById("crm-table-body");
+      const list = adminClientsCRM.filter(c => 
+        c.name.toLowerCase().includes(filter.toLowerCase()) || 
+        c.company.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      tbody.innerHTML = list.map(c => `
+        <tr>
+          <td>
+            <div style="font-weight:900; color:var(--white-pure); text-transform:uppercase;">${c.name}</div>
+            <div style="font-size:0.7rem; color:var(--gold-champagne);">${c.company}</div>
+          </td>
+          <td>
+            <div style="font-size:var(--text-xs); color:var(--white-off);">${c.email}</div>
+            <div class="mono-text" style="font-size:0.65rem; color:var(--white-dim);">${c.phone}</div>
+          </td>
+          <td class="mono-text">${c.projects}</td>
+          <td class="mono-text" style="font-weight:900;">${c.billed}</td>
+          <td><span class="badge ${c.status === 'ACTIVO' ? 'badge-gold' : 'badge-outline'}">${c.status}</span></td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="openCRMDrawer('${c.id}')">
+              VER EXPEDIENTE
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function filterCRMClients(val) { renderCRMTable(val); }
+
+    function openCRMDrawer(clientId) {
+      selectedCRMClientId = clientId;
+      const client = adminClientsCRM.find(c => c.id === clientId);
+      if (!client) return;
+
+      document.getElementById("drawer-name").textContent = client.name;
+      document.getElementById("drawer-company").textContent = client.company;
+      renderDrawerNotes(client);
+      document.getElementById("admin-crm-drawer").classList.add("active");
+    }
+
+    function closeCRMDrawer() {
+      document.getElementById("admin-crm-drawer").classList.remove("active");
+    }
+
+    function renderDrawerNotes(client) {
+      const feed = document.getElementById("drawer-notes-feed");
+      feed.innerHTML = client.notes.map((n, idx) => `
+        <div class="note-item">
+          <div style="display:flex; justify-content:space-between; font-size:0.65rem; color:var(--gold-champagne); margin-bottom:4px; font-weight:800;">
+            <span>ENTRADA #${idx + 1}</span>
+            <span>DIRECCIÓN DE ESTUDIO</span>
+          </div>
+          <p style="font-size:var(--text-xs); color:var(--white-off); margin:0; line-height:1.4;">${n}</p>
+        </div>
+      `).join("");
+    }
+
+    function addClientNote() {
+      const text = document.getElementById("drawer-note-text").value.trim();
+      if (!text || !selectedCRMClientId) return;
+
+      const client = adminClientsCRM.find(c => c.id === selectedCRMClientId);
+      if (client) {
+        client.notes.push(text);
+        renderDrawerNotes(client);
+        document.getElementById("drawer-note-text").value = "";
+        showAdminToast("Nota de producción registrada en Firestore.");
+      }
+    }
+
+    // Enrutamiento de sub-vistas del Sidebar
+    function switchAdminSubView(viewId) {
+      document.querySelectorAll(".admin-view-panel").forEach(p => p.classList.toggle("active", p.id === viewId));
+      document.querySelectorAll(".admin-sidebar .nav-item").forEach(a => a.classList.toggle("active", a.dataset.view === viewId));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll(".admin-sidebar .nav-item").forEach(nav => {
+      nav.addEventListener("click", (e) => {
+        e.preventDefault();
+        const v = nav.dataset.view;
+        if (v) switchAdminSubView(v);
+      });
+    });
+
+    // Inicialización al cargar DOM
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPipelineKanban();
+      renderClientLinks();
+      renderInventoryTable();
+      renderCRMTable();
+    });
+  </script>
+</body>
+</html>

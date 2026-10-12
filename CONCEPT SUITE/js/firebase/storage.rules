@@ -1,0 +1,42 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+
+    // =========================================================================
+    // ENTORNO 1: PREVISUALIZACIONES PÚBLICAS CON MARCA DE AGUA
+    // Lectura pública libre, escritura restringida al fotógrafo / admin autenticado
+    // =========================================================================
+    match /eventos/{eventoId}/publicas_watermark/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // =========================================================================
+    // ENTORNO 2: FOTOGRAFÍAS ORIGINALES EN ALTA RESOLUCIÓN (PRIVADO)
+    // Lectura y escritura bloqueadas al cliente; acceso EXCLUSIVO mediante
+    // URLs firmadas temporales generadas por Cloud Functions tras validar orden APROBADO
+    // =========================================================================
+    match /eventos/{eventoId}/privadas_originales/{fileName} {
+      allow read, write: if false;
+    }
+
+    // Rutas de proyectos existentes
+    match /projects/{projectId}/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /proofing/{projectId}/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+  }
+}

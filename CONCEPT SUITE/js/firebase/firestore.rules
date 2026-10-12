@@ -1,0 +1,69 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+
+    // 1. Calendario de Sesiones
+    // Campos: id, titulo, clienteNombre, telefono, tipo, fechaInicio, hora, estado, notas
+    match /calendario_sesiones/{sesionId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // 2. Eventos Públicos de Cobertura
+    // Campos: id, nombre, fecha, precioPorFoto, moneda, activo
+    match /eventos/{eventoId} {
+      // Público puede consultar eventos activos; el admin puede consultar todos
+      allow read: if resource.data.activo == true || isAdmin();
+      allow write: if isAdmin();
+
+      // Subcolección: eventos/{eventoId}/fotos
+      // Campos: id, nombreArchivoOriginal, urlWatermark, pathOriginalStorage, ordenIndex, disponible
+      match /fotos/{fotoId} {
+        // Fotografías con marca de agua disponibles para el público
+        allow read: if resource.data.disponible == true || isAdmin();
+        allow write: if isAdmin();
+      }
+    }
+
+    // 3. Órdenes de Compra
+    // Campos: id, eventoId, clienteEmail, clienteTelefono, fotosSeleccionadas, totalMonto, metodoPago, transaccionId, estadoPago, fechaCreacion
+    match /ordenes/{ordenId} {
+      // El cliente puede crear una orden únicamente en estado PENDIENTE
+      allow create: if request.resource.data.estadoPago == 'PENDIENTE' 
+        && request.resource.data.totalMonto is number 
+        && request.resource.data.totalMonto > 0
+        && request.resource.data.fotosSeleccionadas is list;
+
+      // Lectura permitida al admin o al cliente con el email/teléfono asociado a la orden
+      allow read: if isAdmin() || (isAuthenticated() && request.auth.token.email == resource.data.clienteEmail);
+
+      // Transición de estado a 'APROBADO' o 'RECHAZADO' restringida exclusivamente al backend administrativo
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // 4. Colecciones de Sistema Existentes (Clientes, Proyectos, Contratos)
+    match /clients/{clientId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /projects/{projectId}/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /contracts/{contractId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE CONCEPT STUDIO. — Portal del Cliente VIP</title>
+  
+  <!-- Tipografía Geométrica Ultra Pesada & Monoespaciada -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/client-portal.css">
+
+  <style>
+    /* Estilos estructurales exclusivos del Portal del Cliente */
+    body {
+      background-color: var(--navy-obsidian);
+      color: var(--white-off);
+      font-family: var(--font-display);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Pantalla de Acceso VIP / Magic Link */
+    #magic-link-gate {
+      position: fixed;
+      inset: 0;
+      background: var(--navy-obsidian);
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-6);
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #magic-link-gate.unlocked {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .gate-card {
+      background: var(--navy-surface);
+      border: 1px solid var(--navy-border-line);
+      border-radius: var(--radius-md);
+      padding: var(--space-10) var(--space-8);
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    .client-portal-nav {
+      background: var(--navy-obsidian);
+      border-bottom: 1px solid var(--navy-border-line);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 0 var(--space-8);
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .client-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .client-nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--white-muted);
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      font-weight: 800;
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition-fast);
+    }
+    .client-nav-btn:hover {
+      color: var(--white-pure);
+    }
+    .client-nav-btn.active {
+      color: var(--white-pure);
+      border-bottom-color: var(--gold-champagne);
+    }
+
+    .client-main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--space-8);
+    }
+
+    .portal-section-view {
+      display: none;
+      animation: fadeIn 0.25s ease forwards;
+    }
+    .portal-section-view.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. ACCESO POR MAGIC LINK / IDENTIFICADOR VIP (PANTALLA DE ENTRADA SOBRIA)
+       ========================================================================= -->
+  <div id="magic-link-gate">
+    <div class="gate-card">
+      <h1 class="brand-logo-text" style="font-size:1.6rem; margin-bottom:0.4rem; color:var(--white-pure);">
+        THE CONCEPT STUDIO<span class="gold-dot">.</span>
+      </h1>
+      <span class="brand-tagline" style="margin-bottom:2rem; display:block; color:var(--white-muted);">
+        ACCESO PRIVADO AL PORTAL DEL CLIENTE
+      </span>
+
+      <form id="gate-form" onsubmit="handleGateUnlock(event)">
+        <div class="form-group" style="text-align:left; margin-bottom:1.5rem;">
+          <label class="form-label" for="gate-code-input">CÓDIGO DE ACCESO VIP O CORREO INSTITUCIONAL:</label>
+          <input 
+            type="text" 
+            id="gate-code-input" 
+            class="form-input" 
+            value="TCS-VIP-8842" 
+            autocomplete="off"
+            required 
+          />
+          <span style="font-size:0.65rem; color:var(--white-dim); margin-top:4px; display:block;">
+            * Token pre-cargado para demostración: <strong>TCS-VIP-8842</strong>
+          </span>
+        </div>
+
+        <button type="submit" class="btn btn-gold" style="width:100%; height:46px;">
+          VERIFICAR ACCESO VIP
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. BARRA DE NAVEGACIÓN SUPERIOR DEL CLIENTE
+       ========================================================================= -->
+  <header class="client-portal-nav">
+    <div style="display:flex; align-items:center; gap:2rem;">
+      <a href="#" style="text-decoration:none; color:inherit;">
+        <span class="brand-logo-text" style="font-size:1.1rem; color:var(--white-pure);">
+          THE CONCEPT STUDIO<span class="gold-dot">.</span>
+        </span>
+      </a>
+      <span class="badge badge-gold" style="font-size:0.6rem;">VIP CLIENT PORTAL</span>
+    </div>
+
+    <nav class="client-nav-links">
+      <button class="client-nav-btn active" data-target="section-proofing">PROOFING</button>
+      <button class="client-nav-btn" data-target="section-video">REVISIÓN DE VIDEO</button>
+      <button class="client-nav-btn" data-target="section-vault">BÓVEDA DE DESCARGAS</button>
+      <button class="client-nav-btn" data-target="section-contracts">CONTRATO & PAGOS</button>
+    </nav>
+
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <span class="mono-text" style="font-size:0.7rem; color:var(--white-muted);">MARCUS VANCE // NIKE</span>
+      <button class="btn btn-secondary btn-sm" onclick="lockGate()">SALIR</button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. CONTENEDOR PRINCIPAL
+       ========================================================================= -->
+  <main class="client-main-container">
+
+    <!-- HERO HEADER PERSONALIZADO -->
+    <header class="vip-welcome-banner" style="margin-bottom:var(--space-8);">
+      <div>
+        <div class="vip-badge-cluster">
+          <span class="badge badge-gold">TOKEN ACTIVO: TCS-VIP-8842</span>
+          <span class="mono-text" style="font-size:0.7rem; color:var(--white-muted);">FECHA DE SESIÓN: 14-16 FEB 2026</span>
+        </div>
+        <h1 class="section-title" style="font-size:1.75rem; margin-top:0.4rem;">
+          BIENVENIDO, MARCUS VANCE // NIKE GLOBAL ATHLETICS
+        </h1>
+        <p class="section-subtitle">
+          Campaña: <strong>NIKE TRAINING // ELITE SPEED 2026</strong> · Estado: Selección de tomas y revisión de máster preliminar.
+        </p>
+      </div>
+
+      <div style="text-align:right;">
+        <span class="section-label" style="justify-content:flex-end;">CUPO CONTRACTUAL</span>
+        <div class="mono-text" style="font-size:1.4rem; font-weight:900; color:var(--gold-champagne);" id="header-quota-display">
+          [ 15 / 20 SELECCIONADAS ]
+        </div>
+      </div>
+    </header>
+
+    <!-- =======================================================================
+         MÓDULO 1: GALERÍAS DE SELECCIÓN (PROOFING)
+         ======================================================================= -->
+    <section id="section-proofing" class="portal-section-view active">
+      
+      <!-- Controles de Galería & Contador de Cuota -->
+      <div class="gallery-controls-bar">
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="ALL">TODAS (14)</button>
+          <button class="filter-btn" data-filter="PISTA">PISTA & VELOCIDAD</button>
+          <button class="filter-btn" data-filter="STUDIO">STUDIO & LUZ</button>
+          <button class="filter-btn" data-filter="FAVORITES">★ FAVORITAS</button>
+        </div>
+
+        <div class="quota-indicator-box">
+          <span class="quota-counter-gold" id="quota-counter-indicator">[ 15 / 20 SELECCIONADAS ]</span>
+          <!-- Alerta sutil al exceder límite -->
+          <span class="extra-photo-warning" id="quota-extra-warning" style="display:none;">
+            +$45 USD / FOTO ADICIONAL
+          </span>
+        </div>
+      </div>
+
+      <!-- Cuadrícula Masonry Limpia -->
+      <div class="masonry-grid" id="proofing-grid-container">
+        <!-- Inyectado por JavaScript modular -->
+      </div>
+
+      <!-- Barra Inferior Fija de Confirmación de Selección -->
+      <div class="proofing-bottom-bar" id="proofing-action-bar">
+        <div>
+          <div class="selection-count-badge" id="bottom-bar-count">[ 15 DE 20 FOTOS BASE SELECCIONADAS ]</div>
+          <div class="selection-subtext">SELECCIÓN VINCULADA AL CONTRATO // LISTA PARA POST-PRODUCCIÓN</div>
+        </div>
+        <div style="display:flex; gap:0.75rem;">
+          <button class="btn btn-secondary" onclick="resetSelection()">LIMPIAR</button>
+          <button class="btn btn-gold btn-lg" onclick="openConfirmationModal()">
+            CONFIRMAR Y ENVIAR SELECCIÓN
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         MÓDULO 2: REVISIÓN ASÍNCRONA DE VIDEO CON TIMESTAMPS
+         ======================================================================= -->
+    <section id="section-video" class="portal-section-view">
+      <div class="view-header">
+        <div>
+          <span class="section-label">FEEDBACK ASÍNCRONO DE VIDEO</span>
+          <h2 class="section-title">REVISIÓN DE CORTE COMERCIAL & TIMESTAMPS</h2>
+          <p class="section-subtitle">Cada comentario queda automáticamente anclado al minuto y segundo exacto del video.</p>
+        </div>
+        <span class="badge badge-gold">HERO CUT 60S V3 // 4K PRORES</span>
+      </div>
+
+      <div class="video-review-container">
+        <!-- Reproductor de Video -->
+        <div class="video-player-card">
+          <div class="video-screen-wrapper" id="video-wrapper">
+            <img src="assets/images/cinema_rig.jpg" alt="Frame de Cine" class="video-element" id="video-frame-display" />
+            <div class="video-overlay-timecode" id="timecode-badge">TC 01:00:00:15:00</div>
+          </div>
+
+          <div class="video-controls">
+            <div class="scrubber-track" id="video-timeline-scrubber">
+              <div class="scrubber-fill" id="timeline-progress-fill" style="width: 25%;"></div>
+            </div>
+
+            <div class="controls-row">
+              <div style="display:flex; align-items:center; gap:1rem;">
+                <button class="control-btn" id="play-pause-toggle" aria-label="Reproducir o pausar video">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <span class="mono-text" style="font-size:var(--text-xs); color:var(--white-off);" id="playback-timer">
+                  00:15 / 02:00
+                </span>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="lockCurrentTimestamp()">
+                + CAPTURAR SEGUNDO ACTUAL
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de Comentarios Vinculados a Marca de Tiempo -->
+        <div class="video-comments-panel">
+          <div class="comments-panel-header">
+            <h4 style="font-size:var(--text-xs); font-weight:900; letter-spacing:var(--tracking-wider); text-transform:uppercase;">
+              COMENTARIOS CON TIMESTAMP
+            </h4>
+            <span class="badge badge-gold" id="comments-total-counter">3 NOTAS</span>
+          </div>
+
+          <div class="comments-list" id="timestamp-comments-list">
+            <!-- Inyectado por JavaScript modular -->
+          </div>
+
+          <!-- Caja de Entrada Anclada a Timestamp -->
+          <div class="comment-input-area">
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.65rem; font-weight:800; text-transform:uppercase;">
+              <span style="color:var(--white-muted);">TIMESTAMP VINCULADO:</span>
+              <span class="mono-text" style="color:var(--gold-champagne);" id="active-anchor-badge">[ 00:15 ]</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0.75rem;">
+              <textarea id="comment-text-input" class="form-textarea" rows="2" placeholder="Escribe el ajuste exacto para este segundo..."></textarea>
+            </div>
+
+            <button class="btn btn-gold" style="width:100%;" onclick="submitVideoComment()">
+              PUBLICAR COMENTARIO AL SEGUNDO
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         MÓDULO 3: BÓVEDA DE DESCARGAS MULTI-RESOLUCIÓN
+         ======================================================================= -->
+    <section id="section-vault" class="portal-section-view">
+      <div class="view-header">
+        <div>
+          <span class="section-label">BÓVEDA DE ENTREGABLES // TRANSFERENCIA SEGURA</span>
+          <h2 class="section-title">DESCARGAS MULTI-RESOLUCIÓN</h2>
+          <p class="section-subtitle">Archivos segmentados para publicación digital inmediata y versiones maestras para impresión.</p>
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="showToast('Generando paquete maestro en ZIP (24.8 GB)...')">
+          DESCARGAR TODO EL PROYECTO
+        </button>
+      </div>
+
+      <!-- Segment Tabs -->
+      <div class="vault-segments-tab-bar">
+        <button class="vault-tab-btn active" data-segment="ALL" onclick="filterVaultSegment('ALL')">TODAS LAS RESOLUCIONES</button>
+        <button class="vault-tab-btn" data-segment="WEB" onclick="filterVaultSegment('WEB')">📱 WEB & REDES SOCIALES (OPTIMIZADO)</button>
+        <button class="vault-tab-btn" data-segment="MASTER" onclick="filterVaultSegment('MASTER')">💎 MASTER & PRINT (MÁXIMA CALIDAD)</button>
+      </div>
+
+      <!-- Cuadrícula de Archivos -->
+      <div class="vault-grid-cards" id="vault-items-container">
+        <!-- Inyectado por JavaScript modular -->
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         MÓDULO 4: CONTRATOS, COTIZACIONES Y ESTADO DE CUENTA
+         ======================================================================= -->
+    <section id="section-contracts" class="portal-section-view">
+      <div class="view-header">
+        <div>
+          <span class="section-label">DOCUMENTO LEGAL & CONCILIACIÓN FINANCIERA</span>
+          <h2 class="section-title">CONTRATOS, COTIZACIONES Y PAGOS</h2>
+          <p class="section-subtitle">Visualiza el desglose del servicio contratado, aprueba formalmente y adjunta comprobantes.</p>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="window.print()">IMPRIMIR COPIA PDF</button>
+      </div>
+
+      <!-- Estado de Cuenta -->
+      <div class="account-statement-grid">
+        <div class="statement-card">
+          <span class="section-label">TOTAL PRESUPUESTADO</span>
+          <div class="metric-value" style="font-size:1.8rem; margin:0.5rem 0 0.25rem 0;">$18,500.00</div>
+          <div class="metric-footer">USD // CONTRATO #TCS-CTR-088</div>
+        </div>
+
+        <div class="statement-card gold-highlight">
+          <span class="section-label" style="color:var(--gold-champagne);">ANTICIPO CONCILIADO (50%)</span>
+          <div class="metric-value" style="font-size:1.8rem; color:var(--gold-champagne); margin:0.5rem 0 0.25rem 0;">$9,250.00</div>
+          <div class="metric-footer" style="color:var(--white-off);">PAGO CONFIRMADO EN BANCO ✓</div>
+        </div>
+
+        <div class="statement-card">
+          <span class="section-label">SALDO FINAL PENDIENTE</span>
+          <div class="metric-value" style="font-size:1.8rem; margin:0.5rem 0 0.25rem 0;">$9,250.00</div>
+          <div class="metric-footer">CONTRA ENTREGA EN BÓVEDA FINAL</div>
+        </div>
+      </div>
+
+      <!-- Documento Formal -->
+      <div class="contract-document-wrapper">
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--navy-border-line); padding-bottom:1.5rem; margin-bottom:1.5rem;">
+          <div>
+            <h3 class="brand-logo-text" style="font-size:1.3rem; color:var(--white-pure);">THE CONCEPT STUDIO<span class="gold-dot">.</span></h3>
+            <div style="font-size:0.7rem; color:var(--white-muted); text-transform:uppercase;">PRESTADOR DEL SERVICIO AUDIOVISUAL</div>
+          </div>
+          <div class="mono-text" style="font-size:0.75rem; color:var(--gold-champagne); text-align:right;">
+            DOCUMENTO: #TCS-CTR-2026-088<br>
+            FECHA: 01 FEB 2026
+          </div>
+        </div>
+
+        <!-- Desglose del Servicio -->
+        <table class="contract-items-table" style="width:100%; border-collapse:collapse; margin-bottom:2rem; font-size:var(--text-xs);">
+          <thead>
+            <tr style="border-bottom:1px solid var(--gold-champagne); text-align:left;">
+              <th style="padding:0.75rem 0;">SERVICIO / ENTREGABLE</th>
+              <th>JORNADA</th>
+              <th style="text-align:right;">TARIFA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--navy-border-subtle);">
+              <td style="padding:0.75rem 0;">Dirección de Cinematografía Comercial (RED V-Raptor 8K VV On-Set + DIT)</td>
+              <td>3 Días</td>
+              <td class="mono-text" style="text-align:right;">$7,500.00 USD</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--navy-border-subtle);">
+              <td style="padding:0.75rem 0;">Fotografía Deportiva High-Speed Stills (Canon R5 II 45MP + Profoto Pro-11)</td>
+              <td>3 Días</td>
+              <td class="mono-text" style="text-align:right;">$5,400.00 USD</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--navy-border-subtle);">
+              <td style="padding:0.75rem 0;">Post-Producción, Color Grading DaVinci Resolve DCI-P3 & Sound Mix</td>
+              <td>Global</td>
+              <td class="mono-text" style="text-align:right;">$3,600.00 USD</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--navy-border-subtle);">
+              <td style="padding:0.75rem 0;">Cesión de Derechos Comerciales Globales (Buyout 2 Años)</td>
+              <td>Licencia</td>
+              <td class="mono-text" style="text-align:right;">$2,000.00 USD</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Zona para Adjuntar Comprobante de Pago -->
+        <div class="payment-proof-zone" onclick="document.getElementById('receipt-upload-input').click()">
+          <h4 style="font-size:var(--text-xs); font-weight:900; text-transform:uppercase; color:var(--white-pure); margin-bottom:4px;">
+            ADJUNTAR O REPORTAR COMPROBANTE DE TRANSFERENCIA
+          </h4>
+          <p style="font-size:0.7rem; color:var(--white-muted); margin:0;" id="receipt-upload-label">
+            Haz click aquí para subir comprobante bancario (PDF / JPG / PNG).
+          </p>
+          <input type="file" id="receipt-upload-input" style="display:none;" onchange="handleReceiptUpload(event)" />
+        </div>
+
+        <!-- Área de Firma Digital -->
+        <div style="margin-top:2rem; border-top:1px solid var(--navy-border-line); padding-top:2rem;">
+          <div id="signature-block-active">
+            <span class="section-label">APROBACIÓN FORMAL Y FIRMA DIGITAL</span>
+            
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label class="form-label" for="client-signer-name">NOMBRE Y CARGO DEL REPRESENTANTE:</label>
+              <input type="text" id="client-signer-name" class="form-input" value="Marcus Vance — Global Brand Director" />
+            </div>
+
+            <div class="signature-canvas-container">
+              <canvas id="digital-signature-canvas" class="signature-canvas"></canvas>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+              <button class="btn btn-secondary btn-sm" onclick="clearSignatureCanvas()">LIMPIAR FIRMA</button>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:var(--text-xs); color:var(--white-muted); cursor:pointer;">
+                <input type="checkbox" id="legal-check" checked style="accent-color:var(--gold-champagne);" />
+                <span>Certifico facultades legales para formalizar este servicio.</span>
+              </label>
+              <button class="btn btn-gold btn-lg" onclick="signContract()">
+                APROBAR Y FIRMAR DIGITALMENTE
+              </button>
+            </div>
+          </div>
+
+          <div class="signed-stamp" id="contract-stamp-result" style="display:none; margin-top:1.5rem;">
+            <!-- Sello inyectado dinámicamente -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal de Confirmación de Selección de Proofing -->
+  <div class="modal-overlay" id="confirm-selection-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="color:var(--white-pure);">CONFIRMAR SELECCIÓN DE IMÁGENES</h3>
+        <button class="modal-close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:var(--text-xs); color:var(--white-muted); margin-bottom:1.5rem; line-height:1.5;">
+          Las fotos seleccionadas se sincronizarán directamente en Cloud Firestore y pasarán de inmediato a la suite de edición y masterización del equipo técnico.
+        </p>
+        <div id="modal-extra-charge-alert" style="display:none; background:rgba(197, 160, 89, 0.12); border:1px solid var(--gold-champagne); padding:0.75rem 1rem; border-radius:var(--radius-sm); margin-bottom:1rem; font-size:var(--text-xs); color:var(--gold-champagne);"></div>
+        <span class="section-label">MANIFIESTO DE TOMAS SELECCIONADAS:</span>
+        <div id="modal-selected-items-list" style="max-height:220px; overflow-y:auto; margin-bottom:1.5rem;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal()">CANCELAR</button>
+        <button class="btn btn-gold" onclick="finalizeProofingSelection()">CONFIRMAR Y ENVIAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="client-toast-hub"></div>
+
+  <!-- =========================================================================
+       4. JAVASCRIPT MODULAR Y ESTRUCTURA PREPARADA PARA FIREBASE
+       ========================================================================= -->
+  <script>
+    /**
+     * THE CONCEPT STUDIO. — CLIENT PORTAL JAVASCRIPT
+     * Manejo de estados de interfaz, proofing reactivo, timestamps y firmas.
+     */
+
+    // Datos emulando colección Firestore: /projects/{id}/galleries
+    const clientProofingData = [
+      { id: "TCS-0491", filename: "TCS_SPRINTER_EXPLOSION_001.CR3", src: "assets/images/sprinter_hero.jpg", category: "PISTA", shutter: "1/2500s", aperture: "f/2.0", iso: "ISO 100", selected: true },
+      { id: "TCS-0492", filename: "TCS_BASKETBALL_DUNK_RIM_002.CR3", src: "assets/images/basketball_action.jpg", category: "STUDIO", shutter: "1/2000s", aperture: "f/2.8", iso: "ISO 400", selected: true },
+      { id: "TCS-0493", filename: "TCS_CINEMA_RIG_SET_003.CR3", src: "assets/images/cinema_rig.jpg", category: "STUDIO", shutter: "1/1000s", aperture: "f/1.8", iso: "ISO 200", selected: true },
+      { id: "TCS-0494", filename: "TCS_STARTING_BLOCKS_FOCUS_004.CR3", src: "assets/images/sprinter_hero.jpg", category: "PISTA", shutter: "1/3200s", aperture: "f/2.2", iso: "ISO 100", selected: true },
+      { id: "TCS-0495", filename: "TCS_AERIAL_DUNK_HIGH_ANGLE_005.CR3", src: "assets/images/basketball_action.jpg", category: "STUDIO", shutter: "1/1600s", aperture: "f/2.8", iso: "ISO 800", selected: true },
+      { id: "TCS-0496", filename: "TCS_DIRECTOR_MONITOR_RIG_006.CR3", src: "assets/images/cinema_rig.jpg", category: "STUDIO", shutter: "1/500s", aperture: "f/2.0", iso: "ISO 400", selected: true },
+      { id: "TCS-0497", filename: "TCS_SPRINTER_FINISH_LINE_007.CR3", src: "assets/images/sprinter_hero.jpg", category: "PISTA", shutter: "1/4000s", aperture: "f/1.4", iso: "ISO 100", selected: true },
+      { id: "TCS-0498", filename: "TCS_WARMUP_SHADOW_STUDIO_008.CR3", src: "assets/images/basketball_action.jpg", category: "STUDIO", shutter: "1/1250s", aperture: "f/2.8", iso: "ISO 320", selected: true },
+      { id: "TCS-0499", filename: "TCS_ANAMORPHIC_FLARE_RUN_009.CR3", src: "assets/images/cinema_rig.jpg", category: "STUDIO", shutter: "1/800s", aperture: "f/2.0", iso: "ISO 200", selected: true },
+      { id: "TCS-0500", filename: "TCS_SPIKES_MACRO_TEXTURE_010.CR3", src: "assets/images/sprinter_hero.jpg", category: "PISTA", shutter: "1/2000s", aperture: "f/4.0", iso: "ISO 100", selected: true },
+      { id: "TCS-0501", filename: "TCS_DUNK_DEFENDER_REBOUND_011.CR3", src: "assets/images/basketball_action.jpg", category: "STUDIO", shutter: "1/2500s", aperture: "f/2.8", iso: "ISO 640", selected: true },
+      { id: "TCS-0502", filename: "TCS_SET_BEHIND_SCENES_012.CR3", src: "assets/images/cinema_rig.jpg", category: "STUDIO", shutter: "1/1000s", aperture: "f/2.8", iso: "ISO 400", selected: true },
+      { id: "TCS-0503", filename: "TCS_ATHLETE_BREATHE_INTENSE_013.CR3", src: "assets/images/sprinter_hero.jpg", category: "PISTA", shutter: "1/3200s", aperture: "f/1.8", iso: "ISO 100", selected: true },
+      { id: "TCS-0504", filename: "TCS_SWEAT_DRIP_COMMERCIAL_014.CR3", src: "assets/images/basketball_action.jpg", category: "STUDIO", shutter: "1/2000s", aperture: "f/2.8", iso: "ISO 200", selected: true },
+      { id: "TCS-0505", filename: "TCS_FINAL_TRACK_PODIUM_015.CR3", src: "assets/images/sprinter_hero.jpg", category: "PISTA", shutter: "1/1600s", aperture: "f/2.0", iso: "ISO 100", selected: true }
+    ];
+
+    // Datos emulando colección Firestore: /projects/{id}/video_comments
+    const videoCommentsData = [
+      { id: "c1", seconds: 15, timeFormatted: "00:15", author: "Marcus Vance (Nike)", text: "Acelerar rampa de velocidad cuando el pie impacta el taco. Máxima tensión previa al disparo." },
+      { id: "c2", seconds: 38, timeFormatted: "00:38", author: "Marcus Vance (Nike)", text: "En este cuadro reducir ligeramente altas luces en el reflejo de la zapatilla. Mantener negro carbón." },
+      { id: "c3", seconds: 72, timeFormatted: "01:12", author: "Sarah Lin (Producer)", text: "El sonido de exhalación del atleta debe subir +3dB antes del bajo." }
+    ];
+
+    // Datos emulando colección Firestore: /projects/{id}/deliverables
+    const vaultFilesData = [
+      { id: "f1", segment: "WEB", name: "NIKE_SPEED_REELS_9x16_PRORES.mp4", format: "H.265 Master 10-bit", resolution: "1080 x 1920 (60fps)", size: "480 MB" },
+      { id: "f2", segment: "WEB", name: "NIKE_STILLS_IG_CURATED_4x5.zip", format: "sRGB High-Density JPEG", resolution: "1080 x 1350", size: "220 MB" },
+      { id: "f3", segment: "MASTER", name: "NIKE_SPEED_2026_MASTER_60S_PRORES422HQ.mov", format: "Apple ProRes 422 HQ", resolution: "3840 x 2160 UHD 24fps", size: "8.42 GB" },
+      { id: "f4", segment: "MASTER", name: "TCS_NIKE_RAW_SELECTS_BATCH_45MP.zip", format: "Canon CR3 RAW 14-bit", resolution: "8192 x 5464 (45 MP)", size: "4.80 GB" }
+    ];
+
+    const PACKAGE_BASE_LIMIT = 20;
+    const EXTRA_PHOTO_PRICE_USD = 45;
+    let activeFilter = "ALL";
+    let currentVideoSeconds = 15;
+
+    // Toast helper
+    function showToast(msg) {
+      const hub = document.getElementById("client-toast-hub");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = `<span style="color:var(--gold-champagne);">✓</span> <span>${msg}</span>`;
+      hub.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add("show"));
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // 1. Desbloqueo Magic Link Gate
+    function handleGateUnlock(e) {
+      e.preventDefault();
+      const code = document.getElementById("gate-code-input").value.trim();
+      if (!code) return;
+      document.getElementById("magic-link-gate").classList.add("unlocked");
+      showToast("Acceso VIP validado. Bienvenido al portal de THE CONCEPT STUDIO.");
+    }
+
+    function lockGate() {
+      document.getElementById("magic-link-gate").classList.remove("unlocked");
+    }
+
+    // 2. Render de Galería de Proofing
+    function renderProofingGrid() {
+      const container = document.getElementById("proofing-grid-container");
+      let items = clientProofingData;
+
+      if (activeFilter === "FAVORITES") items = items.filter(i => i.selected);
+      else if (activeFilter !== "ALL") items = items.filter(i => i.category === activeFilter);
+
+      container.innerHTML = "";
+      items.forEach(photo => {
+        const card = document.createElement("div");
+        card.className = `masonry-item ${photo.selected ? 'selected' : ''}`;
+        card.innerHTML = `
+          <div class="masonry-img-wrapper" onclick="togglePhotoSelection('${photo.id}')">
+            <span class="photo-badge-index">#${photo.id}</span>
+            <button class="photo-select-btn" title="Seleccionar">
+              ${photo.selected 
+                ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`
+                : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`
+              }
+            </button>
+            <img src="${photo.src}" alt="${photo.filename}" class="masonry-img" loading="lazy" />
+          </div>
+          <div class="photo-meta-bar">
+            <div>
+              <div style="font-size:var(--text-xs); font-weight:800; color:var(--white-pure);">${photo.filename}</div>
+              <div class="mono-text" style="font-size:0.65rem; color:var(--white-dim);">${photo.shutter} · ${photo.aperture} · ${photo.iso}</div>
+            </div>
+            <span class="badge ${photo.selected ? 'badge-gold' : 'badge-outline'}">${photo.selected ? 'SELECCIONADA' : 'DISPONIBLE'}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      updateQuotaCounters();
+    }
+
+    function togglePhotoSelection(photoId) {
+      const photo = clientProofingData.find(p => p.id === photoId);
+      if (photo) photo.selected = !photo.selected;
+      renderProofingGrid();
+    }
+
+    function updateQuotaCounters() {
+      const selected = clientProofingData.filter(p => p.selected).length;
+      const displayStr = `[ ${selected} / ${PACKAGE_BASE_LIMIT} SELECCIONADAS ]`;
+      
+      document.getElementById("header-quota-display").textContent = displayStr;
+      document.getElementById("quota-counter-indicator").textContent = displayStr;
+      document.getElementById("bottom-bar-count").textContent = `[ ${selected} DE ${PACKAGE_BASE_LIMIT} FOTOS BASE SELECCIONADAS ]`;
+
+      const extraWarning = document.getElementById("quota-extra-warning");
+      if (selected > PACKAGE_BASE_LIMIT) {
+        const extraCount = selected - PACKAGE_BASE_LIMIT;
+        extraWarning.style.display = "inline-flex";
+        extraWarning.textContent = `+${extraCount} FOTO EXTRA (+$${extraCount * EXTRA_PHOTO_PRICE_USD} USD)`;
+      } else {
+        extraWarning.style.display = "none";
+      }
+    }
+
+    function resetSelection() {
+      clientProofingData.forEach(p => p.selected = false);
+      renderProofingGrid();
+      showToast("Selección reiniciada.");
+    }
+
+    // Modal de Confirmación
+    function openConfirmationModal() {
+      const selected = clientProofingData.filter(p => p.selected);
+      const list = document.getElementById("modal-selected-items-list");
+      const alertBox = document.getElementById("modal-extra-charge-alert");
+
+      list.innerHTML = selected.map(s => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:0.4rem 0; border-bottom:1px solid var(--navy-border-subtle); font-size:var(--text-xs);">
+          <span class="mono-text">${s.filename}</span>
+          <span class="badge badge-gold">${s.category}</span>
+        </div>
+      `).join("") || "<p style='color:var(--white-dim); padding:1rem 0;'>No hay fotos seleccionadas.</p>";
+
+      if (selected.length > PACKAGE_BASE_LIMIT) {
+        const extra = selected.length - PACKAGE_BASE_LIMIT;
+        alertBox.style.display = "block";
+        alertBox.innerHTML = `<strong>AVISO DE COSTO ADICIONAL:</strong> Has marcado ${selected.length} tomas (+${extra} por encima del cupo de ${PACKAGE_BASE_LIMIT}). Monto a liquidar: <strong>+$${extra * EXTRA_PHOTO_PRICE_USD} USD</strong>.`;
+      } else {
+        alertBox.style.display = "none";
+      }
+
+      document.getElementById("confirm-selection-modal").classList.add("active");
+    }
+
+    function closeModal() {
+      document.getElementById("confirm-selection-modal").classList.remove("active");
+    }
+
+    function finalizeProofingSelection() {
+      closeModal();
+      showToast("¡Selección formal transmitida con éxito a THE CONCEPT STUDIO!");
+    }
+
+    // 3. Revisión de Video con Timestamps
+    function renderVideoComments() {
+      const list = document.getElementById("timestamp-comments-list");
+      list.innerHTML = videoCommentsData.map(c => `
+        <div class="comment-card" onclick="seekVideo(${c.seconds})">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+            <span class="comment-timestamp-badge">⏱ ${c.timeFormatted}</span>
+            <span style="font-size:0.65rem; font-weight:800; color:var(--white-muted); text-transform:uppercase;">${c.author}</span>
+          </div>
+          <p style="font-size:var(--text-xs); color:var(--white-off); margin:0; line-height:1.4;">${c.text}</p>
+        </div>
+      `).join("");
+      document.getElementById("comments-total-counter").textContent = `${videoCommentsData.length} NOTAS`;
+    }
+
+    function seekVideo(seconds) {
+      currentVideoSeconds = seconds;
+      const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const secs = (seconds % 60).toString().padStart(2, '0');
+      document.getElementById("playback-timer").textContent = `${mins}:${secs} / 02:00`;
+      document.getElementById("timecode-badge").textContent = `TC 01:00:00:${secs}:00`;
+      document.getElementById("timeline-progress-fill").style.width = `${(seconds / 120) * 100}%`;
+      document.getElementById("active-anchor-badge").textContent = `[ ${mins}:${secs} ]`;
+      showToast(`Reproductor situado en [ ${mins}:${secs} ]`);
+    }
+
+    function lockCurrentTimestamp() {
+      const mins = Math.floor(currentVideoSeconds / 60).toString().padStart(2, '0');
+      const secs = (currentVideoSeconds % 60).toString().padStart(2, '0');
+      document.getElementById("active-anchor-badge").textContent = `[ ${mins}:${secs} ]`;
+      document.getElementById("comment-text-input").focus();
+      showToast(`Timestamp fijado en [ ${mins}:${secs} ]. Escribe tu anotación.`);
+    }
+
+    function submitVideoComment() {
+      const input = document.getElementById("comment-text-input");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const mins = Math.floor(currentVideoSeconds / 60).toString().padStart(2, '0');
+      const secs = (currentVideoSeconds % 60).toString().padStart(2, '0');
+      videoCommentsData.unshift({
+        id: "c_" + Date.now(),
+        seconds: currentVideoSeconds,
+        timeFormatted: `${mins}:${secs}`,
+        author: "Marcus Vance (Nike)",
+        text: text
+      });
+
+      input.value = "";
+      renderVideoComments();
+      showToast(`Comentario publicado y anclado en [ ${mins}:${secs} ].`);
+    }
+
+    // 4. Bóveda de Descargas Multi-Resolución
+    function renderVaultFiles(filter = "ALL") {
+      const container = document.getElementById("vault-items-container");
+      let files = vaultFilesData;
+      if (filter !== "ALL") files = files.filter(f => f.segment === filter);
+
+      container.innerHTML = files.map(f => `
+        <div class="vault-file-card">
+          <div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.75rem;">
+              <span class="badge ${f.segment === 'WEB' ? 'badge-solid' : 'badge-gold'}">
+                ${f.segment === 'WEB' ? '📱 REDES SOCIALES' : '💎 MÁSTER ORIGINAL'}
+              </span>
+              <span class="mono-text" style="font-size:0.7rem; color:var(--gold-champagne); font-weight:800;">${f.size}</span>
+            </div>
+            <h4 style="font-size:var(--text-sm); font-weight:900; text-transform:uppercase; color:var(--white-pure); margin-bottom:0.4rem;">
+              ${f.name}
+            </h4>
+            <div style="font-size:0.7rem; color:var(--white-muted);">
+              <div>FORMATO: ${f.format}</div>
+              <div class="mono-text">RES: ${f.resolution}</div>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; border-top:1px solid var(--navy-border-subtle); padding-top:1rem;">
+            <button class="btn btn-gold btn-sm" style="width:100%;" onclick="showToast('Iniciando descarga segura: ${f.name}')">
+              DESCARGAR ARCHIVO
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function filterVaultSegment(segment) {
+      document.querySelectorAll(".vault-tab-btn").forEach(b => b.classList.toggle("active", b.dataset.segment === segment));
+      renderVaultFiles(segment);
+    }
+
+    // 5. Firma Digital en Canvas
+    const canvas = document.getElementById("digital-signature-canvas");
+    const ctx = canvas?.getContext("2d");
+    let isDrawing = false, hasSigned = false;
+
+    if (canvas && ctx) {
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        ctx.strokeStyle = "#C5A059";
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = "round";
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      canvas.addEventListener("mousedown", (e) => { isDrawing = true; hasSigned = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
+      canvas.addEventListener("mousemove", (e) => { if (!isDrawing) return; ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); });
+      canvas.addEventListener("mouseup", () => isDrawing = false);
+      canvas.addEventListener("mouseleave", () => isDrawing = false);
+    }
+
+    function clearSignatureCanvas() {
+      if (ctx && canvas) { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSigned = false; }
+    }
+
+    function signContract() {
+      const name = document.getElementById("client-signer-name").value.trim();
+      if (!name || !hasSigned) { alert("Por favor ingresa tu nombre y traza tu firma digital."); return; }
+      
+      document.getElementById("signature-block-active").style.display = "none";
+      const stamp = document.getElementById("contract-stamp-result");
+      stamp.style.display = "block";
+      stamp.innerHTML = `
+        <div style="border:1px solid var(--gold-champagne); background:var(--navy-surface); padding:1.5rem; border-radius:var(--radius-sm); text-align:center;">
+          <span class="badge badge-gold" style="margin-bottom:0.5rem;">APROBACIÓN FORMAL REGISTRADA</span>
+          <h4 style="font-size:1.1rem; font-weight:900; color:var(--white-pure); text-transform:uppercase; margin:0.5rem 0;">FIRMADO POR: ${name}</h4>
+          <div class="mono-text" style="font-size:0.7rem; color:var(--white-muted);">FECHA: ${new Date().toLocaleString('es-ES')} · HASH: SHA256-88F92AC19</div>
+        </div>
+      `;
+      showToast("Contrato #TCS-CTR-088 firmado formalmente.");
+    }
+
+    function handleReceiptUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        document.getElementById("receipt-upload-label").innerHTML = `<strong style="color:var(--gold-champagne);">✓ COMPROBANTE ADJUNTO:</strong> ${file.name}`;
+        showToast(`Comprobante [${file.name}] adjuntado con éxito.`);
+      }
+    }
+
+    // Navegación entre pestañas de cliente
+    document.querySelectorAll(".client-nav-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".client-nav-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const targetId = btn.dataset.target;
+        document.querySelectorAll(".portal-section-view").forEach(s => s.classList.toggle("active", s.id === targetId));
+
+        const bar = document.getElementById("proofing-action-bar");
+        if (bar) bar.style.display = targetId === "section-proofing" ? "flex" : "none";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    // Filtros de Proofing
+    document.querySelectorAll(".proofing-filter-btn, .filter-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        if (!btn.dataset.filter) return;
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        renderProofingGrid();
+      });
+    });
+
+    // Inicialización al cargar DOM
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProofingGrid();
+      renderVideoComments();
+      renderVaultFiles("ALL");
+    });
+  </script>
+</body>
+</html>

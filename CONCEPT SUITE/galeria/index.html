@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>THE CONCEPT STUDIO. — Galería de Selección</title>
+
+  <!-- Tipografía Editorial Moderna, Neutra y Geométrica: Inter & Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       THE CONCEPT STUDIO. — IDENTIDAD OFICIAL DE MARCA
+       Paleta: Azul Navy Medianoche (#070D1E / #0A1226),
+       Tarjetas Navy Estructurado (#0F1934),
+       Toques Blancos Puros (#FFFFFF / #EDF2F7),
+       Detalles Quirúrgicos en Dorado Champagne Mate (#C5A059 / #D4AF37).
+       ========================================================================== */
+    :root {
+      --navy-bg: #070D1E;
+      --navy-surface: #0A1226;
+      --navy-card: #0F1934;
+      --navy-card-hover: #142246;
+      --navy-border: rgba(237, 242, 247, 0.12);
+      --navy-border-focus: rgba(197, 160, 89, 0.6);
+
+      --text-white: #FFFFFF;
+      --text-bone: #EDF2F7;
+      --text-muted: rgba(237, 242, 247, 0.65);
+      --text-dim: rgba(237, 242, 247, 0.35);
+
+      --gold-accent: #C5A059;
+      --gold-bright: #D4AF37;
+      --gold-subtle: rgba(197, 160, 89, 0.14);
+      --gold-border: rgba(197, 160, 89, 0.38);
+      --gold-glow: 0 0 16px rgba(197, 160, 89, 0.25);
+
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+
+      --radius: 4px;
+      --transition: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--navy-bg);
+      color: var(--text-bone);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 96px; /* Espacio para barra flotante */
+    }
+
+    /* Scrollbars sobrias */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy-bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.35); border-radius: 2px; }
+
+    /* ==========================================================================
+       LOGO ESTRICTO EN DOS LÍNEAS
+       Línea 1: THE CONCEPT
+       Línea 2: STUDIO.
+       ========================================================================== */
+    .brand-logo-twolines {
+      display: inline-flex;
+      flex-direction: column;
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: 0.95rem;
+      line-height: 1.05;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      user-select: none;
+    }
+    .brand-logo-twolines .logo-line1 {
+      display: block;
+    }
+    .brand-logo-twolines .logo-line2 {
+      display: block;
+    }
+    .gold-dot {
+      color: var(--gold-accent);
+      font-weight: 900;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      cursor: pointer;
+      user-select: none;
+      transition: all var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-gold {
+      background: var(--gold-accent);
+      color: var(--navy-bg);
+      border-color: var(--gold-accent);
+      box-shadow: 0 4px 14px rgba(197, 160, 89, 0.2);
+    }
+    .btn-gold:hover {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+    .btn-gold:active {
+      transform: scale(0.98);
+    }
+    .btn-outline {
+      background: rgba(237, 242, 247, 0.05);
+      color: var(--text-white);
+      border-color: var(--navy-border);
+    }
+    .btn-outline:hover {
+      background: rgba(237, 242, 247, 0.1);
+      border-color: var(--text-white);
+    }
+    .btn-solid {
+      background: var(--text-white);
+      color: var(--navy-bg);
+      border-color: var(--text-white);
+    }
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.7rem;
+    }
+
+    /* ==========================================================================
+       HEADER STICKY DISCRETO
+       ========================================================================= */
+    .gallery-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 13, 30, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--navy-border);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quota-indicator-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius);
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-bright);
+    }
+    .quota-indicator-pill.limit-reached {
+      box-shadow: 0 0 14px rgba(197, 160, 89, 0.35);
+      background: var(--gold-bright);
+      color: var(--navy-bg);
+    }
+
+    /* Sub-barra informativa */
+    .gallery-info-bar {
+      max-width: 1400px;
+      margin: 1.5rem auto 1rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .client-title-large {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--text-white);
+    }
+    .gallery-instructions {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ==========================================================================
+       CUADRÍCULA DE FOTOS RESPONSIVE (MOBILE-FIRST)
+       ========================================================================= */
+    .gallery-grid-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    @media (min-width: 768px) {
+      .photos-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+    }
+    @media (min-width: 1100px) {
+      .photos-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+      }
+    }
+
+    .photo-card {
+      position: relative;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      user-select: none;
+      transition: all var(--transition);
+    }
+    .photo-card:hover {
+      border-color: rgba(237, 242, 247, 0.35);
+    }
+    .photo-card.selected {
+      border: 2px solid var(--gold-bright);
+      box-shadow: 0 0 16px rgba(197, 160, 89, 0.35);
+    }
+
+    .photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .photo-card:hover .photo-img {
+      transform: scale(1.02);
+    }
+
+    /* Selector táctil */
+    .select-toggle-box {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius);
+      background: rgba(7, 13, 30, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all var(--transition);
+    }
+    .photo-card.selected .select-toggle-box {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+      color: var(--navy-bg);
+      transform: scale(1.05);
+    }
+
+    .photo-filename-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(7, 13, 30, 0.85);
+      border: 1px solid var(--navy-border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-bone);
+      z-index: 5;
+    }
+
+    /* ==========================================================================
+       BARRA INFERIOR FLOTANTE FIJA
+       ========================================================================= */
+    .fixed-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(7, 13, 30, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--gold-border);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 500;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.7);
+    }
+    .bottom-bar-summary {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-white);
+    }
+
+    /* ==========================================================================
+       VISOR LIGHTBOX A PANTALLA COMPLETA
+       ========================================================================= */
+    #full-lightbox {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 3000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    #full-lightbox.active {
+      display: flex;
+    }
+    .lightbox-topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      z-index: 10;
+    }
+    .lightbox-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .lightbox-current-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .lightbox-bottombar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      z-index: 10;
+    }
+
+    /* ==========================================================================
+       MODAL DE CONFIRMACIÓN
+       ========================================================================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 13, 30, 0.88);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 4000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition);
+    }
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-card {
+      background: var(--navy-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 440px;
+      padding: 2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    }
+
+    /* ==========================================================================
+       PANTALLA DE CONFIRMACIÓN EDITORIAL
+       ========================================================================= */
+    #confirmation-screen {
+      display: none;
+      min-height: calc(100vh - 80px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    #confirmation-screen.active {
+      display: flex;
+    }
+    .confirm-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      margin: 1.5rem 0 0.75rem 0;
+    }
+    .confirm-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .live-status-card {
+      width: 100%;
+      background: var(--navy-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      text-align: left;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+    .status-stage-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .status-stage-item.current {
+      color: var(--gold-bright);
+      font-weight: 800;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--navy-surface);
+      border: 1px solid var(--navy-border);
+    }
+    .status-stage-item.current .status-dot {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 10px rgba(197, 160, 89, 0.8);
+    }
+    .status-stage-item.done .status-dot {
+      background: var(--text-white);
+      border-color: var(--text-white);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--navy-card);
+      border: 1px solid var(--gold-accent);
+      color: var(--text-white);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.75rem;
+      font-weight: 700;
+      z-index: 6000;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      pointer-events: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       HEADER STICKY DISCRETO
+       ========================================================================= -->
+  <header class="gallery-header">
+    <!-- LOGO EN DOS LÍNEAS CON PUNTO DORADO -->
+    <div class="brand-logo-twolines">
+      <span class="logo-line1">THE CONCEPT</span>
+      <span class="logo-line2">STUDIO<span class="gold-dot">.</span></span>
+    </div>
+
+    <!-- CONTADOR MINIMALISTA: "Seleccionadas: X / [Total permitido]" -->
+    <div class="quota-indicator-pill" id="quota-pill">
+      <span>SELECCIONADAS:</span>
+      <span class="mono" id="selected-count-header">0</span>
+      <span>/</span>
+      <span class="mono" id="quota-limit-header">10</span>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SUB-BARRA INFORMATIVA
+       ========================================================================= -->
+  <div class="gallery-info-bar" id="gallery-info-strip">
+    <div>
+      <h1 class="client-title-large" id="session-client-title">
+        GALERÍA DE SELECCIÓN
+      </h1>
+      <p class="gallery-instructions" id="session-client-instructions">
+        Toca una fotografía para evaluarla a pantalla completa. Pulsa la casilla para incluirla en tu entrega oficial.
+      </p>
+    </div>
+
+    <div class="mono" style="font-size: 0.75rem; color: var(--gold-accent);" id="session-date-display">
+      FECHA: —
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CUADRÍCULA DE FOTOS
+       ========================================================================= -->
+  <main class="gallery-grid-wrap" id="gallery-grid-container">
+    <div class="photos-grid" id="photos-grid-element">
+      <!-- Inyectado dinámicamente -->
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       BARRA INFERIOR FLOTANTE
+       ========================================================================= -->
+  <footer class="fixed-bottom-bar" id="floating-bar">
+    <div class="bottom-bar-summary" id="bottom-summary-text">
+      0 / 10 FOTOGRAFÍAS SELECCIONADAS
+    </div>
+
+    <button class="btn btn-gold" id="btn-open-confirm" onclick="openConfirmModal()">
+      CONFIRMAR SELECCIÓN
+    </button>
+  </footer>
+
+  <!-- =========================================================================
+       VISOR LIGHTBOX A PANTALLA COMPLETA
+       ========================================================================= -->
+  <div id="full-lightbox">
+    <div class="lightbox-topbar">
+      <span class="mono" id="lightbox-filename-text" style="font-size: 0.75rem; color: var(--text-muted);">
+        DSC01245.JPG (1 / 16)
+      </span>
+      <button class="btn btn-outline btn-sm" onclick="closeLightbox()">CERRAR ✕</button>
+    </div>
+
+    <div class="lightbox-img-wrapper" onclick="toggleSelectionCurrentLightbox()">
+      <img src="" alt="Ampliación" class="lightbox-current-img" id="lightbox-img-el" />
+    </div>
+
+    <div class="lightbox-bottombar">
+      <button class="btn btn-outline btn-sm" onclick="navigateLightbox(-1)">◀ ANTERIOR</button>
+      <button class="btn btn-gold btn-sm" id="lightbox-toggle-btn" onclick="toggleSelectionCurrentLightbox()">
+        SELECCIONAR FOTO
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="navigateLightbox(1)">SIGUIENTE ▶</button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL DE CONFIRMACIÓN
+       ========================================================================= -->
+  <div class="modal-backdrop" id="confirm-modal-backdrop">
+    <div class="modal-card">
+      <div class="brand-logo-twolines" style="margin-bottom: 1.25rem;">
+        <span class="logo-line1">THE CONCEPT</span>
+        <span class="logo-line2">STUDIO<span class="gold-dot">.</span></span>
+      </div>
+
+      <h3 style="font-size: 1.15rem; font-weight: 900; text-transform: uppercase; color: var(--text-white); margin-bottom: 0.5rem;">
+        ¿CONFIRMAR SELECCIÓN DEFINITIVA?
+      </h3>
+
+      <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;" id="modal-confirm-desc">
+        Has seleccionado tus fotografías. Al confirmar, tu selección se transmitirá al motor de revelado y procesado automático del estudio.
+      </p>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button class="btn btn-outline" onclick="closeConfirmModal()">CANCELAR</button>
+        <button class="btn btn-gold" id="btn-submit-final" onclick="submitFinalSelection()">CONFIRMAR Y ENVIAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PANTALLA DE CONFIRMACIÓN EDITORIAL
+       ========================================================================= -->
+  <section id="confirmation-screen">
+    <div class="brand-logo-twolines">
+      <span class="logo-line1">THE CONCEPT</span>
+      <span class="logo-line2">STUDIO<span class="gold-dot">.</span></span>
+    </div>
+
+    <h2 class="confirm-title">SELECCIÓN RECIBIDA.</h2>
+
+    <p class="confirm-desc">
+      Tu galería está en proceso de revelado. Recibirás el enlace de descarga tan pronto esté lista.
+    </p>
+
+    <!-- ESTADO EN VIVO DEL PIPELINE DE REVELADO -->
+    <div class="live-status-card" id="client-pipeline-card">
+      <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-bright); margin-bottom: 1rem;">
+        ESTADO DEL REVELADO AUTOMÁTICO
+      </div>
+
+      <div class="status-stage-item current" id="stage-queued">
+        <span class="status-dot"></span>
+        <span>1. En fila de retoque automático</span>
+      </div>
+
+      <div class="status-stage-item" id="stage-developing">
+        <span class="status-dot"></span>
+        <span>2. Aplicando curvas de ajuste .XMP y balance de blancos</span>
+      </div>
+
+      <div class="status-stage-item" id="stage-converting">
+        <span class="status-dot"></span>
+        <span>3. Conversión de perfil a sRGB y compresión sin pérdida</span>
+      </div>
+
+      <div class="status-stage-item" id="stage-ready">
+        <span class="status-dot"></span>
+        <span>4. Listo para entrega (Descarga de alta resolución 45MP)</span>
+      </div>
+
+      <div id="ready-downloads-box" style="display: none; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--navy-border);">
+        <button class="btn btn-gold" style="width: 100%;" onclick="triggerClientDownload()">
+          ⬇ DESCARGAR GALERÍA COMPLETA (ALTA RESOLUCIÓN)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="client-toast">Notificación</div>
+
+  <!-- =========================================================================
+       LÓGICA DEL PORTAL DEL CLIENTE
+       ========================================================================= -->
+  <script type="module">
+    import { studioGalleryManager } from "./js/gallery-manager.js";
+
+    let activeSession = null;
+    let selectedIds = new Set();
+    let currentLightboxIdx = 0;
+
+    function showToast(msg) {
+      const el = document.getElementById("client-toast");
+      el.innerHTML = `<span style="color:var(--gold-accent);">✓</span> <span>${msg}</span>`;
+      el.classList.add("show");
+      setTimeout(() => el.classList.remove("show"), 3200);
+    }
+
+    // Cargar sesión según parámetro URL (?id=...) o sesión activa en studioGalleryManager
+    function initClientSession() {
+      const params = new URLSearchParams(window.location.search);
+      let sessionId = params.get("id");
+      if (!sessionId) {
+        const parts = window.location.pathname.split("/").filter(Boolean);
+        if (parts[0] === "galeria" && parts[1]) {
+          sessionId = parts[1];
+        }
+      }
+
+      activeSession = studioGalleryManager.getActiveSession(sessionId);
+
+      // Si no existe ninguna sesión, crear una demostrativa
+      if (!activeSession) {
+        activeSession = studioGalleryManager.createSession({
+          clientName: "SESIÓN INAUGURAL // THE CONCEPT STUDIO",
+          phone: "+57 300 000 0000",
+          date: new Date().toISOString().split("T")[0],
+          quota: 10,
+          autoProcess: true
+        });
+      }
+
+      // Renderizar UI
+      document.getElementById("session-client-title").textContent = activeSession.clientName;
+      document.getElementById("session-date-display").textContent = `FECHA: ${activeSession.date}`;
+      document.getElementById("quota-limit-header").textContent = activeSession.quota;
+
+      // Si la sesión ya fue confirmada con anterioridad, mostrar pantalla de confirmación
+      if (activeSession.status !== "WAITING_SELECTION") {
+        showConfirmationView(activeSession);
+      } else {
+        renderGrid();
+        updateSelectionCounter();
+      }
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById("photos-grid-element");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      activeSession.photos.forEach((photo, idx) => {
+        const isSelected = selectedIds.has(photo.id);
+        const card = document.createElement("div");
+        card.className = `photo-card ${isSelected ? 'selected' : ''}`;
+        card.dataset.id = photo.id;
+
+        card.innerHTML = `
+          <button class="select-toggle-box" aria-label="Seleccionar foto">
+            ${isSelected 
+              ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>`
+              : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>`
+            }
+          </button>
+          <img src="${photo.src}" alt="${photo.filename}" class="photo-img" loading="lazy" />
+          <div class="photo-filename-tag mono">${photo.filename}</div>
+        `;
+
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".select-toggle-box")) {
+            e.stopPropagation();
+            togglePhotoSelection(photo.id);
+          } else {
+            openLightbox(idx);
+          }
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    function togglePhotoSelection(photoId) {
+      if (selectedIds.has(photoId)) {
+        selectedIds.delete(photoId);
+      } else {
+        // Validación de cupo
+        if (selectedIds.size >= activeSession.quota) {
+          showToast(`Has alcanzado el límite de ${activeSession.quota} fotografías incluidas.`);
+          return;
+        }
+        selectedIds.add(photoId);
+      }
+
+      renderGrid();
+      updateSelectionCounter();
+    }
+
+    function updateSelectionCounter() {
+      const count = selectedIds.size;
+      const total = activeSession.quota;
+
+      document.getElementById("selected-count-header").textContent = count;
+      document.getElementById("bottom-summary-text").textContent = `${count} / ${total} FOTOGRAFÍAS SELECCIONADAS`;
+
+      const pill = document.getElementById("quota-pill");
+      pill.classList.toggle("limit-reached", count === total);
+    }
+
+    // Modal de confirmación
+    window.openConfirmModal = function() {
+      if (selectedIds.size === 0) {
+        showToast("Selecciona al menos una fotografía para continuar.");
+        return;
+      }
+      document.getElementById("modal-confirm-desc").textContent = 
+        `Has seleccionado ${selectedIds.size} de ${activeSession.quota} fotografías. Al confirmar, tu selección se transmitirá al motor de revelado y procesado automático del estudio.`;
+      document.getElementById("confirm-modal-backdrop").classList.add("active");
+    };
+
+    window.closeConfirmModal = function() {
+      document.getElementById("confirm-modal-backdrop").classList.remove("active");
+    };
+
+    window.submitFinalSelection = async function() {
+      closeConfirmModal();
+      const list = Array.from(selectedIds);
+
+      // Registrar en el gestor y activar pipeline
+      await studioGalleryManager.confirmClientSelection(activeSession.id, list);
+
+      showConfirmationView(activeSession);
+      showToast("Selección transmitida al estudio exitosamente.");
+    };
+
+    function showConfirmationView(session) {
+      document.getElementById("gallery-info-strip").style.display = "none";
+      document.getElementById("gallery-grid-container").style.display = "none";
+      document.getElementById("floating-bar").style.display = "none";
+      document.getElementById("confirmation-screen").classList.add("active");
+      updatePipelineProgressDisplay(session);
+    }
+
+    function updatePipelineProgressDisplay(session) {
+      const stageQueued = document.getElementById("stage-queued");
+      const stageDev = document.getElementById("stage-developing");
+      const stageConv = document.getElementById("stage-converting");
+      const stageReady = document.getElementById("stage-ready");
+      const readyBox = document.getElementById("ready-downloads-box");
+
+      [stageQueued, stageDev, stageConv, stageReady].forEach(el => {
+        el.className = "status-stage-item";
+      });
+
+      if (session.status === "QUEUED") {
+        stageQueued.className = "status-stage-item current";
+      } else if (session.status === "PROCESSING") {
+        stageQueued.className = "status-stage-item done";
+        if ((session.processingProgress || 0) < 60) {
+          stageDev.className = "status-stage-item current";
+        } else {
+          stageDev.className = "status-stage-item done";
+          stageConv.className = "status-stage-item current";
+        }
+      } else if (session.status === "READY") {
+        stageQueued.className = "status-stage-item done";
+        stageDev.className = "status-stage-item done";
+        stageConv.className = "status-stage-item done";
+        stageReady.className = "status-stage-item current";
+        if (readyBox) readyBox.style.display = "block";
+      }
+    }
+
+    window.triggerClientDownload = function() {
+      showToast("Descarga de paquete máster iniciada (Archivos 45MP procesados).");
+    };
+
+    // Lightbox
+    window.openLightbox = function(idx) {
+      currentLightboxIdx = idx;
+      updateLightbox();
+      document.getElementById("full-lightbox").classList.add("active");
+    };
+
+    window.closeLightbox = function() {
+      document.getElementById("full-lightbox").classList.remove("active");
+    };
+
+    window.navigateLightbox = function(dir) {
+      const len = activeSession.photos.length;
+      currentLightboxIdx = (currentLightboxIdx + dir + len) % len;
+      updateLightbox();
+    };
+
+    function updateLightbox() {
+      const photo = activeSession.photos[currentLightboxIdx];
+      document.getElementById("lightbox-img-el").src = photo.src;
+      document.getElementById("lightbox-filename-text").textContent = 
+        `${photo.filename} (${currentLightboxIdx + 1} / ${activeSession.photos.length})`;
+
+      const btn = document.getElementById("lightbox-toggle-btn");
+      if (selectedIds.has(photo.id)) {
+        btn.textContent = "DESMARCAR FOTO";
+        btn.className = "btn btn-outline btn-sm";
+      } else {
+        btn.textContent = "SELECCIONAR FOTO";
+        btn.className = "btn btn-gold btn-sm";
+      }
+    }
+
+    window.toggleSelectionCurrentLightbox = function() {
+      const photo = activeSession.photos[currentLightboxIdx];
+      togglePhotoSelection(photo.id);
+      updateLightbox();
+    };
+
+    // Sincronización reactiva con studioGalleryManager
+    studioGalleryManager.subscribe((allSessions, active) => {
+      const params = new URLSearchParams(window.location.search);
+      const reqId = params.get("id");
+      const updated = allSessions.find(s => s.id === (reqId || (active && active.id)));
+      if (updated) {
+        activeSession = updated;
+        if (activeSession.status !== "WAITING_SELECTION") {
+          showConfirmationView(activeSession);
+        } else {
+          document.getElementById("session-client-title").textContent = activeSession.clientName;
+          document.getElementById("session-date-display").textContent = `FECHA: ${activeSession.date}`;
+          document.getElementById("quota-limit-header").textContent = activeSession.quota;
+          renderGrid();
+          updateSelectionCounter();
+        }
+      }
+    });
+
+    // Inicializar al cargar
+    window.addEventListener("DOMContentLoaded", initClientSession);
+  </script>
+</body>
+</html>

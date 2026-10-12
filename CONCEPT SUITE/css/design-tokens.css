@@ -1,0 +1,77 @@
+/* ==========================================================================
+   THE CONCEPT STUDIO. — DESIGN SYSTEM TOKENS (ESTÉTICA EXPENSIVE & SOBRIA)
+   Strict Palette: Obsidian Navy (#060B18 / #0A1128), Midnight Card (#0F1934),
+   Pure White (#FFFFFF), Off-White (#EDF2F7), Champagne Gold (#C5A059 / #D4AF37)
+   Radius: Strict 4px to 6px.
+   ========================================================================== */
+
+:root {
+  /* Obsidian & Deep Navy */
+  --navy-obsidian: #060B18;        /* Base oscura dominante fondos y barras */
+  --navy-deep: #0A1128;            /* Superficie secundaria / canvas base */
+  --navy-surface: #0F1934;         /* Superficie de tarjetas y modales */
+  --navy-surface-hover: #16244C;   /* Estado interactivo elevado */
+  --navy-border-subtle: rgba(237, 242, 247, 0.08); /* 1px micro-borde sutil */
+  --navy-border-line: rgba(237, 242, 247, 0.14);
+
+  /* High Contrast Typography */
+  --white-pure: #FFFFFF;           /* Blanco puro de alto impacto */
+  --white-off: #EDF2F7;            /* Off-White de lectura impecable */
+  --white-muted: rgba(237, 242, 247, 0.65);
+  --white-dim: rgba(237, 242, 247, 0.35);
+
+  /* Champagne Gold Matte (Uso Quirúrgico y Exclusivo) */
+  --gold-champagne: #C5A059;       /* Dorado Champagne mate oficial */
+  --gold-accent: #D4AF37;          /* Acento de confirmación */
+  --gold-badge-bg: rgba(197, 160, 89, 0.12);
+  --gold-badge-border: rgba(197, 160, 89, 0.35);
+  --gold-glow: 0 0 14px rgba(197, 160, 89, 0.22);
+
+  /* Functional Mappings */
+  --bg-canvas: var(--navy-obsidian);
+  --bg-card: var(--navy-surface);
+  --text-main: var(--white-pure);
+  --text-body: var(--white-off);
+  --border-card: 1px solid var(--navy-border-line);
+  --border-gold-1px: 1px solid var(--gold-champagne);
+
+  /* Typography Scales: Geometric Heavy Bold / Black */
+  --font-display: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Mono', 'SF Mono', Monaco, monospace;
+
+  --text-xs: 0.6875rem;    /* 11px */
+  --text-sm: 0.8125rem;    /* 13px */
+  --text-base: 0.9375rem;  /* 15px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.375rem;     /* 22px */
+  --text-2xl: 1.75rem;     /* 28px */
+  --text-3xl: 2.25rem;     /* 36px */
+  --text-4xl: 3.25rem;     /* 52px */
+
+  --tracking-tight: -0.03em;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.16em;
+  --tracking-widest: 0.25em;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Strict Subtle Radius: 4px a 6px */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --shadow-card: 0 12px 32px rgba(2, 5, 14, 0.75);
+
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}

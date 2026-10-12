@@ -1,0 +1,103 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/galeria/:id",
+      "destination": "/gallery.html?id=:id"
+    },
+    {
+      "source": "/galeria",
+      "destination": "/gallery.html"
+    },
+    {
+      "source": "/calendario",
+      "destination": "/admin-app.html?view=view-calendar"
+    },
+    {
+      "source": "/eventos",
+      "destination": "/admin-app.html?view=view-events"
+    },
+    {
+      "source": "/evento/:id",
+      "destination": "/evento.html?id=:id"
+    },
+    {
+      "source": "/evento",
+      "destination": "/evento.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin-app.html"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/admin-dashboard.html"
+    },
+    {
+      "source": "/cliente",
+      "destination": "/client-app.html"
+    },
+    {
+      "source": "/portal",
+      "destination": "/client-portal.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/css/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
+  ]
+}

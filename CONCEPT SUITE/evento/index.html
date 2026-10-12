@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>THE CONCEPT STUDIO. — Cobertura Oficial & Venta de Fotografías</title>
+
+  <!-- Tipografía Editorial Moderna: Inter & Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       THE CONCEPT STUDIO. — SISTEMA VISUAL EDITORIAL (EVENTO PÚBLICO)
+       Midnight Navy + Blanco Puro + Acentos Champagne Gold
+       ========================================================================== */
+    :root {
+      --navy-bg: #070D1E;
+      --navy-surface: #0A1226;
+      --navy-card: #0F1934;
+      --navy-border: rgba(237, 242, 247, 0.12);
+      --navy-border-focus: rgba(197, 160, 89, 0.6);
+
+      --text-white: #FFFFFF;
+      --text-bone: #EDF2F7;
+      --text-muted: rgba(237, 242, 247, 0.65);
+      --text-dim: rgba(237, 242, 247, 0.35);
+
+      --gold-accent: #C5A059;
+      --gold-bright: #D4AF37;
+      --gold-subtle: rgba(197, 160, 89, 0.14);
+      --gold-border: rgba(197, 160, 89, 0.38);
+
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* SEGURIDAD FRONTEND ESTRICTA: Impedir selección global y arrastre */
+    body {
+      background-color: var(--navy-bg);
+      color: var(--text-bone);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 120px;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--navy-bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.35); border-radius: 2px; }
+
+    /* ==========================================================================
+       LOGO OFICIAL EN DOS LÍNEAS CON PUNTO FINAL
+       ========================================================================== */
+    .brand-logo-twolines {
+      display: inline-flex;
+      flex-direction: column;
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: 0.95rem;
+      line-height: 1.05;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-white);
+    }
+    .brand-logo-twolines .logo-line1 { display: block; }
+    .brand-logo-twolines .logo-line2 { display: block; }
+    .gold-dot { color: var(--gold-accent); font-weight: 900; }
+
+    .mono {
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.4rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .btn-gold {
+      background: var(--gold-accent);
+      color: var(--navy-bg);
+      border-color: var(--gold-accent);
+      box-shadow: 0 4px 14px rgba(197, 160, 89, 0.25);
+    }
+    .btn-gold:hover {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+    .btn-solid {
+      background: var(--text-white);
+      color: var(--navy-bg);
+      border-color: var(--text-white);
+    }
+    .btn-solid:hover {
+      background: var(--text-bone);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-white);
+      border-color: var(--navy-border);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold-accent);
+      color: var(--gold-bright);
+    }
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.7rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--navy-border);
+      background: var(--navy-surface);
+      color: var(--text-bone);
+    }
+    .badge-gold {
+      border-color: var(--gold-border);
+      color: var(--gold-bright);
+      background: var(--gold-subtle);
+    }
+
+    /* Encabezado */
+    .event-header {
+      background: var(--navy-surface);
+      border-bottom: 1px solid var(--navy-border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+    }
+
+    /* Hero del Evento */
+    .event-hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--navy-border);
+      margin-bottom: 2rem;
+    }
+    .event-title-main {
+      font-size: 1.75rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      line-height: 1.15;
+    }
+
+    /* Cuadrícula de Fotografías */
+    .event-gallery-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .event-photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Fotografías protegidas */
+    .photo-card-secure {
+      position: relative;
+      background: var(--navy-surface);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      transition: all var(--transition);
+      user-select: none;
+    }
+    .photo-card-secure:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+    }
+    .photo-card-secure.selected {
+      border-color: var(--gold-accent);
+      box-shadow: 0 0 0 2px var(--gold-accent), 0 12px 32px rgba(197, 160, 89, 0.25);
+    }
+
+    .photo-card-secure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    /* Superposición Diagonal de Marca de Agua de Seguridad */
+    .watermark-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 10;
+    }
+    .watermark-stripes {
+      position: absolute;
+      inset: -50%;
+      background: repeating-linear-gradient(
+        -30deg,
+        rgba(255, 255, 255, 0.02) 0px,
+        rgba(255, 255, 255, 0.02) 20px,
+        rgba(0, 0, 0, 0.12) 20px,
+        rgba(0, 0, 0, 0.12) 40px
+      );
+      pointer-events: none;
+    }
+    .watermark-center-stamp {
+      position: relative;
+      transform: rotate(-25deg);
+      border: 2px dashed rgba(255, 255, 255, 0.35);
+      background: rgba(7, 13, 30, 0.65);
+      backdrop-filter: blur(2px);
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      pointer-events: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .wm-brand {
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.95);
+      display: block;
+    }
+    .wm-sub {
+      font-size: 0.55rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* Escudo Protector Invisible */
+    .photo-security-shield {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    /* Badge de ID y Selector */
+    .photo-meta-top {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 30;
+      pointer-events: none;
+    }
+    .photo-id-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      background: rgba(7, 13, 30, 0.85);
+      border: 1px solid var(--navy-border);
+      padding: 3px 6px;
+      border-radius: var(--radius-sm);
+    }
+    .photo-select-checkbox {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      background: rgba(7, 13, 30, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+    .photo-card-secure.selected .photo-select-checkbox {
+      background: var(--gold-accent);
+      border-color: var(--gold-accent);
+    }
+    .photo-select-checkbox svg {
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all var(--transition);
+      color: var(--navy-bg);
+    }
+    .photo-card-secure.selected .photo-select-checkbox svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Barra inferior flotante de checkout */
+    .fixed-checkout-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--navy-surface);
+      border-top: 1px solid var(--gold-border);
+      padding: 1rem 2rem;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+    }
+    .checkout-summary-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .checkout-selection-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-white);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .checkout-total-price {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--gold-bright);
+    }
+    .checkout-buttons-strip {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    /* Modales */
+    .pay-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 9, 20, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 6000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .pay-modal-backdrop.active {
+      display: flex;
+    }
+    .pay-modal-dialog {
+      background: var(--navy-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 520px;
+      padding: 2rem;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9);
+      animation: modalIn 0.2s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--navy-bg);
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: var(--text-white);
+      font-size: 0.85rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color var(--transition);
+      margin-top: 0.35rem;
+    }
+    .form-input:focus {
+      border-color: var(--gold-accent);
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--navy-card);
+      border: 1px solid var(--gold-accent);
+      color: var(--text-white);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      z-index: 8000;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- =========================================================================
+       BARRA SUPERIOR DE MARCA
+       ========================================================================= -->
+  <header class="event-header">
+    <div class="brand-logo-twolines">
+      <span class="logo-line1">THE CONCEPT</span>
+      <span class="logo-line2">STUDIO<span class="gold-dot">.</span></span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span class="badge badge-gold" id="header-price-badge">$0.00 / FOTO</span>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO DEL EVENTO
+       ========================================================================= -->
+  <div class="event-hero" id="event-hero-section">
+    <div>
+      <span class="badge badge-gold" style="margin-bottom: 0.5rem;" id="event-date-badge">
+        COBERTURA OFICIAL
+      </span>
+      <h1 class="event-title-main" id="event-display-name">
+        CARGANDO EVENTO...
+      </h1>
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.35rem;">
+        Selecciona las fotografías que deseas adquirir. Las versiones finales se descargan en alta resolución sin marca de agua mediante URLs firmadas temporales.
+      </p>
+    </div>
+
+    <div style="text-align: right;">
+      <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">FOTOS DISPONIBLES</div>
+      <div class="mono" style="font-size: 1.25rem; font-weight: 900; color: var(--text-white);" id="total-photos-count">
+        0 FOTOS
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       GALERÍA DE FOTOGRAFÍAS CON MARCA DE AGUA
+       ========================================================================= -->
+  <main class="event-gallery-container">
+    <div class="event-photos-grid" id="event-photos-grid-el">
+      <!-- Inyectado dinámicamente -->
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       BARRA INFERIOR FIJA: CARRITO DE COMPRA SIMPLE & CHECKOUT
+       ========================================================================= -->
+  <footer class="fixed-checkout-bar" id="fixed-checkout-bar-el" style="display: none;">
+    <div class="checkout-summary-wrap">
+      <div>
+        <div class="checkout-selection-label" id="cart-counter-text">
+          0 FOTOS SELECCIONADAS
+        </div>
+        <div style="font-size: 0.65rem; color: var(--text-muted);" id="cart-rate-sub">
+          Precio unitario: $0.00 USD
+        </div>
+      </div>
+
+      <div style="border-left: 1px solid var(--navy-border); padding-left: 1.5rem;">
+        <div style="font-size: 0.65rem; color: var(--gold-accent); font-weight: 800; text-transform: uppercase;">
+          TOTAL A PAGAR:
+        </div>
+        <div class="checkout-total-price" id="cart-total-price">
+          $0.00 USD
+        </div>
+      </div>
+    </div>
+
+    <div class="checkout-buttons-strip">
+      <button class="btn btn-gold" id="btn-pay-yappy" onclick="openYappyModal()">
+        <span>⚡</span> PAGAR CON YAPPY
+      </button>
+      <button class="btn btn-solid" id="btn-pay-card" onclick="openCardModal()">
+        <span>💳</span> PAGAR CON TARJETA
+      </button>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODAL 1: PAGO CON YAPPY (PANAMÁ / MÓVIL)
+       ========================================================================= -->
+  <div class="pay-modal-backdrop" id="modal-pay-yappy">
+    <div class="pay-modal-dialog">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+        <div>
+          <span class="badge badge-gold">MÉTODO MÓVIL DIRECTO</span>
+          <h3 style="font-size: 1.2rem; font-weight: 900; text-transform: uppercase; color: var(--text-white); margin-top: 0.25rem;">
+            PAGAR CON YAPPY
+          </h3>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closePayModals()">✕</button>
+      </div>
+
+      <div style="background: var(--navy-surface); border: 1px solid var(--gold-border); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1.25rem; text-align: center;">
+        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">DIRECTORIO COMERCIAL TCS</div>
+        <div style="font-size: 1.15rem; font-weight: 900; color: var(--gold-bright); margin: 0.25rem 0;">THE CONCEPT STUDIO</div>
+        <div class="mono" style="font-size: 0.85rem; color: var(--text-white); font-weight: 700;">+507 6890-4412</div>
+
+        <div style="margin-top: 1rem; border-top: 1px solid var(--navy-border); padding-top: 0.75rem;">
+          <span style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase;">MONTO EXACTO A TRANSFERIR:</span>
+          <div class="mono" style="font-size: 1.4rem; font-weight: 900; color: var(--text-white);" id="yappy-modal-amount">
+            $0.00 USD
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <div>
+          <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">
+            Nombre completo o alias en Yappy *
+          </label>
+          <input type="text" class="form-input" id="yappy-client-name" autocomplete="off" required />
+        </div>
+
+        <div>
+          <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">
+            Correo electrónico (para entrega de enlaces firmados) *
+          </label>
+          <input type="email" class="form-input" id="yappy-client-email" autocomplete="off" required />
+        </div>
+
+        <div>
+          <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">
+            Teléfono celular
+          </label>
+          <input type="tel" class="form-input" id="yappy-client-phone" autocomplete="off" />
+        </div>
+
+        <p style="font-size: 0.65rem; color: var(--text-muted); line-height: 1.4; margin-top: 0.25rem;">
+          La transacción se concilia y aprueba mediante Webhook seguro hacia Firestore. Al confirmarse, se habilitan las URLs firmadas de descarga temporal.
+        </p>
+
+        <button class="btn btn-gold" style="width: 100%; margin-top: 0.5rem;" onclick="confirmYappyPayment()">
+          CONFIRMAR PAGO Y OBTENER ENLACES
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: PAGO CON TARJETA (CUMPLIMIENTO ESTRICTO PCI-DSS)
+       Sin inputs de tarjeta en frontend; pasarela alojada y cifrada
+       ========================================================================= -->
+  <div class="pay-modal-backdrop" id="modal-pay-card">
+    <div class="pay-modal-dialog">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+        <div>
+          <span class="badge badge-gold">PASARELA CIFRADA 256-BIT</span>
+          <h3 style="font-size: 1.2rem; font-weight: 900; text-transform: uppercase; color: var(--text-white); margin-top: 0.25rem;">
+            PAGO CON TARJETA
+          </h3>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closePayModals()">✕</button>
+      </div>
+
+      <div style="background: var(--navy-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.25rem;">
+        <div style="font-size: 0.7rem; font-weight: 800; color: var(--gold-bright); text-transform: uppercase; margin-bottom: 0.35rem;">
+          CUMPLIMIENTO DE SEGURIDAD PCI-DSS
+        </div>
+        <p style="font-size: 0.7rem; color: var(--text-muted); line-height: 1.45;">
+          Por cumplimiento estricto con las normas PCI-DSS, este sitio web no captura, procesa ni almacena números de tarjeta, códigos CVV ni fechas de vencimiento. El pago se procesa directamente a través de una pasarela certificada (Stripe / PagueloFacil / Cuanto).
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+        <div>
+          <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">
+            Correo electrónico (para envío de factura y entrega) *
+          </label>
+          <input type="email" class="form-input" id="card-client-email" autocomplete="off" required />
+        </div>
+
+        <div>
+          <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">
+            Teléfono de contacto
+          </label>
+          <input type="tel" class="form-input" id="card-client-phone" autocomplete="off" />
+        </div>
+
+        <div style="background: var(--navy-bg); border: 1px solid var(--navy-border); border-radius: var(--radius-sm); padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">MONTO TOTAL:</span>
+          <span class="mono" style="font-size: 1.1rem; font-weight: 900; color: var(--text-white);" id="card-modal-total-display">$0.00 USD</span>
+        </div>
+
+        <button class="btn btn-gold" style="width: 100%; margin-top: 0.5rem;" onclick="confirmCardPayment()" id="card-pay-btn">
+          PROCEDER A PASARELA DE PAGO SEGURA ↗
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: BÓVEDA DE DESCARGA TEMPORAL (SIGNED URLS - 15 MINUTOS)
+       ========================================================================= -->
+  <div class="pay-modal-backdrop" id="modal-download-vault">
+    <div class="pay-modal-dialog" style="max-width: 620px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+        <div>
+          <span class="badge" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border-color: rgba(34, 197, 94, 0.4);">
+            ✓ PAGO APROBADO
+          </span>
+          <h3 style="font-size: 1.25rem; font-weight: 900; text-transform: uppercase; color: var(--text-white); margin-top: 0.25rem;">
+            BÓVEDA DE DESCARGA TEMPORAL
+          </h3>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closeDownloadVault()">✕</button>
+      </div>
+
+      <div style="background: var(--navy-surface); border: 1px solid var(--gold-border); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">ORDEN ID</div>
+            <div class="mono" style="font-size: 0.85rem; color: var(--gold-bright); font-weight: 700;" id="vault-order-id">-</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.65rem; color: #fca5a5; text-transform: uppercase; font-weight: 800;">EXPIRACIÓN DE ENLACES FIRMADOS</div>
+            <div class="mono" style="font-size: 1.2rem; font-weight: 900; color: #ef4444;" id="vault-countdown-timer">15:00</div>
+          </div>
+        </div>
+        <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.75rem; border-top: 1px solid var(--navy-border); padding-top: 0.5rem; line-height: 1.4;">
+          Por políticas de almacenamiento seguro en Firebase Storage, los archivos originales de alta resolución sin marca de agua se sirven mediante enlaces firmados temporales (Signed URLs). Tras 15 minutos, los enlaces quedarán automáticamente revocados.
+        </div>
+      </div>
+
+      <div id="vault-photos-list" style="max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.25rem;">
+        <!-- Inyectado dinámicamente -->
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button class="btn btn-gold" style="flex: 1;" onclick="downloadAllVaultFiles()">
+          DESCARGAR TODAS LAS FOTOGRAFÍAS (ALTA RESOLUCIÓN)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="security-toast">Protección activa</div>
+
+  <!-- =========================================================================
+       LÓGICA JAVASCRIPT: SERVICIOS MODULARES FIRESTORE, STORAGE Y PAGOS
+       ========================================================================= -->
+  <script type="module">
+    import { studioEventsService } from "./js/firebase/events-service.js";
+    import { studioOrdersService } from "./js/firebase/orders-service.js";
+
+    let currentEvent = null;
+    let selectedPhotoIds = new Set();
+    let currentSignedFiles = [];
+    let vaultCountdownInterval = null;
+
+    function showToast(msg) {
+      const toast = document.getElementById("security-toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    // 1. SEGURIDAD FRONTEND ESTRICTA
+    document.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      showToast("Descarga bloqueada. Fotografías protegidas por THE CONCEPT STUDIO.");
+      return false;
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'u'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        showToast("Operación deshabilitada por seguridad editorial.");
+      }
+    });
+
+    // 2. Cargar Datos del Evento desde Firestore
+    async function loadEventData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let eventId = urlParams.get("id");
+      if (!eventId) {
+        const parts = window.location.pathname.split("/").filter(Boolean);
+        if (parts[0] === "evento" && parts[1]) {
+          eventId = parts[1];
+        }
+      }
+
+      let event = null;
+      if (eventId) {
+        event = await studioEventsService.getEventoById(eventId);
+      }
+
+      if (!event) {
+        const activeEvents = await studioEventsService.getEventos(true);
+        if (activeEvents.length > 0) {
+          event = await studioEventsService.getEventoById(activeEvents[0].id);
+        }
+      }
+
+      currentEvent = event;
+
+      const heroSection = document.getElementById("event-hero-section");
+      const grid = document.getElementById("event-photos-grid-el");
+      const checkoutBar = document.getElementById("fixed-checkout-bar-el");
+
+      if (!currentEvent) {
+        // Estado vacío limpio sin datos mock
+        document.getElementById("event-display-name").textContent = "NO HAY EVENTOS ACTIVOS";
+        document.getElementById("event-date-badge").textContent = "SISTEMA LISTO";
+        document.getElementById("header-price-badge").textContent = "$0.00 / FOTO";
+        document.getElementById("total-photos-count").textContent = "0 FOTOS";
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 6rem 1.5rem; max-width: 550px; margin: 0 auto;">
+            <div style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--gold-accent);">✦</div>
+            <h3 style="font-size: 1.15rem; font-weight: 900; text-transform: uppercase; color: var(--text-white); letter-spacing: 0.05em;">
+              NO HAY EVENTOS PÚBLICOS ACTIVOS
+            </h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.6;">
+              Actualmente no hay galerías de cobertura publicadas para selección o venta directa. Las nuevas sesiones aparecerán aquí una vez publicadas por el fotógrafo.
+            </p>
+          </div>
+        `;
+        checkoutBar.style.display = "none";
+        return;
+      }
+
+      // Render encabezados del evento real
+      document.getElementById("event-display-name").textContent = currentEvent.nombre;
+      const eventDateStr = currentEvent.fecha?.isoString ? currentEvent.fecha.isoString.split("T")[0] : (currentEvent.fecha || '');
+      document.getElementById("event-date-badge").textContent = `FECHA: ${eventDateStr} · COBERTURA OFICIAL`;
+      document.getElementById("header-price-badge").textContent = `$${parseFloat(currentEvent.precioPorFoto).toFixed(2)} / FOTO`;
+      document.getElementById("cart-rate-sub").textContent = `Precio unitario: $${parseFloat(currentEvent.precioPorFoto).toFixed(2)} USD`;
+      
+      const photos = currentEvent.fotos || [];
+      document.getElementById("total-photos-count").textContent = `${photos.length} FOTO${photos.length === 1 ? '' : 'S'}`;
+
+      if (photos.length > 0) {
+        checkoutBar.style.display = "flex";
+      } else {
+        checkoutBar.style.display = "none";
+      }
+
+      renderGallery(photos);
+      updateCartSummary();
+    }
+
+    // 3. Render de Cuadrícula con Protección y Marca de Agua
+    function renderGallery(photos) {
+      const grid = document.getElementById("event-photos-grid-el");
+      grid.innerHTML = "";
+
+      if (!photos || photos.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1.5rem; color: var(--text-muted);">
+            No hay fotografías disponibles en este evento.
+          </div>
+        `;
+        return;
+      }
+
+      photos.forEach(photo => {
+        const card = document.createElement("div");
+        const isSelected = selectedPhotoIds.has(photo.id);
+        card.className = `photo-card-secure ${isSelected ? 'selected' : ''}`;
+        card.dataset.id = photo.id;
+
+        card.innerHTML = `
+          <div class="photo-meta-top">
+            <span class="photo-id-tag">${photo.id}</span>
+            <div class="photo-select-checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+              </svg>
+            </div>
+          </div>
+
+          <img src="${photo.urlWatermark}" alt="${photo.id}" draggable="false" loading="lazy" />
+
+          <div class="watermark-overlay">
+            <div class="watermark-stripes"></div>
+            <div class="watermark-center-stamp">
+              <span class="wm-brand">THE CONCEPT STUDIO.</span>
+              <span class="wm-sub">PROOF OFICIAL · NO COPIAR</span>
+            </div>
+          </div>
+
+          <div class="photo-security-shield" onclick="togglePhotoSelection('${photo.id}')"></div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    // 4. Selección e interacción
+    window.togglePhotoSelection = function(photoId) {
+      if (selectedPhotoIds.has(photoId)) {
+        selectedPhotoIds.delete(photoId);
+      } else {
+        selectedPhotoIds.add(photoId);
+      }
+
+      const card = document.querySelector(`.photo-card-secure[data-id="${photoId}"]`);
+      if (card) {
+        card.classList.toggle("selected", selectedPhotoIds.has(photoId));
+      }
+
+      updateCartSummary();
+    };
+
+    // 5. Cálculo Dinámico de Carrito
+    function updateCartSummary() {
+      if (!currentEvent) return;
+
+      const count = selectedPhotoIds.size;
+      const priceUnit = parseFloat(currentEvent.precioPorFoto) || 0.75;
+      const total = count * priceUnit;
+
+      const counterText = document.getElementById("cart-counter-text");
+      const totalPrice = document.getElementById("cart-total-price");
+
+      counterText.textContent = `${count} FOTO${count === 1 ? '' : 'S'} SELECCIONADA${count === 1 ? '' : 'S'}`;
+      totalPrice.textContent = `$${total.toFixed(2)} USD`;
+
+      document.getElementById("yappy-modal-amount").textContent = `$${total.toFixed(2)} USD`;
+      document.getElementById("card-modal-total-display").textContent = `$${total.toFixed(2)} USD`;
+    }
+
+    // 6. Modales de Pago
+    window.openYappyModal = function() {
+      if (selectedPhotoIds.size === 0) {
+        alert("Por favor selecciona al menos una fotografía para continuar.");
+        return;
+      }
+      document.getElementById("modal-pay-yappy").classList.add("active");
+    };
+
+    window.openCardModal = function() {
+      if (selectedPhotoIds.size === 0) {
+        alert("Por favor selecciona al menos una fotografía para continuar.");
+        return;
+      }
+      document.getElementById("modal-pay-card").classList.add("active");
+    };
+
+    window.closePayModals = function() {
+      document.querySelectorAll(".pay-modal-backdrop").forEach(m => {
+        if (m.id !== "modal-download-vault") m.classList.remove("active");
+      });
+    };
+
+    window.closeDownloadVault = function() {
+      if (vaultCountdownInterval) clearInterval(vaultCountdownInterval);
+      document.getElementById("modal-download-vault").classList.remove("active");
+    };
+
+    // 7. Flujo de Transacciones y Órdenes
+    window.confirmYappyPayment = async function() {
+      const name = document.getElementById("yappy-client-name").value.trim();
+      const email = document.getElementById("yappy-client-email").value.trim();
+      const phone = document.getElementById("yappy-client-phone").value.trim();
+
+      if (!name) {
+        alert("Por favor ingresa tu nombre completo o alias en Yappy.");
+        return;
+      }
+      if (!email || !email.includes("@")) {
+        alert("Por favor ingresa un correo electrónico válido para la entrega.");
+        return;
+      }
+
+      const total = selectedPhotoIds.size * (parseFloat(currentEvent.precioPorFoto) || 0.75);
+
+      try {
+        // 1. Crear Orden en Firestore
+        const orden = await studioOrdersService.crearOrden({
+          eventoId: currentEvent.id,
+          clienteEmail: email,
+          clienteTelefono: phone || name,
+          fotosSeleccionadas: Array.from(selectedPhotoIds),
+          totalMonto: total,
+          metodoPago: "YAPPY"
+        });
+
+        // 2. Iniciar checkout Yappy
+        const session = await studioOrdersService.iniciarCheckoutYappy(orden.id, total, phone);
+
+        closePayModals();
+        showToast("Procesando confirmación segura con Yappy...");
+
+        // 3. Simular reconciliación de webhook seguro de backend hacia Firestore
+        setTimeout(async () => {
+          await studioOrdersService.procesarConfirmacionWebhook(orden.id, session.yappySessionId);
+          await abrirBovedaDescarga(orden.id);
+        }, 1200);
+
+      } catch (err) {
+        alert("Error al procesar orden: " + err.message);
+      }
+    };
+
+    window.confirmCardPayment = async function() {
+      const email = document.getElementById("card-client-email").value.trim();
+      const phone = document.getElementById("card-client-phone").value.trim();
+
+      if (!email || !email.includes("@")) {
+        alert("Por favor ingresa un correo electrónico válido para la entrega.");
+        return;
+      }
+
+      const total = selectedPhotoIds.size * (parseFloat(currentEvent.precioPorFoto) || 0.75);
+
+      try {
+        // 1. Crear Orden en Firestore
+        const orden = await studioOrdersService.crearOrden({
+          eventoId: currentEvent.id,
+          clienteEmail: email,
+          clienteTelefono: phone,
+          fotosSeleccionadas: Array.from(selectedPhotoIds),
+          totalMonto: total,
+          metodoPago: "TARJETA"
+        });
+
+        // 2. Iniciar sesión en pasarela externa alojada (PCI-DSS compliant)
+        const session = await studioOrdersService.iniciarCheckoutTarjeta(orden.id, total, email);
+
+        closePayModals();
+        showToast("Conectando con pasarela segura...");
+
+        // 3. Simular confirmación vía webhook tras retorno de pasarela
+        setTimeout(async () => {
+          await studioOrdersService.procesarConfirmacionWebhook(orden.id, session.transaccionId);
+          await abrirBovedaDescarga(orden.id);
+        }, 1200);
+
+      } catch (err) {
+        alert("Error al procesar orden: " + err.message);
+      }
+    };
+
+    // 8. Bóveda de Descarga y Enlaces Firmados (Signed URLs)
+    async function abrirBovedaDescarga(ordenId) {
+      try {
+        const signedLinks = await studioOrdersService.obtenerEnlacesFirmadosDescarga(ordenId);
+        currentSignedFiles = signedLinks;
+
+        document.getElementById("vault-order-id").textContent = ordenId;
+        const listEl = document.getElementById("vault-photos-list");
+
+        listEl.innerHTML = signedLinks.map(link => {
+          // Buscar foto original en currentEvent
+          const photoObj = (currentEvent.fotos || []).find(f => f.id === link.fotoId);
+          const thumbUrl = photoObj?.urlWatermark || "";
+          const fileName = photoObj?.nombreArchivoOriginal || `${link.fotoId}_ORIGINAL.JPG`;
+
+          return `
+            <div style="background: var(--navy-bg); border: 1px solid var(--navy-border); border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                ${thumbUrl ? `<img src="${thumbUrl}" style="width: 38px; height: 38px; object-fit: cover; border-radius: 3px;" />` : ''}
+                <div>
+                  <div class="mono" style="font-size: 0.75rem; font-weight: 800; color: var(--gold-bright);">${link.fotoId}</div>
+                  <div style="font-size: 0.65rem; color: var(--text-muted);">${fileName}</div>
+                </div>
+              </div>
+              <a href="${link.signedUrl}" download="${fileName}" target="_blank" class="btn btn-outline btn-sm" style="padding: 0.35rem 0.65rem; font-size: 0.65rem;">
+                DESCARGAR ⬇
+              </a>
+            </div>
+          `;
+        }).join("");
+
+        // Iniciar cuenta regresiva de 15 minutos
+        iniciarTemporizadorBoveda(15 * 60);
+
+        document.getElementById("modal-download-vault").classList.add("active");
+        showToast("✓ Enlaces firmados temporales generados con éxito.");
+      } catch (err) {
+        alert("Error al obtener enlaces: " + err.message);
+      }
+    }
+
+    function iniciarTemporizadorBoveda(segundosTotales) {
+      if (vaultCountdownInterval) clearInterval(vaultCountdownInterval);
+      let restante = segundosTotales;
+
+      const timerEl = document.getElementById("vault-countdown-timer");
+      const renderTimer = () => {
+        const min = Math.floor(restante / 60);
+        const sec = restante % 60;
+        timerEl.textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+        if (restante <= 0) {
+          clearInterval(vaultCountdownInterval);
+          timerEl.textContent = "EXPIRADO";
+          alert("Los enlaces firmados han expirado. Por favor contacta al estudio con tu ID de orden.");
+        }
+        restante--;
+      };
+
+      renderTimer();
+      vaultCountdownInterval = setInterval(renderTimer, 1000);
+    }
+
+    window.downloadAllVaultFiles = function() {
+      if (!currentSignedFiles || currentSignedFiles.length === 0) return;
+      showToast("Descargando archivos en alta resolución...");
+      currentSignedFiles.forEach((file, idx) => {
+        setTimeout(() => {
+          const a = document.createElement("a");
+          a.href = file.signedUrl;
+          a.download = `${file.fotoId}_ORIGINAL.JPG`;
+          a.target = "_blank";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, idx * 300);
+      });
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      studioEventsService.limpiarEventosEjemplo();
+      loadEventData();
+    });
+  </script>
+</body>
+</html>

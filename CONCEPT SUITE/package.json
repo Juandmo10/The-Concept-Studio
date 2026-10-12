@@ -1,0 +1,14 @@
+{
+  "name": "the-concept-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "THE CONCEPT STUDIO. — Plataforma Web de Fotografía Editorial y Cobertura Deportiva",
+  "scripts": {
+    "dev": "serve -l 3333 .",
+    "start": "serve -l 3333 .",
+    "build": "echo 'Build OK: Proyecto estático THE CONCEPT STUDIO listo para Vercel.'"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
